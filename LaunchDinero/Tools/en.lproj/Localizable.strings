@@ -1,0 +1,58 @@
+/* 
+  Localizable.strings
+  LaunchDinero
+
+  Created by wangxiang on 2025/2/13.
+  
+*/
+
+"login_img" = "login_img";
+"Phone number" = "Phone number";
+"Enter your phone number" = "Enter your phone number";
+"Verification code" = "Verification code";
+"Get code" = "Get code";
+"Voice verification" = "Voice verification";
+"Log in" = "Log in";
+"I have read and agree" = "  I have read and agree";
+"Privacy Agreement" = "Privacy Agreement";
+"Please agree to the agreement" = "Please agree to the agreement";
+"Welcome to LaunchDinero" = "Welcome to LaunchDinero";
+"Common functions" = "Common functions";
+"Account cancellation" = "Account cancellation";
+"Logout" = "Logout";
+"Set up" = "Set up";
+"Next" = "Next";
+"Confirm" = "Confirm";
+"Agree and Continue" = "Agree and Continue";
+"Sign out" = "Sign out";
+"Are you sure you want to exit the application?" = "Are you sure you want to exit the application?";
+"Loan Agreement" = "Loan Agreement";
+"Delete Agreement Content" = "Launch Dinero App is a professional personal credit loan application that can provide users with up to 70000 yuan in funding services with simple information. We have provided financial services to over one million users, helping them solve various application that can provide users with up to 70000 yuan in funding services with simple information.We have provided financial services to over one million users.";
+"I have read and accept the above" = "  I have read and accept the above";
+"Delete Content" = "Accounts cannot be restored after cancellation. To ensure the security of your account, please confirm that you have properly processed account-related services before submitting an application.";
+"main_2_img" = "main_2_img";
+"Loan supermarket" = "Loan supermarket";
+"main_1_img" = "main_1_img";
+"main_1_know" = "main_1_know";
+"main_1_step" = "main_1_step";
+"Loan process" = "Loan process";
+"Do you know us?" = "Do you know us?";
+"Loan details" = "Loan details";
+"verify_list_img" = "verify_list_img";
+"Certification condition" = "Certification condition";
+"Verify upload photo hint" = "*Please submit the certification according to the sample to avoid blurring, obstructions and reflections";
+"Demonstration" = "Demonstration";
+"Wrong demonstration" = "Wrong demonstration";
+"Please confirm" = "Please confirm";
+"Name" = "Name";
+"ID No." = "ID No.";
+"Date Birth" = "Date Birth";
+"Verify confirm desc" = "*Please check your lD information correctly, oncesubmitted it is not changed again";
+"Order list" = "Order list";
+"All" = "All";
+"Apply" = "Apply";
+"Repayment" = "Repayment";
+"Finished" = "Finished";
+"There are currently no orders available" = "There are currently no orders available";
+"wecome" = "wecome";
+"Check" = "Check";

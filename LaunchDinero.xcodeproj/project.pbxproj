@@ -1,0 +1,760 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2EB59FE62D917E2900D7A011 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2EB59FE52D917E2900D7A011 /* PrivacyInfo.xcprivacy */; };
+		516D126E6BEF80FC0BE03800 /* Pods_LaunchDineroTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D11E48932E8B769422FDC2C9 /* Pods_LaunchDineroTests.framework */; };
+		A2DC8A167260E680C157786C /* Pods_LaunchDinero_LaunchDineroUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCCE1946CE75800435D1B1A5 /* Pods_LaunchDinero_LaunchDineroUITests.framework */; };
+		C32FA3DBE35E9187FF6A4B92 /* Pods_LaunchDinero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106F4946B8AA48251242A459 /* Pods_LaunchDinero.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2EF67BBA2D5E0F630011597D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2EF67B9B2D5E0F630011597D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2EF67BA22D5E0F630011597D;
+			remoteInfo = LaunchDinero;
+		};
+		2EF67BC42D5E0F630011597D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2EF67B9B2D5E0F630011597D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2EF67BA22D5E0F630011597D;
+			remoteInfo = LaunchDinero;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0FDEDD9D54453D8BCC4B0C41 /* Pods-LaunchDineroTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LaunchDineroTests.release.xcconfig"; path = "Target Support Files/Pods-LaunchDineroTests/Pods-LaunchDineroTests.release.xcconfig"; sourceTree = "<group>"; };
+		106F4946B8AA48251242A459 /* Pods_LaunchDinero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LaunchDinero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EAD047327A7B4E66C9B18CC /* Pods-LaunchDinero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LaunchDinero.release.xcconfig"; path = "Target Support Files/Pods-LaunchDinero/Pods-LaunchDinero.release.xcconfig"; sourceTree = "<group>"; };
+		2EB59FE52D917E2900D7A011 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		2EF67BA32D5E0F630011597D /* LaunchDinero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LaunchDinero.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EF67BB92D5E0F630011597D /* LaunchDineroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LaunchDineroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EF67BC32D5E0F630011597D /* LaunchDineroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LaunchDineroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A34C83C0E629DA71165E191 /* Pods-LaunchDinero-LaunchDineroUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LaunchDinero-LaunchDineroUITests.release.xcconfig"; path = "Target Support Files/Pods-LaunchDinero-LaunchDineroUITests/Pods-LaunchDinero-LaunchDineroUITests.release.xcconfig"; sourceTree = "<group>"; };
+		8D8B5E0CFEA18CE0F0525742 /* Pods-LaunchDinero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LaunchDinero.debug.xcconfig"; path = "Target Support Files/Pods-LaunchDinero/Pods-LaunchDinero.debug.xcconfig"; sourceTree = "<group>"; };
+		D11E48932E8B769422FDC2C9 /* Pods_LaunchDineroTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LaunchDineroTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D60D593CB1FE8EDF539CD0E6 /* Pods-LaunchDinero-LaunchDineroUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LaunchDinero-LaunchDineroUITests.debug.xcconfig"; path = "Target Support Files/Pods-LaunchDinero-LaunchDineroUITests/Pods-LaunchDinero-LaunchDineroUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		DAB746A6676D7FABB5673BEC /* Pods-LaunchDineroTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LaunchDineroTests.debug.xcconfig"; path = "Target Support Files/Pods-LaunchDineroTests/Pods-LaunchDineroTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FCCE1946CE75800435D1B1A5 /* Pods_LaunchDinero_LaunchDineroUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LaunchDinero_LaunchDineroUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2EF67BCB2D5E0F640011597D /* Exceptions for "LaunchDinero" folder in "LaunchDinero" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2EF67BA22D5E0F630011597D /* LaunchDinero */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		2EF67BA52D5E0F630011597D /* LaunchDinero */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2EF67BCB2D5E0F640011597D /* Exceptions for "LaunchDinero" folder in "LaunchDinero" target */,
+			);
+			path = LaunchDinero;
+			sourceTree = "<group>";
+		};
+		2EF67BBC2D5E0F630011597D /* LaunchDineroTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = LaunchDineroTests;
+			sourceTree = "<group>";
+		};
+		2EF67BC62D5E0F630011597D /* LaunchDineroUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = LaunchDineroUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2EF67BA02D5E0F630011597D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C32FA3DBE35E9187FF6A4B92 /* Pods_LaunchDinero.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EF67BB62D5E0F630011597D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				516D126E6BEF80FC0BE03800 /* Pods_LaunchDineroTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EF67BC02D5E0F630011597D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2DC8A167260E680C157786C /* Pods_LaunchDinero_LaunchDineroUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2EF67B9A2D5E0F630011597D = {
+			isa = PBXGroup;
+			children = (
+				2EB59FE52D917E2900D7A011 /* PrivacyInfo.xcprivacy */,
+				2EF67BA52D5E0F630011597D /* LaunchDinero */,
+				2EF67BBC2D5E0F630011597D /* LaunchDineroTests */,
+				2EF67BC62D5E0F630011597D /* LaunchDineroUITests */,
+				2EF67BA42D5E0F630011597D /* Products */,
+				9153D239FAABB659B08F791D /* Pods */,
+				77AF4165770FB014AACC8D82 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2EF67BA42D5E0F630011597D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2EF67BA32D5E0F630011597D /* LaunchDinero.app */,
+				2EF67BB92D5E0F630011597D /* LaunchDineroTests.xctest */,
+				2EF67BC32D5E0F630011597D /* LaunchDineroUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		77AF4165770FB014AACC8D82 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				106F4946B8AA48251242A459 /* Pods_LaunchDinero.framework */,
+				FCCE1946CE75800435D1B1A5 /* Pods_LaunchDinero_LaunchDineroUITests.framework */,
+				D11E48932E8B769422FDC2C9 /* Pods_LaunchDineroTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9153D239FAABB659B08F791D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8D8B5E0CFEA18CE0F0525742 /* Pods-LaunchDinero.debug.xcconfig */,
+				2EAD047327A7B4E66C9B18CC /* Pods-LaunchDinero.release.xcconfig */,
+				D60D593CB1FE8EDF539CD0E6 /* Pods-LaunchDinero-LaunchDineroUITests.debug.xcconfig */,
+				7A34C83C0E629DA71165E191 /* Pods-LaunchDinero-LaunchDineroUITests.release.xcconfig */,
+				DAB746A6676D7FABB5673BEC /* Pods-LaunchDineroTests.debug.xcconfig */,
+				0FDEDD9D54453D8BCC4B0C41 /* Pods-LaunchDineroTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2EF67BA22D5E0F630011597D /* LaunchDinero */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EF67BCC2D5E0F640011597D /* Build configuration list for PBXNativeTarget "LaunchDinero" */;
+			buildPhases = (
+				B26AC5503EE42592E6C5794C /* [CP] Check Pods Manifest.lock */,
+				2EF67B9F2D5E0F630011597D /* Sources */,
+				2EF67BA02D5E0F630011597D /* Frameworks */,
+				2EF67BA12D5E0F630011597D /* Resources */,
+				87653E96FFBB52EA0A09B9DA /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				2EF67BA52D5E0F630011597D /* LaunchDinero */,
+			);
+			name = LaunchDinero;
+			productName = LaunchDinero;
+			productReference = 2EF67BA32D5E0F630011597D /* LaunchDinero.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2EF67BB82D5E0F630011597D /* LaunchDineroTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EF67BD12D5E0F640011597D /* Build configuration list for PBXNativeTarget "LaunchDineroTests" */;
+			buildPhases = (
+				145571D610DED1F5D1375926 /* [CP] Check Pods Manifest.lock */,
+				2EF67BB52D5E0F630011597D /* Sources */,
+				2EF67BB62D5E0F630011597D /* Frameworks */,
+				2EF67BB72D5E0F630011597D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2EF67BBB2D5E0F630011597D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2EF67BBC2D5E0F630011597D /* LaunchDineroTests */,
+			);
+			name = LaunchDineroTests;
+			productName = LaunchDineroTests;
+			productReference = 2EF67BB92D5E0F630011597D /* LaunchDineroTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2EF67BC22D5E0F630011597D /* LaunchDineroUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EF67BD42D5E0F640011597D /* Build configuration list for PBXNativeTarget "LaunchDineroUITests" */;
+			buildPhases = (
+				865896712219DFD3AFF2B1BE /* [CP] Check Pods Manifest.lock */,
+				2EF67BBF2D5E0F630011597D /* Sources */,
+				2EF67BC02D5E0F630011597D /* Frameworks */,
+				2EF67BC12D5E0F630011597D /* Resources */,
+				EFD10AB8CBED7CD1ED9B0E4A /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2EF67BC52D5E0F630011597D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2EF67BC62D5E0F630011597D /* LaunchDineroUITests */,
+			);
+			name = LaunchDineroUITests;
+			productName = LaunchDineroUITests;
+			productReference = 2EF67BC32D5E0F630011597D /* LaunchDineroUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2EF67B9B2D5E0F630011597D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					2EF67BA22D5E0F630011597D = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					2EF67BB82D5E0F630011597D = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 2EF67BA22D5E0F630011597D;
+					};
+					2EF67BC22D5E0F630011597D = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 2EF67BA22D5E0F630011597D;
+					};
+				};
+			};
+			buildConfigurationList = 2EF67B9E2D5E0F630011597D /* Build configuration list for PBXProject "LaunchDinero" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				es,
+			);
+			mainGroup = 2EF67B9A2D5E0F630011597D;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 2EF67BA42D5E0F630011597D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2EF67BA22D5E0F630011597D /* LaunchDinero */,
+				2EF67BB82D5E0F630011597D /* LaunchDineroTests */,
+				2EF67BC22D5E0F630011597D /* LaunchDineroUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2EF67BA12D5E0F630011597D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EB59FE62D917E2900D7A011 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EF67BB72D5E0F630011597D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EF67BC12D5E0F630011597D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		145571D610DED1F5D1375926 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LaunchDineroTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		865896712219DFD3AFF2B1BE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LaunchDinero-LaunchDineroUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		87653E96FFBB52EA0A09B9DA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LaunchDinero/Pods-LaunchDinero-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LaunchDinero/Pods-LaunchDinero-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LaunchDinero/Pods-LaunchDinero-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B26AC5503EE42592E6C5794C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LaunchDinero-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EFD10AB8CBED7CD1ED9B0E4A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LaunchDinero-LaunchDineroUITests/Pods-LaunchDinero-LaunchDineroUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LaunchDinero-LaunchDineroUITests/Pods-LaunchDinero-LaunchDineroUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LaunchDinero-LaunchDineroUITests/Pods-LaunchDinero-LaunchDineroUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2EF67B9F2D5E0F630011597D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EF67BB52D5E0F630011597D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EF67BBF2D5E0F630011597D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2EF67BBB2D5E0F630011597D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2EF67BA22D5E0F630011597D /* LaunchDinero */;
+			targetProxy = 2EF67BBA2D5E0F630011597D /* PBXContainerItemProxy */;
+		};
+		2EF67BC52D5E0F630011597D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2EF67BA22D5E0F630011597D /* LaunchDinero */;
+			targetProxy = 2EF67BC42D5E0F630011597D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2EF67BCD2D5E0F640011597D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D8B5E0CFEA18CE0F0525742 /* Pods-LaunchDinero.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LaunchDinero/LaunchDinero.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 11;
+				DEVELOPMENT_TEAM = YUQ352UGYJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LaunchDinero/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LaunchDinero;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Authorize camera access to easily take ID card photos and have a convenient operation process.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "LaunchDinero applies to access the contact list. Easily upload contact information to simplify steps and accelerate the loan application.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Enable location permission to help FastLending accurately assess loan needs and provide considerate and localized service.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Enable location permission to help FastLending accurately assess loan needs and provide considerate and localized service.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Enable location permission to help FastLending accurately assess loan needs and provide considerate and localized service.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "LaunchDinero applies to obtain the advertising identifier (IDFA) information of your device to provide more accurate and personalized services.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wangtutu.LaunchDinero;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		2EF67BCE2D5E0F640011597D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2EAD047327A7B4E66C9B18CC /* Pods-LaunchDinero.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LaunchDinero/LaunchDinero.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 11;
+				DEVELOPMENT_TEAM = YUQ352UGYJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LaunchDinero/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LaunchDinero;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Authorize camera access to easily take ID card photos and have a convenient operation process.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "LaunchDinero applies to access the contact list. Easily upload contact information to simplify steps and accelerate the loan application.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Enable location permission to help FastLending accurately assess loan needs and provide considerate and localized service.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Enable location permission to help FastLending accurately assess loan needs and provide considerate and localized service.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Enable location permission to help FastLending accurately assess loan needs and provide considerate and localized service.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "LaunchDinero applies to obtain the advertising identifier (IDFA) information of your device to provide more accurate and personalized services.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wangtutu.LaunchDinero;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		2EF67BCF2D5E0F640011597D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2EF67BD02D5E0F640011597D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2EF67BD22D5E0F640011597D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DAB746A6676D7FABB5673BEC /* Pods-LaunchDineroTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YUQ352UGYJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wangtutu.LaunchDineroTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LaunchDinero.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LaunchDinero";
+			};
+			name = Debug;
+		};
+		2EF67BD32D5E0F640011597D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0FDEDD9D54453D8BCC4B0C41 /* Pods-LaunchDineroTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YUQ352UGYJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wangtutu.LaunchDineroTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LaunchDinero.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LaunchDinero";
+			};
+			name = Release;
+		};
+		2EF67BD52D5E0F640011597D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D60D593CB1FE8EDF539CD0E6 /* Pods-LaunchDinero-LaunchDineroUITests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YUQ352UGYJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wangtutu.LaunchDineroUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LaunchDinero;
+			};
+			name = Debug;
+		};
+		2EF67BD62D5E0F640011597D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A34C83C0E629DA71165E191 /* Pods-LaunchDinero-LaunchDineroUITests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YUQ352UGYJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wangtutu.LaunchDineroUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LaunchDinero;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2EF67B9E2D5E0F630011597D /* Build configuration list for PBXProject "LaunchDinero" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EF67BCF2D5E0F640011597D /* Debug */,
+				2EF67BD02D5E0F640011597D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2EF67BCC2D5E0F640011597D /* Build configuration list for PBXNativeTarget "LaunchDinero" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EF67BCD2D5E0F640011597D /* Debug */,
+				2EF67BCE2D5E0F640011597D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2EF67BD12D5E0F640011597D /* Build configuration list for PBXNativeTarget "LaunchDineroTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EF67BD22D5E0F640011597D /* Debug */,
+				2EF67BD32D5E0F640011597D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2EF67BD42D5E0F640011597D /* Build configuration list for PBXNativeTarget "LaunchDineroUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EF67BD52D5E0F640011597D /* Debug */,
+				2EF67BD62D5E0F640011597D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2EF67B9B2D5E0F630011597D /* Project object */;
+}

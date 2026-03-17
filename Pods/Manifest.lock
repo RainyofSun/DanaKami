@@ -1,0 +1,115 @@
+PODS:
+  - Alamofire (5.10.2)
+  - ESPullToRefresh (2.9.3)
+  - FSPagerView (0.8.3)
+  - IQKeyboardCore (1.0.5)
+  - IQKeyboardManagerSwift (8.0.0):
+    - IQKeyboardManagerSwift/Appearance (= 8.0.0)
+    - IQKeyboardManagerSwift/Core (= 8.0.0)
+    - IQKeyboardManagerSwift/IQKeyboardReturnManager (= 8.0.0)
+    - IQKeyboardManagerSwift/IQKeyboardToolbarManager (= 8.0.0)
+    - IQKeyboardManagerSwift/IQTextView (= 8.0.0)
+    - IQKeyboardManagerSwift/Resign (= 8.0.0)
+  - IQKeyboardManagerSwift/Appearance (8.0.0):
+    - IQKeyboardManagerSwift/Core
+  - IQKeyboardManagerSwift/Core (8.0.0):
+    - IQKeyboardNotification
+    - IQTextInputViewNotification
+  - IQKeyboardManagerSwift/IQKeyboardReturnManager (8.0.0):
+    - IQKeyboardReturnManager
+  - IQKeyboardManagerSwift/IQKeyboardToolbarManager (8.0.0):
+    - IQKeyboardManagerSwift/Core
+    - IQKeyboardToolbarManager
+  - IQKeyboardManagerSwift/IQTextView (8.0.0):
+    - IQTextView
+  - IQKeyboardManagerSwift/Resign (8.0.0):
+    - IQKeyboardManagerSwift/Core
+  - IQKeyboardNotification (1.0.3)
+  - IQKeyboardReturnManager (1.0.4):
+    - IQKeyboardCore (= 1.0.5)
+  - IQKeyboardToolbar (1.1.1):
+    - IQKeyboardCore
+    - IQKeyboardToolbar/Core (= 1.1.1)
+  - IQKeyboardToolbar/Core (1.1.1):
+    - IQKeyboardCore
+    - IQKeyboardToolbar/Placeholderable
+  - IQKeyboardToolbar/Placeholderable (1.1.1):
+    - IQKeyboardCore
+  - IQKeyboardToolbarManager (1.1.2):
+    - IQKeyboardToolbar
+    - IQTextInputViewNotification
+  - IQTextInputViewNotification (1.0.8):
+    - IQKeyboardCore
+  - IQTextView (1.0.5):
+    - IQKeyboardToolbar/Placeholderable
+  - JFPopup (1.5.7):
+    - JRBaseKit (~> 1.1.1)
+  - JRBaseKit (1.1.2)
+  - Kingfisher (8.3.1)
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
+  - ReachabilitySwift (5.2.4)
+  - SnapKit (5.7.1)
+  - SwiftyJSON (5.0.2)
+  - Toast-Swift (5.1.1)
+
+DEPENDENCIES:
+  - ESPullToRefresh
+  - FSPagerView
+  - IQKeyboardManagerSwift
+  - JFPopup
+  - Kingfisher (~> 8.3.1)
+  - Moya
+  - ReachabilitySwift
+  - SnapKit
+  - SwiftyJSON (~> 5.0.2)
+  - Toast-Swift
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - ESPullToRefresh
+    - FSPagerView
+    - IQKeyboardCore
+    - IQKeyboardManagerSwift
+    - IQKeyboardNotification
+    - IQKeyboardReturnManager
+    - IQKeyboardToolbar
+    - IQKeyboardToolbarManager
+    - IQTextInputViewNotification
+    - IQTextView
+    - JFPopup
+    - JRBaseKit
+    - Kingfisher
+    - Moya
+    - ReachabilitySwift
+    - SnapKit
+    - SwiftyJSON
+    - Toast-Swift
+
+SPEC CHECKSUMS:
+  Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
+  ESPullToRefresh: 0d68daa602b343c81753a1b95e09fd0bfcddfd40
+  FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
+  IQKeyboardCore: 28c8bf3bcd8ba5aa1570b318cbc4da94b861711e
+  IQKeyboardManagerSwift: 0c6fbbaa2e60739e48d7cf59f25661471a7a3a65
+  IQKeyboardNotification: d7382c4466c5a5adef92c7452ebf861b36050088
+  IQKeyboardReturnManager: 972be48528ce9e7508ab3ab15ac7efac803f17f5
+  IQKeyboardToolbar: d4bdccfb78324aec2f3920659c77bb89acd33312
+  IQKeyboardToolbarManager: 6f4072ac620c2572d4af8c09f42a801f3e4909f7
+  IQTextInputViewNotification: f5e954d8881fd9808b744e49e024cc0d4bcfe572
+  IQTextView: ae13b4922f22e6f027f62c557d9f4f236b19d5c7
+  JFPopup: e53721abbf9d3aea3650ce7ea72e97f12d9d91b9
+  JRBaseKit: 825cca458a73990f6019deaaaaff75840dea477f
+  Kingfisher: 3204d23de16b5ea53541c44ca5a8efb55741dec3
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  SwiftyJSON: f5b1bf1cd8dd53cd25887ac0eabcfd92301c6a5a
+  Toast-Swift: 7a03a532afe3a560d4044bc7c237e2864d295173
+
+PODFILE CHECKSUM: 7cf00bb04afe3398623f365acf348d7f359fe86e
+
+COCOAPODS: 1.16.2
