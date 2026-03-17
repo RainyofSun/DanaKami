@@ -43,7 +43,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     self.window?.makeKeyAndVisible()
                     return
                 }
-            case .failure(_):
+            case .failure(let error):
+                print("\(error.localizedDescription)")
                 break
             }
             LDReqManager.requestList(url: .jsonUrl) { result in

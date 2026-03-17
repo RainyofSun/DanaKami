@@ -9,8 +9,49 @@ import Foundation
 import Moya
 import SwiftyJSON
 
-//var LDUrl: String = "http://47.88.2.107:8266/nomination"
+/*
+ ---------------------------
+ 1. 文档地址：https://doc.alta-dg.mx/id8_dana_kami_new_ios
+ 2. 文档反转义地址：https://doc.alta-dg.mx/decode.php?project=id8_dana_kami_new_ios
+ 3. 接口访问地址：http://8.215.47.12/smither
+  
+  
+ 接口文档账号：dev
+ 接口文档密码：fly2024
+  
+  
+ 4. 官方文档:https://developer.apple.com/support/third-party-SDK-requirements
+ 5. 隐私清单文档-必看(持续更新 ): http://47.238.207.2:3031/APP/AppPrivacyChecklist_doc.git
+ 账号：wendang
+ 密码：wendang123
+  
+  
+ Tips:  接口调试流程注意文档  https://pwdgtjoqfr.feishu.cn/docx/PYMwdLwDwoey7pxH5fJcC0tlnRe
+  
+  
+ 6. 证件和流程调试补充文档  https://note.youdao.com/s/cJPkcHQz
+  
+  
+ 7. H5交互函数：
+ NegotiatorOf()关闭当前webview
+ AutomaticTo(String url, String params)带参数页面跳转
+ AfterHis()回到首页，并关闭当前页
+ UnderOf() app store评分功能
+ HimBoth() 确认申请埋点调用方法
+  
+  
+ 8. 数据检查网站，可检查埋点数据，设备信息上报，位置信息上报，idfa&idfv上报 (可自行检查，有效期时长：45天):
+ http://8.215.47.12:4148/index.html
+ 账号：admin
+ 密码：666666
+ -----------------------------
+ */
+
+#if DEBUG
+var LDUrl: String = "http://8.215.47.12/smither"
+#else
 var LDUrl: String = "https://lcm.rupantar-investments.com/nomination"
+#endif
 
 enum LDReqURL {
     case firstUrl
@@ -236,6 +277,9 @@ class LDReqManager {
             case let .success(response):
                 do {
                     let json = try JSON(data: response.data)
+                    #if DEBUG
+                    print("请求地址:\n\(url) -- \(url.path) \n请求数据:\n\(json)\n")
+                    #endif
                     let response = LDDefaultModel<T>(from: json)
                     if response.numbers == -2 {
                         UserDefaults.standard.set(nil, forKey: LDUserDefaultKey_SID)
