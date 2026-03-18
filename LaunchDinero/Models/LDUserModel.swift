@@ -10,7 +10,6 @@ import Foundation
 struct LDUserModel: Codable {
     var mathematicians: [LDUserMathematiciansModel] = []
     var userInfo: LDUserInfo = LDUserInfo()
-    var desLog: LDUserDesLog = LDUserDesLog()
 }
 
 struct LDUserMathematiciansModel: Codable {
@@ -23,12 +22,5 @@ struct LDUserMathematiciansModel: Codable {
 }
 
 struct LDUserInfo: Codable {
-    var isReal: Int = 0
-    var tied: String = ""
-    var userphone: String = ""
-}
-
-struct LDUserDesLog: Codable {
-    var decTitle: String = ""
-    var decValue: String = ""
+    var kate: String = ""
 }

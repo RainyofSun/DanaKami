@@ -119,18 +119,18 @@ class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
     func refreshData() {
         isList = false
         for item in mainData.mathematicians {
-            if item.listed == "homea" {
+            if item.listeder == "homea" {
                 self.bannerList = item.ramanujan
-            } else if item.listed == "homeb" {
+            } else if item.listeder == "homeb" {
                 if let m = item.ramanujan[safe: 0] {
                     self.itemModel = m
                 }
-            } else if item.listed == "homec" {
+            } else if item.listeder == "homec" {
                 isList = true
                 if let m = item.ramanujan[safe: 0] {
                     self.listModel = m
                 }
-            } else if item.listed == "homed" {
+            } else if item.listeder == "homed" {
                 isList = true
                 self.list = item.ramanujan
             }

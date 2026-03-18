@@ -9,7 +9,7 @@ import Foundation
 
 struct LDStartModel: Codable {
     /// 1=India，2=Mexico
-    var retrieved: Int = 1
+    var retrieved: String = "1"
     /// agreement
     var archived: String = ""
     /// Facebook
@@ -19,7 +19,7 @@ struct LDStartModel: Codable {
     
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.retrieved = try container.decodeIfPresent(Int.self, forKey: .retrieved) ?? 1
+        self.retrieved = try container.decodeIfPresent(String.self, forKey: .retrieved) ?? "1"
         self.archived = try container.decodeIfPresent(String.self, forKey: .archived) ?? ""
         self.catalog = try container.decodeIfPresent(LDStartCatalogModel.self, forKey: .catalog) ?? LDStartCatalogModel()
     }

@@ -45,13 +45,11 @@ struct LDMainCenturiesModel: Codable {
     var fishermen: String = ""
     /// linkUrl
     var farmers: String = ""
-    /// linkUrltwo
-    var linkUrltwo: String = ""
 }
 
 struct LDMainMathematiciansModel: Codable {
     /// type
-    var listed: String = ""
+    var listeder: String = ""
     /// item
     var ramanujan: [LDMainrRamanujanModel] = []
 }
