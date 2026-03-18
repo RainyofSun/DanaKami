@@ -11,7 +11,7 @@ class LDVerifyDetailAVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
     
     var data: LDVerifyDetailAModel = LDVerifyDetailAModel()
     
-    var type: String = "finda"
+    var type: String = "findb"
     
     lazy var tb: UITableView = {
         let tb = UITableView(frame: .zero, style: .plain)
@@ -112,12 +112,10 @@ class LDVerifyDetailAVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
     
     func reqData() {
         let params: [String: Any] = ["foreign": self.pID]
-        var url: LDReqURL = .verifyDetailWJUrl(params: params)
+        var url: LDReqURL = .verifyDetailGRXXUrl(params: params)
         if type == "findc" {
-            url = .verifyDetailGRXXUrl(params: params)
-        } else if type == "findd" {
             url = .verifyDetailGZXXUrl(params: params)
-        } else if type == "findf" {
+        } else if type == "finde" {
             url = .verifyDetailBKUrl(params: params)
         }
         

@@ -14,14 +14,25 @@ class LDWecomeVC: LDBaseVC {
         img.isUserInteractionEnabled = true
         return img
     }()
+    
+    lazy var applogoImgView: UIImageView = {
+        let img = UIImageView(image: UIImage(named: "appLogo"))
+        return img
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.addSubview(imgV)
+        imgV.addSubview(applogoImgView)
         
         imgV.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        
+        applogoImgView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-100)
         }
     }
     

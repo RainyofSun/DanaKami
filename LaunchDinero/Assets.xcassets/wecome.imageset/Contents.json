@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "wecome.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "wecome@2x.png",
+      "filename" : "Rectangle 19093@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "wecome@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

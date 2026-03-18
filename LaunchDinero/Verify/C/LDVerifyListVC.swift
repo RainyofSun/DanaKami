@@ -125,7 +125,7 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
     
     func pushDetail(type: String, model: LDVerifyPromisingModel, currentIndex: Int) {
         switch type {
-        case "findb":
+        case "finda":
             let viewController = LDVerifyDetailBVC()
             viewController.pID = self.pID
             viewController.OrderNo = self.OrderNo
@@ -133,7 +133,7 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
             viewController.stepV.index = currentIndex
             self.navigationController?.pushViewController(viewController, animated: true)
             break
-        case "finde":
+        case "findd":
             let viewController = LDVerifyDetailCVC()
             viewController.pID = self.pID
             viewController.OrderNo = self.OrderNo
@@ -203,16 +203,14 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
         for m in verifyModel.promising {
             switch m.bmi {
             case "finda":
-                VerifyStepList.append(LDVerifyStepModel(img: "verify_step_0", selImg: "verify_step_0_sel"))
-            case "findb":
                 VerifyStepList.append(LDVerifyStepModel(img: "verify_step_1", selImg: "verify_step_1_sel"))
-            case "findc":
+            case "findb":
                 VerifyStepList.append(LDVerifyStepModel(img: "verify_step_2", selImg: "verify_step_2_sel"))
-            case "findd":
+            case "findc":
                 VerifyStepList.append(LDVerifyStepModel(img: "verify_step_3", selImg: "verify_step_3_sel"))
-            case "finde":
+            case "findd":
                 VerifyStepList.append(LDVerifyStepModel(img: "verify_step_4", selImg: "verify_step_4_sel"))
-            case "findf":
+            case "finde":
                 VerifyStepList.append(LDVerifyStepModel(img: "verify_step_5", selImg: "verify_step_5_sel"))
             default:
                 break

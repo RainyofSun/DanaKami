@@ -74,8 +74,7 @@ struct LDVerifyStepModel {
     }
 }
 
-var VerifyStepList: [LDVerifyStepModel] = [LDVerifyStepModel(img: "verify_step_0", selImg: "verify_step_0_sel"),
-                                           LDVerifyStepModel(img: "verify_step_1", selImg: "verify_step_1_sel"),
+var VerifyStepList: [LDVerifyStepModel] = [LDVerifyStepModel(img: "verify_step_1", selImg: "verify_step_1_sel"),
                                            LDVerifyStepModel(img: "verify_step_2", selImg: "verify_step_2_sel"),
                                            LDVerifyStepModel(img: "verify_step_3", selImg: "verify_step_3_sel"),
                                            LDVerifyStepModel(img: "verify_step_4", selImg: "verify_step_4_sel"),

@@ -65,7 +65,6 @@ enum LDReqURL {
     case mainUrl
     case allowProductUrl(params: [String: Any])
     case verifyListUrl(params: [String: Any])
-    case verifyDetailWJUrl(params: [String: Any])
     case verifyDetailSFZUrl(params: [String: Any])
     case verifyDetailGRXXUrl(params: [String: Any])
     case verifyDetailGZXXUrl(params: [String: Any])
@@ -121,10 +120,8 @@ extension LDReqURL: TargetType {
             return "/utman/afi"
         case .verifyListUrl:
             return "/utman/references"
-        case .verifyDetailWJUrl:
-            return "/utman/disco"
         case .verifyDetailSFZUrl:
-            return "/utman/kate"
+            return "/utman/board"
         case .verifyDetailGRXXUrl:
             return "/utman/county"
         case .verifyDetailGZXXUrl:
@@ -132,7 +129,7 @@ extension LDReqURL: TargetType {
         case .verifyDetailLXRUrl:
             return "/utman/farmers"
         case .verifyDetailBKUrl:
-            return "/utman/ramanujan"
+            return "/utman/duo"
         case .verifyCommitWJUrl:
             return "/utman/beckinsale"
         case .verifyCommitSFZUrl:
@@ -144,9 +141,9 @@ extension LDReqURL: TargetType {
         case .verifyCommitLXRUrl:
             return "/utman/mathematicians"
         case .verifyCommitBKUrl:
-            return "/utman/infinity"
+            return "/utman/male"
         case .verifySFZConfirmUrl:
-            return "/utman/notes"
+            return "/utman/national"
         case .playAnOrder:
             return "/utman/knew"
         case .allOrderUrl:
@@ -178,7 +175,6 @@ extension LDReqURL: TargetType {
                 .loginUrl,
                 .allowProductUrl,
                 .verifyListUrl,
-                .verifyDetailWJUrl,
                 .verifyDetailSFZUrl,
                 .verifyDetailGRXXUrl,
                 .verifyDetailGZXXUrl,
@@ -216,7 +212,6 @@ extension LDReqURL: TargetType {
                 .loginUrl(let dict),
                 .allowProductUrl(let dict),
                 .verifyListUrl(let dict),
-                .verifyDetailWJUrl(let dict),
                 .verifyDetailSFZUrl(let dict),
                 .verifyDetailGRXXUrl(let dict),
                 .verifyDetailGZXXUrl(let dict),
