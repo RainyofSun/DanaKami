@@ -135,7 +135,7 @@ class LDUserVC: LDBaseVC, UICollectionViewDelegateFlowLayout, UICollectionViewDe
             case .success(let success):
                 if let m = success.financial {
                     self.userModel = m
-                    self.nameLb.text = self.userModel.userInfo.userphone
+                    self.nameLb.text = self.userModel.userInfo.kate
                     self.collectionV.reloadData()
                 } else {
                     self.view.LDToast(text: success.information)

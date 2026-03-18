@@ -47,7 +47,7 @@ class LDMainListCell: LDCell {
     lazy var amountA: UILabel = {
         let lb = UILabel(text: "",
                          color: UIColor(hex: "#555555"),
-                         font: .systemFont(ofSize: LDLocalLanguage.shared.localLanguage == .es ? 12 : 14),
+                         font: .systemFont(ofSize: LDLocalLanguage.shared.localLanguage == .indonesian ? 12 : 14),
                          alignment: .center)
         return lb
     }()
@@ -62,7 +62,7 @@ class LDMainListCell: LDCell {
     lazy var termA: UILabel = {
         let lb = UILabel(text: "",
                          color: UIColor(hex: "#333333"),
-                         font: .systemFont(ofSize: LDLocalLanguage.shared.localLanguage == .es ? 12 : 14),
+                         font: .systemFont(ofSize: LDLocalLanguage.shared.localLanguage == .indonesian ? 12 : 14),
                          alignment: .center)
         return lb
     }()
@@ -77,7 +77,7 @@ class LDMainListCell: LDCell {
     lazy var rateA: UILabel = {
         let lb = UILabel(text: "",
                          color: UIColor(hex: "#333333"),
-                         font: .systemFont(ofSize: LDLocalLanguage.shared.localLanguage == .es ? 12 : 14),
+                         font: .systemFont(ofSize: LDLocalLanguage.shared.localLanguage == .indonesian ? 12 : 14),
                          alignment: .center)
         return lb
     }()

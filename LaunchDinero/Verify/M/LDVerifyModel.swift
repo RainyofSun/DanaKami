@@ -33,7 +33,7 @@ struct LDVerifyModel: Codable {
 
 struct LDVerifyReelModel: Codable {
     /// amountArr
-    var globe: [Int] = []
+    var globe: [String] = []
     /// amount
     var newcomer: String = ""
     /// termArr
@@ -95,7 +95,7 @@ struct LDVerifyPromisingModel: Codable {
     /// subtitle
     var association: String = ""
     /// type
-    var listed: Int = 0
+    var listeder: Int = 0
     /// url
     var infinity: String = ""
     /// status
@@ -121,7 +121,7 @@ struct LDVerifyPromisingModel: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.rainmaker = try container.decodeIfPresent(String.self, forKey: .rainmaker) ?? ""
         self.association = try container.decodeIfPresent(String.self, forKey: .association) ?? ""
-        self.listed = try container.decodeIfPresent(Int.self, forKey: .listed) ?? 0
+        self.listeder = try container.decodeIfPresent(Int.self, forKey: .listeder) ?? 0
         self.infinity = try container.decodeIfPresent(String.self, forKey: .infinity) ?? ""
         self.society = try container.decodeIfPresent(Int.self, forKey: .society) ?? 0
         self.tv = try container.decodeIfPresent(String.self, forKey: .tv) ?? ""
@@ -140,7 +140,7 @@ struct LDVerifyGoldenModel: Codable {
     /// url
     var infinity: String = ""
     /// type
-    var listed: Int = 0
+    var listeder: Int = 0
     /// title
     var rainmaker: String = ""
 }

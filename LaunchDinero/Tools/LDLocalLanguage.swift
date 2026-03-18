@@ -8,8 +8,8 @@
 import Foundation
 
 enum LDLocalLanguageType: String {
-    case en
-    case es
+    case en = "en"
+    case indonesian = "id"
 }
 
 class LDLocalLanguage {

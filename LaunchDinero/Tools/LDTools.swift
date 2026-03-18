@@ -61,7 +61,7 @@ func isLogin(currentVC: UIViewController) -> Bool {
 func allowProductDetail(vc: UIViewController, pID: String) {
     vc.view.LDShowActivity()
     LDPermissionManager.location { isAllow in
-        if !isAllow && isGreaterThanOneDay() && LDLocalLanguage.shared.localLanguage == .es {
+        if !isAllow && isGreaterThanOneDay() && LDLocalLanguage.shared.localLanguage == .indonesian {
             vc.view.LDHideActivity()
             LDPermissionManager.requestPermission(currentVC: vc)
         } else {
@@ -154,7 +154,7 @@ func getBaseUrl(urls: [String], index: Int = 0) {
         case .success(let success):
             if let m = success.financial {
                 startModel = m
-                LDLocalLanguage.shared.configLanguage(type: startModel.retrieved == 2 ? .es : .en)
+                LDLocalLanguage.shared.configLanguage(type: startModel.retrieved == "2" ? .indonesian : .en)
                 UserDefaults.standard.set(startModel.retrieved, forKey: LDUserDefaultKey_CITY)
                 if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let window = windowScene.windows.first {
                     window.rootViewController = LDTabBarC()

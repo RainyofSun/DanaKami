@@ -37,7 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             case .success(let success):
                 if let m = success.financial {
                     startModel = m
-                    LDLocalLanguage.shared.configLanguage(type: startModel.retrieved == 2 ? .es : .en)
+                    LDLocalLanguage.shared.configLanguage(type: startModel.retrieved == "2" ? .indonesian : .en)
                     UserDefaults.standard.set(startModel.retrieved, forKey: LDUserDefaultKey_CITY)
                     self.window?.rootViewController = LDTabBarC()
                     self.window?.makeKeyAndVisible()

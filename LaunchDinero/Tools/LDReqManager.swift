@@ -354,7 +354,8 @@ struct LDDefaultModel<T: Codable> {
         do {
             let dataJson = try json["financial"].rawData()
             self.financial = try JSONDecoder().decode(T.self, from: dataJson)
-        } catch {
+        } catch (let error) {
+            print("解析失败 ---- \nmodel 类型 \n\(T.self) \n\(error) \n----")
             self.financial = nil
         }
         
