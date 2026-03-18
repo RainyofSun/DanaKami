@@ -350,7 +350,7 @@ struct LDDefaultModel<T: Codable> {
     
     init(from json: JSON) {
         self.numbers = json["numbers"].intValue
-        self.information = json["information"].stringValue
+        self.information = json["informationed"].stringValue
         do {
             let dataJson = try json["financial"].rawData()
             self.financial = try JSONDecoder().decode(T.self, from: dataJson)
