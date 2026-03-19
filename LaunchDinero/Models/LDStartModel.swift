@@ -37,3 +37,4 @@ struct LDStartCatalogModel: Codable {
 }
 
 var startModel: LDStartModel = LDStartModel()
+var isEnglish: Bool = startModel.retrieved == "1"

@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import FSPagerView
 
-class LDMainCell: LDCell, FSPagerViewDelegate, FSPagerViewDataSource {
+class LDMainCell: LDCell {
     
     var model: LDMainrRamanujanModel = LDMainrRamanujanModel() {
         didSet {
@@ -22,23 +21,6 @@ class LDMainCell: LDCell, FSPagerViewDelegate, FSPagerViewDataSource {
             rateB.text = model.actors
             
             applyBtn.setTitle(model.turkish, for: .normal)
-        }
-    }
-    
-    var bannerData: [LDMainrRamanujanModel] = [] {
-        didSet {
-            self.bannerV.reloadData()
-            
-            bannerV.isHidden = bannerData.count <= 0
-            
-            knowLb.snp.remakeConstraints { make in
-                if bannerData.count > 0 {
-                    make.top.equalTo(bannerV.snp.bottom).offset(14)
-                } else {
-                    make.top.equalTo(bgImageView.snp.bottom).offset(10)
-                }
-                make.left.equalTo(14 * LDScale)
-            }
         }
     }
     
@@ -123,17 +105,6 @@ class LDMainCell: LDCell, FSPagerViewDelegate, FSPagerViewDataSource {
         let img = UIImageView(image: UIImage(named: LDText(key: "main_1_know")))
         return img
     }()
-    
-    lazy var bannerV: FSPagerView = {
-        let view = FSPagerView()
-        view.delegate = self
-        view.dataSource = self
-        view.isInfinite = false
-        view.backgroundColor = .clear
-        view.itemSize = CGSize(width: LDScreenWidth, height: 113)
-        view.register(LDMainBannerCell.self, forCellWithReuseIdentifier: "Cell")
-        return view
-    }()
 
     override func setupSubviews() {
         super.setupSubviews()
@@ -152,7 +123,6 @@ class LDMainCell: LDCell, FSPagerViewDelegate, FSPagerViewDataSource {
         bgImageView.addSubview(stepImg)
         self.contentView.addSubview(knowLb)
         self.contentView.addSubview(knowImg)
-        self.contentView.addSubview(bannerV)
         
         bgImageView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
@@ -214,69 +184,11 @@ class LDMainCell: LDCell, FSPagerViewDelegate, FSPagerViewDataSource {
             make.left.equalTo(14 * LDScale)
             make.bottom.right.equalTo(-14 * LDScale)
         }
-        
-        bannerV.snp.makeConstraints { make in
-            make.top.equalTo(bgImageView.snp.bottom).offset(10)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(113)
-        }
     }
     
     @objc func applyBtnClick() {
         if isLogin(currentVC: self.parentVC()) {
             allowProductDetail(vc: self.parentVC(), pID: "\(model.flag)")
         }
-    }
-    
-    func numberOfItems(in pagerView: FSPagerView) -> Int {
-        bannerData.count
-    }
-    
-    func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
-        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "Cell", at: index) as! LDMainBannerCell
-        if let m = bannerData[safe: index] {
-            cell.model = m
-        }
-        return cell
-    }
-    
-    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
-        if let m = bannerData[safe: index] {
-            jumpPage(vc: self.parentVC(), url: m.infinity)
-        }
-    }
-
-}
-
-class LDMainBannerCell: FSPagerViewCell {
-    
-    var model: LDMainrRamanujanModel = LDMainrRamanujanModel() {
-        didSet {
-            img.kf.setImage(with: URL(string: model.knew))
-        }
-    }
-    
-    lazy var img: UIImageView = {
-        let img = UIImageView()
-        img.isUserInteractionEnabled = true
-        img.backgroundColor = .red
-        return img
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        self.backgroundColor = .clear
-        
-        self.addSubview(img)
-        img.snp.makeConstraints { make in
-            make.left.equalTo(14)
-            make.right.equalTo(-14)
-            make.top.bottom.equalToSuperview()
-        }
-    }
-    
-    @MainActor required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

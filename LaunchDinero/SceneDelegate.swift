@@ -20,9 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         IQKeyboardManager.shared.isEnabled = true
         IQKeyboardManager.shared.resignOnTouchOutside = true
-//        startApp()
-        self.window?.rootViewController = LDWecomeVC()
-        self.window?.makeKeyAndVisible()
+        
+        setWelcomeVC()
     }
     
     func startApp(isWecome: Bool = false) {
@@ -47,13 +46,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 print("\(error.localizedDescription)")
                 break
             }
-            LDReqManager.requestList(url: .jsonUrl) { result in
+            
+            if let _window = self.window, let _we_vc = _window.rootViewController as? LDWecomeVC {
+                _we_vc.retryBtn.isHidden = false
+            }
+            
+            LDReqManager.requestList(url: .jsonUrl) { [weak self] result in
                 switch result {
                 case .success(let success):
                     getBaseUrl(urls: success)
                 case .failure(_):
-                    self.window?.rootViewController = LDWecomeVC()
-                    self.window?.makeKeyAndVisible()
+                    self?.setWelcomeVC(showRetry: true)
                 }
             }
         }
@@ -92,5 +95,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
+    func setWelcomeVC(showRetry: Bool = false) {
+        let welcome = LDWecomeVC()
+        welcome.retryBtn.isHidden = !showRetry
+        welcome.retryDelegate = self
+        self.window?.rootViewController = welcome
+        self.window?.makeKeyAndVisible()
+    }
+}
+
+extension SceneDelegate: RetryRequestProtocol {
+    func retryRequest() {
+        startApp(isWecome: true)
+    }
 }
 

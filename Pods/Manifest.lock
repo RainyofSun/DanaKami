@@ -1,7 +1,6 @@
 PODS:
   - Alamofire (5.10.2)
   - ESPullToRefresh (2.9.3)
-  - FSPagerView (0.8.3)
   - IQKeyboardCore (1.0.5)
   - IQKeyboardManagerSwift (8.0.0):
     - IQKeyboardManagerSwift/Appearance (= 8.0.0)
@@ -57,7 +56,6 @@ PODS:
 
 DEPENDENCIES:
   - ESPullToRefresh
-  - FSPagerView
   - IQKeyboardManagerSwift
   - JFPopup
   - Kingfisher (~> 8.3.1)
@@ -71,7 +69,6 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - ESPullToRefresh
-    - FSPagerView
     - IQKeyboardCore
     - IQKeyboardManagerSwift
     - IQKeyboardNotification
@@ -92,7 +89,6 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
   ESPullToRefresh: 0d68daa602b343c81753a1b95e09fd0bfcddfd40
-  FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   IQKeyboardCore: 28c8bf3bcd8ba5aa1570b318cbc4da94b861711e
   IQKeyboardManagerSwift: 0c6fbbaa2e60739e48d7cf59f25661471a7a3a65
   IQKeyboardNotification: d7382c4466c5a5adef92c7452ebf861b36050088
@@ -110,6 +106,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: f5b1bf1cd8dd53cd25887ac0eabcfd92301c6a5a
   Toast-Swift: 7a03a532afe3a560d4044bc7c237e2864d295173
 
-PODFILE CHECKSUM: 7cf00bb04afe3398623f365acf348d7f359fe86e
+PODFILE CHECKSUM: ff773e0c54b48abadd976360c45faa21bb65c03a
 
 COCOAPODS: 1.16.2

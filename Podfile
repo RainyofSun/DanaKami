@@ -13,7 +13,6 @@ target 'LaunchDinero' do
   pod 'Kingfisher', '~> 8.3.1'
   pod 'Toast-Swift'
   pod 'IQKeyboardManagerSwift'
-  pod 'FSPagerView'
   pod "ESPullToRefresh"
   pod 'SwiftyJSON', '~> 5.0.2'
   pod 'JFPopup'

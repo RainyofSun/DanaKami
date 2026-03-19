@@ -79,7 +79,6 @@ class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell1") as! LDMainCell
         cell.model = self.itemModel
-        cell.bannerData = self.bannerList
         return cell
     }
     
@@ -119,9 +118,7 @@ class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
     func refreshData() {
         isList = false
         for item in mainData.mathematicians {
-            if item.listeder == "homea" {
-                self.bannerList = item.ramanujan
-            } else if item.listeder == "homeb" {
+            if item.listeder == "homeb" {
                 if let m = item.ramanujan[safe: 0] {
                     self.itemModel = m
                 }
