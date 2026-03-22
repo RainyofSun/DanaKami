@@ -116,3 +116,15 @@ extension UIImage {
         return imgData
     }
 }
+
+enum InterFontWeight: String {
+    case Regular = "GalanoGrotesque-Regular"
+    case Bold = "GalanoGrotesque-SemiBold"
+    case Extra_Bold = "SharpGrotesk-Bold20"
+}
+
+extension UIFont {
+    static func interFont(size: CGFloat, fontStyle: InterFontWeight) -> UIFont {
+        return self.init(name: fontStyle.rawValue, size: size) ?? UIFont.systemFont(ofSize: size);
+    }
+}

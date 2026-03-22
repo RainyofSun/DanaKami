@@ -10,11 +10,11 @@
 "Phone number" = "Phone number";
 "Enter your phone number" = "Enter your phone number";
 "Verification code" = "Verification code";
-"Get code" = "Get code";
+"Get code" = "Kirim kode";
 "Voice verification" = "Voice verification";
 "Log in" = "Log in";
-"I have read and agree" = "  I have read and agree";
-"Privacy Agreement" = "Privacy Agreement";
+
+"Privacy Agreement" = "<Perjanjian Privasi>";
 "Please agree to the agreement" = "Please agree to the agreement";
 "Welcome to LaunchDinero" = "Welcome to LaunchDinero";
 "Common functions" = "Common functions";
@@ -58,3 +58,12 @@
 "Check" = "Check";
 
 "retry" = "Mencoba kembali";
+"Welcome back" = "Selamat datang kembali";
+"Borrow with greater peace of mind." = "Masuk menggunakan nomor ponsel anda";
+"Sign in" = "Log masuk";
+"Log in using your mobile phone number" = "Masuk menggunakan nomor ponsel anda";
+"+62" = "+62";
+"login_privice" = "Saya telah membaca dan menyetujui \n";
+"Loan Terms" = "Percepatan persetujuan";
+"Click to learn about Loan Terms" = "Ajukan hari ini, dana cair hari ini!";
+"Check" = "Menerapkan";

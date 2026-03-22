@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "login_voice.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "login_voice@2x.png",
+      "filename" : "login_voice_icon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "login_voice@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

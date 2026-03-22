@@ -54,7 +54,7 @@ var LDUrl: String = "https://lcm.rupantar-investments.com/nomination"
 #endif
 
 enum LDReqURL {
-    case firstUrl
+    case firstUrl(params: [String: Any])
     case jsonUrl
     case loginCodeUrl(params: [String: Any])
     case loginVoiceUrl(params: [String: Any])
@@ -98,7 +98,7 @@ extension LDReqURL: TargetType {
     
     var path: String {
         switch self {
-        case .firstUrl:
+        case .firstUrl(params: _):
             return "/utman/movies"
         case .jsonUrl:
             return ""
@@ -163,8 +163,7 @@ extension LDReqURL: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .firstUrl,
-                .jsonUrl,
+        case .jsonUrl,
                 .userInfoUrl,
                 .userOutUrl,
                 .userDeleteUrl,
@@ -193,6 +192,7 @@ extension LDReqURL: TargetType {
                 .uploadingIdfvIdfaUrl,
                 .uploadingBasePointUrl,
                 .uploadingDeviceInfoUrl,
+                .firstUrl(params: _),
                 .uploadingContactsUrl:
             return .post
         }
@@ -200,8 +200,7 @@ extension LDReqURL: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .firstUrl,
-                .jsonUrl,
+        case.jsonUrl,
                 .userInfoUrl,
                 .userOutUrl,
                 .userDeleteUrl,
@@ -229,7 +228,8 @@ extension LDReqURL: TargetType {
                 .uploadingIdfvIdfaUrl(let dict),
                 .uploadingBasePointUrl(let dict),
                 .uploadingDeviceInfoUrl(let dict),
-                .uploadingContactsUrl(let dict):
+                .uploadingContactsUrl(let dict),
+                .firstUrl(params: let dict):
             var formData: [MultipartFormData] = []
             for (key, v) in dict {
                 if let str = "\(v)".data(using: .utf8) {

@@ -1,10 +1,3 @@
-//
-//  GradientLoadingButton.swift
-//  LaunchDinero
-//
-//  Created by 一刻 on 2026/3/19.
-//
-
 import UIKit
 
 class GradientLoadingButton: UIControl {
@@ -26,16 +19,9 @@ class GradientLoadingButton: UIControl {
     /// 内边距（左右默认 8）
     var contentInsets = UIEdgeInsets(top: 6, left: 8, bottom: 6, right: 8) {
         didSet {
-            updateInsetsConstraints()
             invalidateIntrinsicContentSize()
         }
     }
-
-    // MARK: - 约束缓存
-    private var topConstraint: NSLayoutConstraint!
-    private var bottomConstraint: NSLayoutConstraint!
-    private var leadingConstraint: NSLayoutConstraint!
-    private var trailingConstraint: NSLayoutConstraint!
 
     // MARK: - 对外 loading
     var isLoading: Bool {
@@ -76,12 +62,12 @@ class GradientLoadingButton: UIControl {
         contentStack.alignment = .center
         contentStack.translatesAutoresizingMaskIntoConstraints = false
         contentStack.isUserInteractionEnabled = false
-        
+
         // image
         iconImageView.contentMode = .scaleAspectFit
         iconImageView.setContentHuggingPriority(.required, for: .horizontal)
 
-        // title
+        // title（必须有）
         titleLabel.font = UIFont.systemFont(ofSize: 16)
         titleLabel.textColor = .white
         titleLabel.setContentHuggingPriority(.required, for: .horizontal)
@@ -91,17 +77,10 @@ class GradientLoadingButton: UIControl {
 
         addSubview(contentStack)
 
-        // 约束（带 padding）
-        topConstraint = contentStack.topAnchor.constraint(equalTo: topAnchor, constant: contentInsets.top)
-        bottomConstraint = contentStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -contentInsets.bottom)
-        leadingConstraint = contentStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: contentInsets.left)
-        trailingConstraint = contentStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -contentInsets.right)
-
+        // ⭐ 改成居中约束
         NSLayoutConstraint.activate([
-            topConstraint,
-            bottomConstraint,
-            leadingConstraint,
-            trailingConstraint
+            contentStack.centerXAnchor.constraint(equalTo: centerXAnchor),
+            contentStack.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
 
         // loading
@@ -120,14 +99,6 @@ class GradientLoadingButton: UIControl {
         gradientLayer.frame = bounds
     }
 
-    // MARK: - 更新 Insets
-    private func updateInsetsConstraints() {
-        topConstraint.constant = contentInsets.top
-        bottomConstraint.constant = -contentInsets.bottom
-        leadingConstraint.constant = contentInsets.left
-        trailingConstraint.constant = -contentInsets.right
-    }
-
     // MARK: - 自适应尺寸（核心）
     override var intrinsicContentSize: CGSize {
         let stackSize = contentStack.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
@@ -140,7 +111,7 @@ class GradientLoadingButton: UIControl {
 
     // MARK: - 对外 API
 
-    func setTitle(_ text: String?) {
+    func setTitle(_ text: String) {   // ⭐ 改成必传
         titleLabel.text = text
         invalidateIntrinsicContentSize()
     }
@@ -173,7 +144,7 @@ class GradientLoadingButton: UIControl {
             indicator.startAnimating()
 
             if hidesContentWhenLoading {
-                contentStack.alpha = 0   // ⭐ 不影响布局
+                contentStack.alpha = 0
             }
 
             if disableWhenLoading {
@@ -187,7 +158,7 @@ class GradientLoadingButton: UIControl {
         }
     }
 
-    // MARK: - 点击高亮（模拟 UIButton）
+    // MARK: - 点击高亮
     override var isHighlighted: Bool {
         didSet {
             UIView.animate(withDuration: 0.15) {

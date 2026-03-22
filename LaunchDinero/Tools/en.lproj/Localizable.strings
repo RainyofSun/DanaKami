@@ -11,10 +11,10 @@
 "Enter your phone number" = "Enter your phone number";
 "Verification code" = "Verification code";
 "Get code" = "Get code";
-"Voice verification" = "Voice verification";
+"Voice verification" = "Verifikasi suara";
 "Log in" = "Log in";
-"I have read and agree" = "  I have read and agree";
-"Privacy Agreement" = "Privacy Agreement";
+
+"Privacy Agreement" = "<Privacy Agreement>";
 "Please agree to the agreement" = "Please agree to the agreement";
 "Welcome to LaunchDinero" = "Welcome to LaunchDinero";
 "Common functions" = "Common functions";
@@ -58,3 +58,12 @@
 "Check" = "Check";
 
 "retry" = "Retry";
+"Welcome back" = "Welcome back";
+"Borrow with greater peace of mind." = "Borrow with greater peace of mind.";
+"Sign in" = "Sign in";
+"Log in using your mobile phone number" = "Log in using your mobile phone number";
+"+62" = "+91";
+"login_privice" = "Confirm and agree to the \n";
+"Loan Terms" = "Loan Terms";
+"Click to learn about Loan Terms" = "Click to learn about Loan Terms";
+"Check" = "Check";

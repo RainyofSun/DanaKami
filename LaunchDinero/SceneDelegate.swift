@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         IQKeyboardManager.shared.isEnabled = true
         IQKeyboardManager.shared.resignOnTouchOutside = true
-        
+        showAllFonts()
         setWelcomeVC()
     }
     
@@ -30,7 +30,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = ws.windows.first
         }
         self.window?.LDShowActivity()
-        LDReqManager.request(url: LDReqURL.firstUrl, modelType: LDStartModel.self) { result in
+        
+        LDReqManager.request(url: LDReqURL.firstUrl(params: ["timer": Locale.preferredLanguages.first ?? "en", "mojo": (LDDevice.isVPNConnected() ? 1 : 0), "movies": LDDevice.proxyInfo().enabled ? 1 : 0]), modelType: LDStartModel.self) { result in
             self.window?.LDHideActivity()
             switch result {
             case .success(let success):
@@ -101,6 +102,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         welcome.retryDelegate = self
         self.window?.rootViewController = welcome
         self.window?.makeKeyAndVisible()
+    }
+    
+    func showAllFonts(){
+        let familyNames = UIFont.familyNames
+        
+        var index:Int = 0
+        
+        for familyName in familyNames {
+            
+            let fontNames = UIFont.fontNames(forFamilyName: familyName as String)
+            print("------- 字体家族 -------- \(familyName)")
+            for fontName in fontNames
+            {
+                index += 1
+                
+                print("第 \(index) 个字体，字体font名称：\(fontName)")
+            }
+        }
     }
 }
 

@@ -227,6 +227,46 @@ class LDDevice {
                     "bags": wifiInfo]
         }
     }
+    
+    static func isVPNConnected() -> Bool {
+        guard let dict = CFNetworkCopySystemProxySettings()?.takeRetainedValue() as? [String: Any],
+              let keys = (dict["__SCOPED__"] as? [String: Any])?.keys else {
+            return false
+        }
+
+        return keys.contains { key in
+            key.contains("utun") ||
+            key.contains("ppp") ||
+            key.contains("ipsec") ||
+            key.contains("tun")
+        }
+    }
+    
+    static func proxyInfo() -> (enabled: Bool, host: String?, port: Int?) {
+        guard let settings = CFNetworkCopySystemProxySettings()?.takeRetainedValue() as? [String: Any] else {
+            return (false, nil, nil)
+        }
+
+        if let httpEnable = settings["HTTPEnable"] as? Int, httpEnable == 1 {
+            let host = settings["HTTPProxy"] as? String
+            let port = settings["HTTPPort"] as? Int
+            return (true, host, port)
+        }
+
+        if let httpsEnable = settings["HTTPSEnable"] as? Int, httpsEnable == 1 {
+            let host = settings["HTTPSProxy"] as? String
+            let port = settings["HTTPSPort"] as? Int
+            return (true, host, port)
+        }
+
+        if let socksEnable = settings["SOCKSEnable"] as? Int, socksEnable == 1 {
+            let host = settings["SOCKSProxy"] as? String
+            let port = settings["SOCKSPort"] as? Int
+            return (true, host, port)
+        }
+
+        return (false, nil, nil)
+    }
 }
 
 class LDKeychain {

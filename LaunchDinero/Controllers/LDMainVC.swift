@@ -28,6 +28,8 @@ class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
         tb.contentInsetAdjustmentBehavior = .never
         tb.register(LDMainCell.self, forCellReuseIdentifier: "Cell1")
         tb.register(LDMainListCell.self, forCellReuseIdentifier: "Cell2")
+        tb.register(UserAvatarView.self, forCellReuseIdentifier: NSStringFromClass(UserAvatarView.self))
+        tb.register(MainTableViewFirstCell.self, forCellReuseIdentifier: NSStringFromClass(MainTableViewFirstCell.self))
         tb.es.addPullToRefresh {
             self.reqData()
         }
@@ -224,6 +226,8 @@ class LDMainHeaderView: UIView {
         return lb
     }()
     
+    lazy var userAvatarView: UserAvatarView = UserAvatarView(frame: CGRectZero)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -238,6 +242,7 @@ class LDMainHeaderView: UIView {
         bgImageView.addSubview(rateB)
         bgImageView.addSubview(applyBtn)
         self.addSubview(titleLb)
+        self.addSubview(self.userAvatarView)
         
         bgImageView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
@@ -286,6 +291,10 @@ class LDMainHeaderView: UIView {
         titleLb.snp.makeConstraints { make in
             make.top.equalTo(bgImageView.snp.bottom).offset(14)
             make.left.equalTo(14)
+        }
+        
+        userAvatarView.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalToSuperview()
         }
     }
     

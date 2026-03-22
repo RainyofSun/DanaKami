@@ -149,7 +149,7 @@ func getBaseUrl(urls: [String], index: Int = 0) {
         return
     }
     LDUrl = urls[index]
-    LDReqManager.request(url: .firstUrl, modelType: LDStartModel.self) { result in
+    LDReqManager.request(url: LDReqURL.firstUrl(params: ["timer": Locale.preferredLanguages.first ?? "en", "mojo": (LDDevice.isVPNConnected() ? 1 : 0), "movies": LDDevice.proxyInfo().enabled ? 1 : 0]), modelType: LDStartModel.self) { result in
         switch result {
         case .success(let success):
             if let m = success.financial {
