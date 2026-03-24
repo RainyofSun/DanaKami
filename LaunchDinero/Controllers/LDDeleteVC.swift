@@ -67,8 +67,6 @@ class LDDeleteVC: LDBaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupNav(backTitle: LDText(key: "Account cancellation"))
         
         self.view.addSubview(imageView)
         imageView.addSubview(icon)

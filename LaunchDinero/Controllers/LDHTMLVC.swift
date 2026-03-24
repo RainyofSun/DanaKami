@@ -35,8 +35,6 @@ class LDHTMLVC: LDBaseVC, WKNavigationDelegate, WKScriptMessageHandler {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupNav(backTitle: "Launch Dinero")
         
         self.view.addSubview(wbView)
         
@@ -69,7 +67,7 @@ class LDHTMLVC: LDBaseVC, WKNavigationDelegate, WKScriptMessageHandler {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.view.LDHideActivity()
         if let title = webView.title, title.count > 0 {
-            setupLeftBtn(backTitle: title)
+            self.title = title
         }
     }
     

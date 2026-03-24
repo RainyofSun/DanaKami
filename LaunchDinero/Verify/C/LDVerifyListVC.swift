@@ -70,7 +70,6 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
     override func setupSubviews() {
         super.setupSubviews()
         
-        setupNav(backTitle: LDText(key: "Loan details"))
         stepV.isHidden = true
         
         self.view.addSubview(listTb)
@@ -182,7 +181,7 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
         self.nextBtn.setTitle(verifyModel.reel.turkish, for: .normal)
         self.listTb.reloadData()
         
-        setupLeftBtn(backTitle: verifyModel.reel.portal)
+        self.title = verifyModel.reel.portal
         
         isShowAgree = !verifyModel.festival.rainmaker.isEmpty
         agreeBtn.isHidden = !isShowAgree

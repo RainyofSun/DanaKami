@@ -99,8 +99,12 @@ func jumpPage(vc: UIViewController, url: String) {
             viewController.hidesBottomBarWhenPushed = true
             vc.navigationController?.pushViewController(viewController, animated: true)
         } else if url.contains("etrieved") { // main
-            if let ws = UIApplication.shared.connectedScenes.first as? UIWindowScene, let w = ws.windows.first {
-                w.rootViewController = LDTabBarC()
+            if let ws = UIApplication.shared.connectedScenes.first as? UIWindowScene, let w = ws.windows.first?.rootViewController as? LDTabBarC {
+                w.selectedIndex = 0
+            }
+        } else if url.contains("order") { // main
+            if let ws = UIApplication.shared.connectedScenes.first as? UIWindowScene, let w = ws.windows.first?.rootViewController as? LDTabBarC {
+                w.selectedIndex = 1
             }
         } else if url.contains("llywood") { // login
             if isLogin(currentVC: vc) {

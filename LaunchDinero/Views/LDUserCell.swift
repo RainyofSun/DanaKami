@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LDUserCell: UICollectionViewCell {
+class LDUserCell: UITableViewCell {
     
     var data: LDUserMathematiciansModel = LDUserMathematiciansModel() {
         didSet {
@@ -15,6 +15,16 @@ class LDUserCell: UICollectionViewCell {
             self.titleLb.text = data.rainmaker
         }
     }
+    
+    lazy var costView: UIView = {
+        let view = UIView(frame: CGRectZero)
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 18
+        view.clipsToBounds = true
+        view.layer.borderColor = UIColor(hex: "#CCCCCC").cgColor
+        view.layer.borderWidth = 1
+        return view
+    }()
     
     lazy var icon: UIImageView = {
         let img = UIImageView()
@@ -31,34 +41,41 @@ class LDUserCell: UICollectionViewCell {
     }()
     
     lazy var arrowImg: UIImageView = {
-        let img = UIImageView(image: UIImage(named: "user_arrow"))
+        let img = UIImageView(image: UIImage(named: "Vector"))
         return img
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = 16
-        self.layer.borderWidth = 1.5
-        self.layer.borderColor = UIColor(hex: "#173100").cgColor
+        self.contentView.backgroundColor = .clear
+        self.backgroundColor = .clear
+        self.selectionStyle = .none
         
-        self.addSubview(icon)
-        self.addSubview(titleLb)
-        self.addSubview(arrowImg)
+        self.contentView.addSubview(self.costView)
+        self.costView.addSubview(icon)
+        self.costView.addSubview(titleLb)
+        self.costView.addSubview(arrowImg)
+        
+        self.costView.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(15)
+            make.verticalEdges.equalToSuperview().inset(5)
+        }
         
         icon.snp.makeConstraints { make in
-            make.top.equalTo(12)
+            make.verticalEdges.equalToSuperview().inset(8)
             make.left.equalTo(14)
             make.width.height.equalTo(45)
         }
+        
         titleLb.snp.makeConstraints { make in
             make.left.equalTo(icon.snp.right).offset(8)
             make.right.equalTo(-16)
             make.centerY.equalTo(icon)
         }
+        
         arrowImg.snp.makeConstraints { make in
-            make.bottom.equalTo(-14)
+            make.centerY.equalTo(icon)
             make.right.equalTo(-15)
         }
     }

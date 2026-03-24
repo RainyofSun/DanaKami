@@ -40,8 +40,6 @@ class LDVerifyBaseVC: LDBaseVC {
     }
     
     func setupSubviews() {
-        
-        setupNav(backTitle: navTitle)
 
         self.view.addSubview(stepV)
         self.view.addSubview(nextBtn)

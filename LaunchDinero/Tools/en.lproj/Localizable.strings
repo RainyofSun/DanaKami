@@ -17,7 +17,8 @@
 "Privacy Agreement" = "<Privacy Agreement>";
 "Please agree to the agreement" = "Please agree to the agreement";
 "Welcome to LaunchDinero" = "Welcome to LaunchDinero";
-"Common functions" = "Common functions";
+"Common functions" = "My orders";
+"allOrder" = "All orders";
 "Account cancellation" = "Account cancellation";
 "Logout" = "Logout";
 "Set up" = "Set up";
@@ -79,3 +80,7 @@
 "Interest and fee information is clearly available, with no hidden charges." = "Interest and fee information is clearly available, with no hidden charges.";
 "Semua produk" = "All Products";
 "Apply now" = "Apply now";
+"In progress" = "In progress";
+"Repayment" = "Repayment";
+"Completed" = "Completed";
+"Version" = "Versi";

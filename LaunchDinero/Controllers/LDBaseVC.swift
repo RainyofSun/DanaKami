@@ -11,12 +11,6 @@ class LDBaseVC: UIViewController {
     
     var beginTime: String = ""
     
-    lazy var navView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        return view
-    }()
-    
     var gradientView: GradientView = {
         let view = GradientView(frame: CGRectZero)
         view.diagonalGradient([UIColor(hex: "#C7C58B"), UIColor(hex: "#CFC98A")])
@@ -39,23 +33,12 @@ class LDBaseVC: UIViewController {
         self.gradientView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        setupLeftBtn()
     }
     
-    func setupNav(backTitle: String) {
-        
-        setupLeftBtn(backTitle: backTitle)
-        
-        self.view.addSubview(navView)
-        
-        navView.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
-            make.height.equalTo(LDNavMaxY)
-        }
-    }
-    
-    func setupLeftBtn(backTitle: String) {
+    func setupLeftBtn() {
         let btn = UIButton(type: .custom)
-        btn.setTitle(backTitle, for: .normal)
         btn.setImage(UIImage(named: "back"), for: .normal)
         btn.titleLabel?.font = .boldSystemFont(ofSize: 16)
         btn.setTitleColor(UIColor(hex: "#333333"), for: .normal)

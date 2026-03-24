@@ -26,16 +26,18 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
         return view
     }()
     
-    lazy var titleLb: UILabel = {
-        let lb = UILabel(text: LDText(key: "Order list"),
-                         color: UIColor(hex: "#333333"),
-                         font: .boldSystemFont(ofSize: 18))
-        return lb
-    }()
-    
     lazy var lineV: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hex: "#9BCF21")
+        view.backgroundColor = UIColor(hex: "#FFD363")
+        view.layer.cornerRadius = 18
+        return view
+    }()
+    
+    lazy var gradientBgView: GradientView = {
+        let view = GradientView(frame: CGRectZero)
+        view.setCorners([.topLeft, .topRight], radius: 25)
+        view.verticalGradient([UIColor.white, UIColor.init(hex: "#D8D99E")])
+        
         return view
     }()
     
@@ -59,7 +61,6 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
     lazy var noDataView: LDListNoDataView = {
         let view = LDListNoDataView(frame: .zero)
         view.backgroundColor = .clear
-        view.addTarget(self, action: #selector(noDataClick), for: UIControl.Event.touchUpInside)
         return view
     }()
     
@@ -73,15 +74,26 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("requestOrder"), object: nil, queue: OperationQueue.main) { (sender: Notification) in
+            guard let _tag = sender.object as? Int else {
+                return
+            }
+            
+            if let _v = self.headerView.viewWithTag(_tag) as? UIButton {
+                self.btnClick(sender: _v)
+            }
+        }
+        
         self.topTip2.numberOfLines = 0
         
+        noDataView.clickButton.addTarget(self, action: #selector(noDataClick), for: UIControl.Event.touchUpInside)
         self.gradientView.addSubview(self.topTip1)
         self.gradientView.addSubview(self.topTip2)
-        self.view.addSubview(headerView)
+        self.view.addSubview(self.gradientBgView)
+        self.gradientBgView.addSubview(headerView)
         self.view.addSubview(noDataView)
-        headerView.addSubview(titleLb)
         headerView.addSubview(lineV)
-        self.view.addSubview(tb)
+        self.gradientBgView.addSubview(tb)
         self.gradientView.addSubview(self.iconImgView)
         
         self.topTip1.snp.makeConstraints { make in
@@ -98,42 +110,44 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
         self.iconImgView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(LDStatusBarHeight + 10)
             make.right.equalToSuperview().offset(-15)
+            make.size.equalTo(107)
+        }
+        
+        gradientBgView.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-LDHomeBarHeight - LDTabBarHeight)
+            make.top.equalTo(self.topTip2.snp.bottom).offset(15)
         }
         
         headerView.snp.makeConstraints { make in
-            make.top.equalTo(self.topTip2.snp.bottom).offset(15)
-            make.left.right.equalToSuperview()
+            make.top.equalToSuperview().offset(15)
+            make.horizontalEdges.equalToSuperview().inset(15)
         }
         
         noDataView.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.bottom).offset(124)
             make.centerX.equalToSuperview()
         }
-        titleLb.snp.makeConstraints { make in
-            make.top.equalTo(LDStatusBarHeight)
-            make.left.equalTo(14)
-            make.height.equalTo(44)
-        }
+        
         tb.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.bottom)
-            make.left.right.equalToSuperview()
-            make.bottom.equalTo(-(LDHomeBarHeight + LDTabBarHeight))
+            make.horizontalEdges.bottom.equalToSuperview()
         }
         
-        let btnW: CGFloat = LDScreenWidth / CGFloat(list.count)
+        let btnW: CGFloat = (LDScreenWidth - 30) / CGFloat(list.count)
         let btnH: CGFloat = 44.0
         for (i, str) in list.enumerated() {
             let btn = UIButton()
             btn.setTitle(str, for: .normal)
-            btn.setTitleColor(UIColor(hex: "#333333"), for: .normal)
-            btn.setTitleColor(UIColor(hex: "#555555"), for: .selected)
+            btn.setTitleColor(UIColor(hex: "#999999"), for: .normal)
+            btn.setTitleColor(UIColor(hex: "#000000"), for: .selected)
             btn.titleLabel?.font = .systemFont(ofSize: 14)
             btn.addTarget(self, action: #selector(btnClick(sender:)), for: .touchUpInside)
             headerView.addSubview(btn)
             self.btns.append(btn)
             
             btn.snp.makeConstraints { make in
-                make.top.equalTo(titleLb.snp.bottom)
+                make.top.equalToSuperview()
                 make.left.equalTo(CGFloat(i) * btnW)
                 make.width.equalTo(btnW)
                 make.height.equalTo(btnH)
@@ -145,10 +159,9 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
                 btn.isSelected = true
                 btn.titleLabel?.font = .boldSystemFont(ofSize: 15)
                 lineV.snp.makeConstraints { make in
-                    make.bottom.equalTo(-8)
-                    make.width.equalTo(17)
-                    make.height.equalTo(2)
-                    make.centerX.equalTo(btn)
+                    make.width.equalTo(btnW)
+                    make.height.equalTo(36)
+                    make.center.equalTo(btn)
                 }
             } else {
                 btn.tag = 8 - i
@@ -159,19 +172,19 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
     @objc func btnClick(sender: UIButton) {
         btns.forEach { btn in
             btn.isSelected = false
-            btn.titleLabel?.font = .systemFont(ofSize: 14)
+            btn.titleLabel?.font = UIFont.interFont(size: 14, fontStyle: InterFontWeight.Regular)
         }
         sender.isSelected = true
-        sender.titleLabel?.font = .boldSystemFont(ofSize: 15)
+        sender.titleLabel?.font = UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold)
         lineV.snp.remakeConstraints { make in
-            make.bottom.equalTo(-8)
-            make.width.equalTo(17)
-            make.height.equalTo(2)
-            make.centerX.equalTo(sender)
+            make.width.equalTo(sender.jf_width)
+            make.height.equalTo(36)
+            make.center.equalTo(sender)
         }
         currentIndex = sender.tag
         self.tb.es.startPullToRefresh()
     }
+    
     
     @objc func noDataClick() {
         jumpPage(vc: self, url: "fvns://etrieved")
@@ -238,7 +251,6 @@ class LDListNoDataView: UIControl {
         view.setTitleColor(UIColor.white)
         view.layer.cornerRadius = 22
         view.clipsToBounds = true
-        view.isUserInteractionEnabled = false
         return view
     }()
     

@@ -7,14 +7,9 @@
 
 import UIKit
 
-class LDUserVC: LDBaseVC, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+class LDUserVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
     
     var userModel: LDUserModel = LDUserModel()
-    
-    lazy var headerBgImg: UIImageView = {
-        let img = UIImageView(image: UIImage(named: "user_img"))
-        return img
-    }()
     
     lazy var avatarImg: UIImageView = {
         let img = UIImageView(image: UIImage(named: "user_avatar"))
@@ -23,101 +18,167 @@ class LDUserVC: LDBaseVC, UICollectionViewDelegateFlowLayout, UICollectionViewDe
     
     lazy var nameLb: UILabel = {
         let label = UILabel(text: "**********",
-                            color: .white,
-                            font: .boldSystemFont(ofSize: 16))
+                            color: UIColor.init(hex: "#460629"),
+                            font: UIFont.interFont(size: 24, fontStyle: InterFontWeight.Bold))
         return label
     }()
     
     lazy var subtitleLb: UILabel = {
         let label = UILabel(text: LDText(key: "Welcome to LaunchDinero"),
-                            color: .white,
-                            font: .systemFont(ofSize: 13))
+                            color: UIColor.init(hex: "#460629"),
+                            font: UIFont.interFont(size: 14, fontStyle: InterFontWeight.Regular))
         return label
-    }()
-    
-    lazy var bgView: UIView = {
-        let view = UIView()
-        view.backgroundColor = LDBgColor
-        view.layer.masksToBounds = true
-        view.layer.cornerRadius = 20
-        return view
-    }()
-    
-    lazy var bannerImg: UIImageView = {
-        let img = UIImageView(image: UIImage(named: "user_banner"))
-        return img
     }()
     
     lazy var titleLb: UILabel = {
         let label = UILabel(text: LDText(key: "Common functions"),
-                            color: UIColor(hex: "#2A2727"),
-                            font: .boldSystemFont(ofSize: 16))
+                            color: UIColor(hex: "#460629"),
+                            font: UIFont.interFont(size: 16, fontStyle: InterFontWeight.Bold))
         return label
     }()
     
-    lazy var collectionV: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: 166, height: 92)
-        flowLayout.minimumLineSpacing = 10
-        flowLayout.minimumInteritemSpacing = 15
-        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        cv.showsVerticalScrollIndicator = false
-        cv.showsHorizontalScrollIndicator = false
-        cv.delegate = self
-        cv.dataSource = self
-        cv.register(LDUserCell.self, forCellWithReuseIdentifier: "cell")
-        cv.backgroundColor = .clear
-        return cv
+    lazy var titleLb1: UILabel = {
+        let label = UILabel(text: LDText(key: "allOrder"),
+                            color: UIColor(hex: "#460629"),
+                            font: UIFont.interFont(size: 16, fontStyle: InterFontWeight.Bold))
+        return label
+    }()
+    
+    lazy var arrowImg: UIImageView = UIImageView(image: UIImage(named: "Vectorsmal"))
+    
+    lazy var greenBgView: GradientView = {
+        let view = GradientView(frame: CGRectZero)
+        view.setCorners([.topLeft, .topRight], radius: 20)
+        view.verticalGradient([UIColor.init(hex: "#22421E"), UIColor.init(hex: "#588734")])
+        
+        return view
+    }()
+
+    lazy var progressBtn: ImageTopTitleBottomButton = {
+        let view = ImageTopTitleBottomButton(frame: CGRectZero)
+        view.set(image: UIImage(named: "progress"), title: LDText(key: "In progress"))
+        view.tag = 1007
+        return view
+    }()
+    
+    lazy var repaymentBtn: ImageTopTitleBottomButton = {
+        let view = ImageTopTitleBottomButton(frame: CGRectZero)
+        view.set(image: UIImage(named: "repayment"), title: LDText(key: "Repayment"))
+        view.tag = 1006
+        return view
+    }()
+    
+    lazy var completeBtn: ImageTopTitleBottomButton = {
+        let view = ImageTopTitleBottomButton(frame: CGRectZero)
+        view.set(image: UIImage(named: "complete"), title: LDText(key: "Completed"))
+        view.tag = 1005
+        return view
+    }()
+    
+    lazy var bgView: GradientView = {
+        let view = GradientView(frame: CGRectZero)
+        view.setCorners([.topLeft, .topRight], radius: 25)
+        view.diagonalGradient([UIColor.white, UIColor.init(hex: "#D8D99E")])
+        
+        return view
+    }()
+    
+    lazy var tb: UITableView = {
+        let tb = UITableView(frame: .zero, style: .plain)
+        tb.backgroundColor = .clear
+        tb.separatorStyle = .none
+        tb.showsVerticalScrollIndicator = false
+        tb.showsHorizontalScrollIndicator = false
+        tb.delegate = self
+        tb.dataSource = self
+        tb.register(LDUserCell.self, forCellReuseIdentifier: NSStringFromClass(LDUserCell.self))
+        return tb
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.addSubview(headerBgImg)
         self.view.addSubview(avatarImg)
         self.view.addSubview(nameLb)
         self.view.addSubview(subtitleLb)
+        self.view.addSubview(self.titleLb)
+        self.view.addSubview(self.titleLb1)
+        self.view.addSubview(self.arrowImg)
+        self.view.addSubview(self.greenBgView)
+        self.greenBgView.addSubview(self.progressBtn)
+        self.greenBgView.addSubview(self.repaymentBtn)
+        self.greenBgView.addSubview(self.completeBtn)
         self.view.addSubview(bgView)
-        bgView.addSubview(bannerImg)
-        bgView.addSubview(titleLb)
-        bgView.addSubview(collectionV)
+        bgView.addSubview(tb)
         
-        headerBgImg.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
-        }
+        self.titleLb1.isUserInteractionEnabled = true
+        self.titleLb1.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(gotoAllOrder)))
+        self.progressBtn.addTarget(self, action: #selector(gotoOrder(sender: )), for: UIControl.Event.touchUpInside)
+        self.repaymentBtn.addTarget(self, action: #selector(gotoOrder(sender: )), for: UIControl.Event.touchUpInside)
+        self.completeBtn.addTarget(self, action: #selector(gotoOrder(sender: )), for: UIControl.Event.touchUpInside)
+        
         avatarImg.snp.makeConstraints { make in
-            make.left.equalTo(14)
-            make.bottom.equalTo(headerBgImg).offset(-44)
-            make.width.height.equalTo(58)
+            make.left.equalTo(20)
+            make.top.equalToSuperview().offset(LDStatusBarHeight + 40)
+            make.width.height.equalTo(100)
         }
+        
         nameLb.snp.makeConstraints { make in
-            make.left.equalTo(avatarImg.snp.right).offset(12)
-            make.top.equalTo(avatarImg).offset(6)
-            make.height.equalTo(22)
+            make.left.equalTo(avatarImg.snp.right).offset(15)
+            make.top.equalTo(avatarImg).offset(30)
         }
+        
         subtitleLb.snp.makeConstraints { make in
             make.left.equalTo(nameLb)
-            make.bottom.equalTo(avatarImg).offset(-6)
-            make.height.equalTo(18)
+            make.top.equalTo(nameLb.snp.bottom).offset(5)
         }
-        bgView.snp.makeConstraints { make in
-            make.top.equalTo(headerBgImg.snp.bottom).offset(-20)
-            make.left.right.bottom.equalToSuperview()
-        }
-        bannerImg.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.left.equalTo(14)
-            make.right.equalTo(-14)
-        }
+        
         titleLb.snp.makeConstraints { make in
-            make.top.equalTo(bannerImg.snp.bottom).offset(18)
-            make.left.equalTo(14)
-            make.height.equalTo(22)
+            make.left.equalTo(avatarImg)
+            make.top.equalTo(avatarImg.snp.bottom).offset(25)
         }
-        collectionV.snp.makeConstraints { make in
+        
+        arrowImg.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-15)
+            make.centerY.equalTo(titleLb)
+        }
+        
+        titleLb1.snp.makeConstraints { make in
+            make.right.equalTo(arrowImg.snp.left).offset(-2)
+            make.centerY.equalTo(titleLb)
+        }
+        
+        greenBgView.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(20)
             make.top.equalTo(titleLb.snp.bottom).offset(10)
-            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo((LDScreenWidth - 40) * 0.31)
+        }
+        
+        progressBtn.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(15)
+            make.verticalEdges.equalToSuperview().inset(15)
+        }
+        
+        repaymentBtn.snp.makeConstraints { make in
+            make.left.equalTo(progressBtn.snp.right).offset(10)
+            make.verticalEdges.width.equalTo(progressBtn)
+        }
+        
+        completeBtn.snp.makeConstraints { make in
+            make.left.equalTo(repaymentBtn.snp.right).offset(10)
+            make.verticalEdges.width.equalTo(repaymentBtn)
+            make.right.equalToSuperview().offset(-15)
+        }
+        
+        bgView.snp.makeConstraints { make in
+            make.top.equalTo(greenBgView.snp.bottom)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-LDHomeBarHeight - LDTabBarHeight)
+        }
+        
+        tb.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(10)
+            make.horizontalEdges.bottom.equalToSuperview()
         }
     }
     
@@ -136,7 +197,7 @@ class LDUserVC: LDBaseVC, UICollectionViewDelegateFlowLayout, UICollectionViewDe
                 if let m = success.financial {
                     self.userModel = m
                     self.nameLb.text = self.userModel.userInfo.kate
-                    self.collectionV.reloadData()
+                    self.tb.reloadData()
                 } else {
                     self.view.LDToast(text: success.information)
                 }
@@ -146,25 +207,35 @@ class LDUserVC: LDBaseVC, UICollectionViewDelegateFlowLayout, UICollectionViewDe
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.userModel.mathematicians.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! LDUserCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(LDUserCell.self), for: indexPath) as! LDUserCell
         if let m = self.userModel.mathematicians[safe: indexPath.item] {
             cell.data = m
         }
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let viewController = LDSetupVC()
-//        viewController.hidesBottomBarWhenPushed = true
-//        self.navigationController?.pushViewController(viewController, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let m = self.userModel.mathematicians[safe: indexPath.item] {
             jumpPage(vc: self, url: m.infinity)
         }
     }
 
+    @objc func gotoAllOrder() {
+        jumpPage(vc: self, url: "fvb://order")
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
+            NotificationCenter.default.post(name: NSNotification.Name("requestOrder"), object: 4)
+        })
+    }
+    
+    @objc func gotoOrder(sender: ImageTopTitleBottomButton) {
+        jumpPage(vc: self, url: "fvb://order")
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
+            NotificationCenter.default.post(name: NSNotification.Name("requestOrder"), object: sender.tag - 1000)
+        })
+    }
 }

@@ -9,31 +9,6 @@ import UIKit
 
 class LDSetupVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
     
-    lazy var icon: UIImageView = {
-        let img = UIImageView(image: UIImage(named: "setup_img"))
-        return img
-    }()
-    
-    lazy var titleLb: UILabel = {
-        let lb = UILabel(text: "LaunchDinero",
-                         font: .boldSystemFont(ofSize: 20),
-                         alignment: .center)
-        return lb
-    }()
-    
-    lazy var vLb: UILabel = {
-        let lb = UILabel(text: "V\(LDDevice.info.version)",
-                         color: UIColor(hex: "#9BCF21"),
-                         alignment: .center)
-        return lb
-    }()
-    
-    lazy var lineV: UIView = {
-        let v = UIView()
-        v.backgroundColor = UIColor(hex: "#EBEBEB")
-        return v
-    }()
-    
     lazy var tableView: UITableView = {
         let tb = UITableView(frame: .zero, style: .plain)
         tb.backgroundColor = .clear
@@ -43,90 +18,46 @@ class LDSetupVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
         tb.showsVerticalScrollIndicator = false
         tb.showsHorizontalScrollIndicator = false
         tb.bounces = false
+        tb.register(SetupTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(SetupTableViewCell.self))
         return tb
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupNav(backTitle: LDText(key: "Set up"))
         
-        self.view.addSubview(icon)
-        self.view.addSubview(titleLb)
-        self.view.addSubview(vLb)
+        self.title = LDText(key: "Set up")
+        
         self.view.addSubview(tableView)
-        self.view.addSubview(lineV)
         
-        icon.snp.makeConstraints { make in
-            make.top.equalTo(LDNavMaxY + 51)
-            make.centerX.equalToSuperview()
-        }
-        titleLb.snp.makeConstraints { make in
-            make.top.equalTo(icon.snp.bottom).offset(28)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(28)
-        }
-        vLb.snp.makeConstraints { make in
-            make.top.equalTo(titleLb.snp.bottom).offset(5)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(22)
-        }
-        lineV.snp.makeConstraints { make in
-            make.top.equalTo(vLb.snp.bottom).offset(32)
-            make.left.equalTo(14)
-            make.right.equalTo(-14)
-            make.height.equalTo(1)
-        }
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(lineV.snp.bottom)
-            make.left.right.bottom.equalToSuperview()
+            make.edges.equalToSuperview()
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        47
+        3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell()
-        cell.accessoryType = .disclosureIndicator
-        cell.backgroundColor = .clear
-        cell.selectionStyle = .none
-        
-        let icon = UIImageView(image: UIImage(named: indexPath.row == 0 ? "setup_delete" : "setup_out"))
-        cell.contentView.addSubview(icon)
-        icon.snp.makeConstraints { make in
-            make.left.equalTo(28)
-            make.centerY.equalToSuperview()
+        guard let _cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(SetupTableViewCell.self), for: indexPath) as? SetupTableViewCell else {
+            return UITableViewCell()
         }
         
-        let lb = UILabel(text: LDText(key: indexPath.row == 0 ? "Account cancellation" : "Logout"),
-                         font: .systemFont(ofSize: 15))
-        cell.contentView.addSubview(lb)
-        lb.snp.makeConstraints { make in
-            make.left.equalTo(icon.snp.right).offset(14)
-            make.centerY.equalToSuperview()
+        _cell.showVersion = indexPath.row == 0
+        
+        if indexPath.row == 0 {
+            _cell.titleLab.text = LDText(key: "Version")
+        } else if indexPath.row == 1 {
+            _cell.titleLab.text = LDText(key: "Account cancellation")
+        } else {
+            _cell.titleLab.text = LDText(key: "Logout")
         }
         
-        let divideV = UIView()
-        divideV.backgroundColor = UIColor(hex: "#EBEBEB")
-        cell.contentView.addSubview(divideV)
-        divideV.snp.makeConstraints { make in
-            make.left.equalTo(14)
-            make.right.equalTo(-14)
-            make.bottom.equalToSuperview()
-            make.height.equalTo(1)
-        }
-        
-        return cell
+        return _cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
+        if indexPath.row == 1 {
             self.popup.custom(with: LDPopupConfig()) {
                 let popupV = LDPopupDeleteView(frame: CGRect(x: 0, y: 0, width: 339, height: 456))
                 popupV.AgreeClourse = { [weak self] in
@@ -135,7 +66,7 @@ class LDSetupVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
                 }
                 return popupV
             }
-        } else {
+        } else if indexPath.row == 2 {
             self.popup.custom(with: LDPopupConfig()) {
                 let popupV = LDPopupOutView(frame: CGRect(x: 0, y: 0, width: 339, height: 268))
                 return popupV
