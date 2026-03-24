@@ -45,6 +45,10 @@ struct LDMainCenturiesModel: Codable {
     var fishermen: String = ""
     /// linkUrl
     var farmers: String = ""
+    /// feedbackUrl
+    var feedbackUrl: String = ""
+    /// aboutUrl
+    var aboutUrl: String = ""
 }
 
 struct LDMainMathematiciansModel: Codable {

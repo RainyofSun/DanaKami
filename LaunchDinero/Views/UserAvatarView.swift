@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol UserAvatarProtocol: AnyObject {
+    func gotoService()
+}
+
 class UserAvatarView: UITableViewCell {
 
-    lazy var avatarImgView: UIImageView = UIImageView(frame: CGRectZero)
+    open weak var avatarProtocol: UserAvatarProtocol?
+    
+    lazy var avatarImgView: UIImageView = UIImageView(image: UIImage(named: "user_avatar"))
     
     lazy var userPhoneLab: UILabel = {
         let view = UILabel(frame: CGRectZero)
@@ -25,8 +31,10 @@ class UserAvatarView: UITableViewCell {
         return view
     }()
     
-    lazy var serviceImgView: UIImageView = {
-        let view = UIImageView(image: UIImage(named: "service"))
+    lazy var serviceImgView: UIButton = {
+        let view = UIButton(type: UIButton.ButtonType.custom)
+        view.setBackgroundImage(UIImage(named: "service"), for: UIControl.State.normal)
+        view.addTarget(self, action: #selector(clickServiceButton(sender: )), for: UIControl.Event.touchUpInside)
         return view
     }()
     
@@ -47,7 +55,8 @@ class UserAvatarView: UITableViewCell {
         self.avatarImgView.snp.makeConstraints { make in
             make.size.equalTo(50)
             make.left.equalToSuperview().offset(20)
-            make.verticalEdges.equalToSuperview().inset(8)
+            make.top.equalToSuperview().offset(LDStatusBarHeight)
+            make.bottom.equalToSuperview().offset(8)
         }
         
         self.userPhoneLab.snp.makeConstraints { make in
@@ -68,5 +77,9 @@ class UserAvatarView: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func clickServiceButton(sender: UIButton) {
+        self.avatarProtocol?.gotoService()
     }
 }

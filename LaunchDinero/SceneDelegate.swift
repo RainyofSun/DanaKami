@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         IQKeyboardManager.shared.isEnabled = true
         IQKeyboardManager.shared.resignOnTouchOutside = true
-        showAllFonts()
+//        showAllFonts()
         setWelcomeVC()
     }
     
@@ -37,6 +37,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             case .success(let success):
                 if let m = success.financial {
                     startModel = m
+                    // TODO 测试使用
+                    #if DEBUG
+                    startModel.retrieved = "2"
+                    #endif
                     LDLocalLanguage.shared.configLanguage(type: startModel.retrieved == "2" ? .indonesian : .en)
                     UserDefaults.standard.set(startModel.retrieved, forKey: LDUserDefaultKey_CITY)
                     self.window?.rootViewController = LDTabBarC()

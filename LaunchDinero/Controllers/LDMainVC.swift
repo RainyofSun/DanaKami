@@ -14,6 +14,7 @@ class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
     var mainData: LDMainModel = LDMainModel()
     var itemModel: LDMainrRamanujanModel = LDMainrRamanujanModel()
     var listModel: LDMainrRamanujanModel = LDMainrRamanujanModel()
+    var serviceModel: LDMainCenturiesModel = LDMainCenturiesModel()
     var list: [LDMainrRamanujanModel] = []
     var bannerList: [LDMainrRamanujanModel] = []
     
@@ -30,6 +31,8 @@ class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
         tb.register(LDMainListCell.self, forCellReuseIdentifier: "Cell2")
         tb.register(UserAvatarView.self, forCellReuseIdentifier: NSStringFromClass(UserAvatarView.self))
         tb.register(MainTableViewFirstCell.self, forCellReuseIdentifier: NSStringFromClass(MainTableViewFirstCell.self))
+        tb.register(MainTableViewLastCell.self, forCellReuseIdentifier: NSStringFromClass(MainTableViewLastCell.self))
+        tb.register(MainTableViewEnglishCell.self, forCellReuseIdentifier: NSStringFromClass(MainTableViewEnglishCell.self))
         tb.es.addPullToRefresh {
             self.reqData()
         }
@@ -68,26 +71,62 @@ class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isList ? list.count : 1
+        if isList {
+            return list.count + 2
+        } else {
+            return 3
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if isList {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2") as! LDMainListCell
-            if let m = list[safe: indexPath.row] {
-                cell.model = m
+        if indexPath.row == 0 {
+            if let avatarCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(UserAvatarView.self), for: indexPath) as? UserAvatarView {
+                avatarCell.avatarProtocol = self
+                return avatarCell
             }
-            return cell
+        } else if indexPath.row == 1 {
+            if let applyCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MainTableViewFirstCell.self), for: indexPath) as? MainTableViewFirstCell {
+                applyCell.model = self.itemModel
+                
+                return applyCell
+            }
+        } else {
+            
+            if isList {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2") as! LDMainListCell
+                if let m = list[safe: indexPath.row] {
+                    cell.model = m
+                }
+                return cell
+            } else {
+                if isEnglish {
+                    if let _lastCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MainTableViewEnglishCell.self), for: indexPath) as? MainTableViewEnglishCell {
+                        _lastCell.eProtocol = self
+                        return _lastCell
+                    }
+                } else {
+                    if let _lastCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MainTableViewLastCell.self), for: indexPath) as? MainTableViewLastCell {
+                        _lastCell.eProtocol = self
+                        return _lastCell
+                    }
+                }
+            }
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell1") as! LDMainCell
+//            cell.model = self.itemModel
+            
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell1") as! LDMainCell
-        cell.model = self.itemModel
-        return cell
+        
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isList {
-            if let m = list[safe: indexPath.row] {
-                allowProductDetail(vc: self, pID: "\(m.flag)")
+        if indexPath.row == 1 {
+            applyBtnClick()
+        } else {
+            if isList {
+                if let m = list[safe: indexPath.row] {
+                    allowProductDetail(vc: self, pID: "\(m.flag)")
+                }
             }
         }
     }
@@ -106,6 +145,7 @@ class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
                 if success.numbers == 0 {
                     if let m = success.financial {
                         self.mainData = m
+                        self.serviceModel = m.centuries
                         self.refreshData()
                     }
                 } else {
@@ -154,6 +194,22 @@ class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
         }
     }
 
+}
+
+extension LDMainVC: UserAvatarProtocol {
+    func gotoService() {
+        if self.serviceModel.feedbackUrl.isEmpty {
+            return
+        }
+        
+        jumpPage(vc: self, url: self.serviceModel.feedbackUrl)
+    }
+}
+
+extension LDMainVC: EnglishCellProtocol {
+    func gotoApply(sender: GradientLoadingButton) {
+        applyBtnClick()
+    }
 }
 
 class LDMainHeaderView: UIView {

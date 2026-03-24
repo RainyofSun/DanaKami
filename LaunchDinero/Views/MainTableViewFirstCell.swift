@@ -9,6 +9,24 @@ import UIKit
 
 class MainTableViewFirstCell: UITableViewCell {
     
+    var model: LDMainrRamanujanModel = LDMainrRamanujanModel() {
+        didSet {
+            
+            if let _url = URL(string: model.writers) {
+                ppLogoImgView.kf.setImage(with: _url, options: [.transition(.fade(0.3))])
+            }
+            
+            ppNameLab.text = model.portal
+            mountTip.text = model.southeastern
+            amountLab.text = model.telly
+            
+            dayButton.setTitle(model.female, for: UIControl.State.normal)
+            rateButton.setTitle(model.actors, for: UIControl.State.normal)
+            
+            gradientLoadingButton.setTitle(model.turkish)
+        }
+    }
+    
     lazy var gradientContainerView: GradientView = {
         let view = GradientView(frame: CGRectZero)
         view.setCorners(.allCorners, radius: 25)
@@ -53,11 +71,12 @@ class MainTableViewFirstCell: UITableViewCell {
     }()
     
     lazy var mountTip: UILabel = UILabel(text: "", color: UIColor.init(hex: "#460629"), font: UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold))
-    lazy var amountLab: UILabel = UILabel(text: "", color: UIColor.init(hex: "#460629"), font: UIFont.interFont(size: 20, fontStyle: InterFontWeight.Extra_Bold))
+    lazy var amountLab: UILabel = UILabel(text: "", color: UIColor.init(hex: "#460629"), font: UIFont.interFont(size: 50, fontStyle: InterFontWeight.Extra_Bold))
     lazy var dayButton: UIButton = {
         let view = UIButton(type: UIButton.ButtonType.custom)
         view.setTitleColor(UIColor.init(hex: "#460629"), for: UIControl.State.normal)
         view.backgroundColor = UIColor.init(hex: "#C9D9A0")
+        view.titleLabel?.font = UIFont.interFont(size: 16, fontStyle: InterFontWeight.Regular)
         view.layer.cornerRadius = 18
         view.clipsToBounds = true
         view.isUserInteractionEnabled = false
@@ -68,6 +87,7 @@ class MainTableViewFirstCell: UITableViewCell {
         let view = UIButton(type: UIButton.ButtonType.custom)
         view.setTitleColor(UIColor.init(hex: "#460629"), for: UIControl.State.normal)
         view.backgroundColor = UIColor.init(hex: "#FFD363")
+        view.titleLabel?.font = UIFont.interFont(size: 16, fontStyle: InterFontWeight.Regular)
         view.layer.cornerRadius = 18
         view.clipsToBounds = true
         view.isUserInteractionEnabled = false
@@ -76,6 +96,7 @@ class MainTableViewFirstCell: UITableViewCell {
     
     lazy var gradientLoadingButton: GradientLoadingButton = {
         let view = GradientLoadingButton(frame: CGRectZero)
+        view.setFont(UIFont.interFont(size: 20, fontStyle: InterFontWeight.Extra_Bold))
         view.layer.cornerRadius = 27
         view.clipsToBounds = true
         
@@ -104,7 +125,7 @@ class MainTableViewFirstCell: UITableViewCell {
         
         self.gradientContainerView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(15)
-            make.top.equalToSuperview().offset(15)
+            make.top.equalToSuperview().offset(25)
         }
         
         self.ppLogoImgView.snp.makeConstraints { make in
@@ -155,12 +176,12 @@ class MainTableViewFirstCell: UITableViewCell {
             make.left.equalTo(self.dayButton.snp.right).offset(10)
             make.centerY.height.equalTo(self.dayButton)
             make.width.greaterThanOrEqualTo(120)
-            make.bottom.equalToSuperview().offset(15)
+            make.bottom.equalToSuperview().offset(-15)
         }
         
         self.gradientLoadingButton.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(self.gradientContainerView)
-            make.top.equalTo(self.gradientContainerView.snp.bottom).offset(5)
+            make.top.equalTo(self.dayButton.snp.bottom).offset(15)
             make.height.equalTo(54)
             make.bottom.equalToSuperview()
         }
