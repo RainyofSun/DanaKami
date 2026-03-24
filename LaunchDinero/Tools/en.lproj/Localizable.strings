@@ -48,12 +48,13 @@
 "ID No." = "ID No.";
 "Date Birth" = "Date Birth";
 "Verify confirm desc" = "*Please check your lD information correctly, oncesubmitted it is not changed again";
-"Order list" = "Order list";
+"Order list" = "Order center";
+"order_tip" = "Every loan application comes with full, transparent traceability.";
 "All" = "All";
 "Apply" = "Apply";
 "Repayment" = "Repayment";
 "Finished" = "Finished";
-"There are currently no orders available" = "There are currently no orders available";
+"There are currently no orders available" = "No orders yet. tap apply to start your experience.";
 "wecome" = "wecome";
 "Check" = "Check";
 
@@ -76,3 +77,5 @@
 "Fully automated intelligent approval, results in as little as 1 minute." = "Fully automated intelligent approval, results in as little as 1 minute.";
 "transparent interest and fees" = "Transparent interest and fees";
 "Interest and fee information is clearly available, with no hidden charges." = "Interest and fee information is clearly available, with no hidden charges.";
+"Semua produk" = "All Products";
+"Apply now" = "Apply now";

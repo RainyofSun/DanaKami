@@ -14,27 +14,25 @@ class LDMainListCell: LDCell {
             icon.kf.setImage(with: URL(string: model.writers))
             titleLb.text = model.portal
             
-            amountA.text = model.southeastern
-            amountB.text = model.telly
+            amountB.text = model.southeastern
+            amountA.text = model.telly
             
-            termA.text = model.leading
-            termB.text = model.female
-            
-            rateA.text = model.satellite
-            rateB.text = model.actors
-            
-            applyBtn.setTitle(model.turkish, for: .normal)
+            applyBtn.setTitle(model.turkish)
         }
     }
     
-    lazy var bgImageView: UIImageView = {
-        let img = UIImageView(image: UIImage(named: "main_2_list_img"))
-        img.isUserInteractionEnabled = true
+    lazy var bgImageView: UIView = {
+        let img = UIView(frame: CGRectZero)
+        img.backgroundColor = .white
+        img.layer.cornerRadius = 25
+        img.clipsToBounds = true
         return img
     }()
     
     lazy var icon: UIImageView = {
-        let img = UIImageView(image: UIImage(named: "main_2_list_icon"))
+        let img = UIImageView(frame: CGRectZero)
+        img.layer.cornerRadius = 5
+        img.clipsToBounds = true
         return img
     }()
     
@@ -46,131 +44,67 @@ class LDMainListCell: LDCell {
     
     lazy var amountA: UILabel = {
         let lb = UILabel(text: "",
-                         color: UIColor(hex: "#555555"),
-                         font: .systemFont(ofSize: LDLocalLanguage.shared.localLanguage == .indonesian ? 12 : 14),
-                         alignment: .center)
+                         color: UIColor(hex: "#000000"),
+                         font: UIFont.interFont(size: 28, fontStyle: InterFontWeight.Bold))
         return lb
     }()
     lazy var amountB: UILabel = {
         let lb = UILabel(text: "",
-                         color: UIColor(hex: "#9BCF21"),
-                         font: .systemFont(ofSize: 16),
-                         alignment: .center)
+                         color: UIColor(hex: "#999999"),
+                         font: .systemFont(ofSize: 12))
         return lb
     }()
     
-    lazy var termA: UILabel = {
-        let lb = UILabel(text: "",
-                         color: UIColor(hex: "#333333"),
-                         font: .systemFont(ofSize: LDLocalLanguage.shared.localLanguage == .indonesian ? 12 : 14),
-                         alignment: .center)
-        return lb
-    }()
-    lazy var termB: UILabel = {
-        let lb = UILabel(text: "",
-                         color: UIColor(hex: "#333333"),
-                         font: .boldSystemFont(ofSize: 15),
-                         alignment: .center)
-        return lb
-    }()
-    
-    lazy var rateA: UILabel = {
-        let lb = UILabel(text: "",
-                         color: UIColor(hex: "#333333"),
-                         font: .systemFont(ofSize: LDLocalLanguage.shared.localLanguage == .indonesian ? 12 : 14),
-                         alignment: .center)
-        return lb
-    }()
-    lazy var rateB: UILabel = {
-        let lb = UILabel(text: "",
-                         color: UIColor(hex: "#333333"),
-                         font: .boldSystemFont(ofSize: 15),
-                         alignment: .center)
-        return lb
-    }()
-    
-    lazy var applyBtn: UIButton = {
-        let btn = UIButton()
-        btn.setBackgroundImage(UIImage(named: "main_2_list_btn"), for: .normal)
-        btn.setTitle("", for: .normal)
-        btn.setTitleColor(.white, for: .normal)
-        btn.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        btn.isUserInteractionEnabled = false
+    lazy var applyBtn: GradientLoadingButton = {
+        let btn = GradientLoadingButton(frame: CGRectZero)
+        btn.setFont(UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold))
+        btn.setTitleColor(.white)
+        btn.layer.cornerRadius = 17
+        btn.clipsToBounds = true
         return btn
-    }()
-    
-    lazy var lineImg: UIImageView = {
-        let img = UIImageView(image: UIImage(named: "main_2_line"))
-        return img
     }()
 
     override func setupSubviews() {
         super.setupSubviews()
+        
         self.contentView.addSubview(bgImageView)
         bgImageView.addSubview(icon)
         bgImageView.addSubview(titleLb)
         bgImageView.addSubview(amountA)
         bgImageView.addSubview(amountB)
-        bgImageView.addSubview(termA)
-        bgImageView.addSubview(termB)
-        bgImageView.addSubview(rateA)
-        bgImageView.addSubview(rateB)
         bgImageView.addSubview(applyBtn)
-        bgImageView.addSubview(lineImg)
         
         bgImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.left.equalTo(14)
-            make.right.bottom.equalTo(-14)
-            make.height.equalTo(117)
+            make.verticalEdges.equalToSuperview().inset(5)
+            make.horizontalEdges.equalToSuperview().inset(15)
         }
+        
         icon.snp.makeConstraints { make in
-            make.top.left.equalTo(12)
+            make.top.left.equalTo(15)
             make.width.height.equalTo(26)
         }
-        applyBtn.snp.makeConstraints { make in
-            make.right.equalTo(-12)
-            make.centerY.equalTo(icon)
-            make.width.equalTo(108)
-            make.height.equalTo(34)
-        }
+        
         titleLb.snp.makeConstraints { make in
             make.left.equalTo(icon.snp.right).offset(9)
             make.centerY.equalTo(icon)
             make.right.equalTo(applyBtn.snp.left).offset(-9)
         }
-        lineImg.snp.makeConstraints { make in
-            make.top.equalTo(50)
-            make.left.equalTo(12)
-            make.right.equalTo(-12)
+        
+        applyBtn.snp.makeConstraints { make in
+            make.right.equalTo(-15)
+            make.height.equalTo(34)
+            make.centerY.equalToSuperview()
         }
-        let w: CGFloat = (LDScreenWidth - 52) / 3
-        let h: CGFloat = 20
-        termA.snp.makeConstraints { make in
-            make.top.equalTo(60)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(w)
-            make.height.equalTo(h)
-        }
-        termB.snp.makeConstraints { make in
-            make.top.equalTo(termA.snp.bottom).offset(6)
-            make.left.right.height.equalTo(termA)
-        }
+        
         amountA.snp.makeConstraints { make in
-            make.top.width.height.equalTo(termA)
-            make.right.equalTo(termA.snp.left)
+            make.top.equalTo(icon.snp.bottom).offset(10)
+            make.left.equalTo(icon)
         }
+        
         amountB.snp.makeConstraints { make in
-            make.top.equalTo(termB)
-            make.left.right.height.equalTo(amountA)
-        }
-        rateA.snp.makeConstraints { make in
-            make.top.width.height.equalTo(termA)
-            make.left.equalTo(termA.snp.right)
-        }
-        rateB.snp.makeConstraints { make in
-            make.top.equalTo(termB)
-            make.left.right.height.equalTo(rateA)
+            make.top.equalTo(amountA.snp.bottom).offset(3)
+            make.left.equalTo(amountA)
+            make.bottom.equalToSuperview().offset(-15)
         }
     }
 

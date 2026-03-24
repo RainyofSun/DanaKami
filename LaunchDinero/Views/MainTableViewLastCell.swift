@@ -18,6 +18,7 @@ class MainTableViewLastCell: UITableViewCell {
     lazy var marksButton: UIButton = {
         let view = UIButton(type: UIButton.ButtonType.custom)
         view.setTitle(LDText(key: "Check"), for: UIControl.State.normal)
+        view.contentEdgeInsets = UIEdgeInsets.init(top: 0, left: 8, bottom: 0, right: 8)
         view.setTitleColor(UIColor.init(hex: "#460629"), for: UIControl.State.normal)
         view.backgroundColor = UIColor.init(hex: "#FBF5DE")
         view.titleLabel?.font = UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold)
@@ -35,7 +36,7 @@ class MainTableViewLastCell: UITableViewCell {
     }()
     
     lazy var tipLab5: UILabel = UILabel(text: LDText(key: "Steps to obtain a loan"), color: UIColor.init(hex: "#460629"), font: UIFont.interFont(size: 16, fontStyle: InterFontWeight.Bold))
-    lazy var midImgView: UIImageView = UIImageView(image: UIImage(named: isEnglish ? "main_en_ll" : "main_es_ll"))
+    lazy var midImgView: UIImageView = UIImageView(image: UIImage(named: isEnglish ? "main_en_ll" : "main_id_ll"))
         
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -74,14 +75,14 @@ class MainTableViewLastCell: UITableViewCell {
             make.right.equalToSuperview().offset(-15)
             make.top.equalTo(self.tipLab1)
             make.width.greaterThanOrEqualTo(80)
-            make.width.lessThanOrEqualTo(120)
+            make.width.lessThanOrEqualTo(240)
             make.height.equalTo(34)
         }
         
         self.gradingContainerView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview()
             make.top.equalTo(self.tipLab2.snp.bottom).offset(20)
-            make.height.greaterThanOrEqualTo(240)
+            make.height.greaterThanOrEqualTo(LDScreenHeight - 370 - LDTabBarHeight - LDHomeBarHeight)
             make.bottom.equalToSuperview()
         }
         
@@ -94,7 +95,6 @@ class MainTableViewLastCell: UITableViewCell {
             make.horizontalEdges.equalToSuperview().inset(30)
             make.top.equalTo(self.tipLab5.snp.bottom).offset(10)
             make.height.equalTo((LDScreenWidth - 60) * 0.32)
-            make.bottom.equalToSuperview().offset(-20)
         }
     }
     

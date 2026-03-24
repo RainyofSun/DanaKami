@@ -27,6 +27,43 @@ class MainTableViewFirstCell: UITableViewCell {
         }
     }
     
+    var showBottomTip: Bool = false {
+        didSet {
+            if showBottomTip {
+                UIView.animate(withDuration: 0.3) {
+                    self.gradientLoadingButton.snp.remakeConstraints { make in
+                        make.horizontalEdges.equalTo(self.gradientContainerView)
+                        make.top.equalTo(self.dayButton.snp.bottom).offset(15)
+                        make.height.equalTo(54)
+                    }
+                    
+                    self.tipLab5.snp.remakeConstraints { make in
+                        make.left.equalTo(self.gradientLoadingButton)
+                        make.top.equalTo(self.gradientLoadingButton.snp.bottom).offset(15)
+                        make.bottom.equalToSuperview().offset(-5)
+                    }
+                    
+                    self.contentView.layoutIfNeeded()
+                }
+            } else {
+                UIView.animate(withDuration: 0.3) {
+                    self.tipLab5.snp.removeConstraints()
+                    
+                    self.gradientLoadingButton.snp.remakeConstraints { make in
+                        make.horizontalEdges.equalTo(self.gradientContainerView)
+                        make.top.equalTo(self.dayButton.snp.bottom).offset(15)
+                        make.height.equalTo(54)
+                        make.bottom.equalToSuperview()
+                    }
+                    
+                    self.contentView.layoutIfNeeded()
+                }
+            }
+            
+            self.tipLab5.isHidden = !showBottomTip
+        }
+    }
+    
     lazy var gradientContainerView: GradientView = {
         let view = GradientView(frame: CGRectZero)
         view.setCorners(.allCorners, radius: 25)
@@ -99,9 +136,11 @@ class MainTableViewFirstCell: UITableViewCell {
         view.setFont(UIFont.interFont(size: 20, fontStyle: InterFontWeight.Extra_Bold))
         view.layer.cornerRadius = 27
         view.clipsToBounds = true
-        
+        view.isUserInteractionEnabled = false
         return view
     }()
+    
+    lazy var tipLab5: UILabel = UILabel(text: LDText(key: "Semua produk"), color: UIColor.init(hex: "#460629"), font: UIFont.interFont(size: 16, fontStyle: InterFontWeight.Bold))
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -122,6 +161,7 @@ class MainTableViewFirstCell: UITableViewCell {
         self.gradientContainerView.addSubview(self.dayButton)
         self.gradientContainerView.addSubview(self.rateButton)
         self.contentView.addSubview(self.gradientLoadingButton)
+        self.contentView.addSubview(self.tipLab5)
         
         self.gradientContainerView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(15)

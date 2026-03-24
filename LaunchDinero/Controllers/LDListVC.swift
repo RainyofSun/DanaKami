@@ -16,6 +16,10 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
     
     var currentIndex: Int = 4
     
+    lazy var topTip1: UILabel = UILabel(text: LDText(key: "Order list"), color: UIColor.init(hex: "#460629"), font: UIFont.interFont(size: 20, fontStyle: InterFontWeight.Bold))
+    lazy var topTip2: UILabel = UILabel(text: LDText(key: "order_tip"), color: UIColor.init(hex: "#460629"), font: UIFont.interFont(size: 12, fontStyle: InterFontWeight.Bold))
+    lazy var iconImgView: UIImageView = UIImageView(image: UIImage(named: "order_coin"))
+    
     lazy var headerView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -55,6 +59,7 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
     lazy var noDataView: LDListNoDataView = {
         let view = LDListNoDataView(frame: .zero)
         view.backgroundColor = .clear
+        view.addTarget(self, action: #selector(noDataClick), for: UIControl.Event.touchUpInside)
         return view
     }()
     
@@ -68,15 +73,38 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.topTip2.numberOfLines = 0
+        
+        self.gradientView.addSubview(self.topTip1)
+        self.gradientView.addSubview(self.topTip2)
         self.view.addSubview(headerView)
         self.view.addSubview(noDataView)
         headerView.addSubview(titleLb)
         headerView.addSubview(lineV)
         self.view.addSubview(tb)
+        self.gradientView.addSubview(self.iconImgView)
+        
+        self.topTip1.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(LDStatusBarHeight + 30)
+            make.horizontalEdges.equalToSuperview().inset(15)
+        }
+        
+        self.topTip2.snp.makeConstraints { make in
+            make.top.equalTo(self.topTip1.snp.bottom).offset(6)
+            make.left.equalTo(self.topTip1)
+            make.right.equalTo(self.iconImgView.snp.left).offset(-15)
+        }
+        
+        self.iconImgView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(LDStatusBarHeight + 10)
+            make.right.equalToSuperview().offset(-15)
+        }
         
         headerView.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
+            make.top.equalTo(self.topTip2.snp.bottom).offset(15)
+            make.left.right.equalToSuperview()
         }
+        
         noDataView.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.bottom).offset(124)
             make.centerX.equalToSuperview()
@@ -145,6 +173,10 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
         self.tb.es.startPullToRefresh()
     }
     
+    @objc func noDataClick() {
+        jumpPage(vc: self, url: "fvns://etrieved")
+    }
+    
     func reqData() {
         LDReqManager.request(url: .allOrderUrl(params: ["jeffrey": "\(currentIndex)"]), modelType: LDOrderModel.self) { model in
             self.view.LDHideActivity()
@@ -183,7 +215,7 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
 
 }
 
-class LDListNoDataView: UIView {
+class LDListNoDataView: UIControl {
     
     lazy var imgV: UIImageView = {
         let img = UIImageView(image: UIImage(named: "order_list_empty"))
@@ -199,20 +231,37 @@ class LDListNoDataView: UIView {
         return lb
     }()
     
+    lazy var clickButton: GradientLoadingButton = {
+        let view = GradientLoadingButton(frame: CGRectZero)
+        view.setTitle(LDText(key: "Apply now"))
+        view.setFont(UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold))
+        view.setTitleColor(UIColor.white)
+        view.layer.cornerRadius = 22
+        view.clipsToBounds = true
+        view.isUserInteractionEnabled = false
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         self.addSubview(imgV)
         self.addSubview(textLb)
+        self.addSubview(self.clickButton)
         
         imgV.snp.makeConstraints { make in
             make.top.centerX.equalToSuperview()
         }
         textLb.snp.makeConstraints { make in
             make.top.equalTo(imgV.snp.bottom).offset(20)
-            make.left.equalTo(78)
-            make.right.equalTo(-78)
+            make.horizontalEdges.equalToSuperview().inset(20)
+        }
+        
+        self.clickButton.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(80)
+            make.top.equalTo(textLb.snp.bottom).offset(20)
             make.bottom.equalToSuperview()
+            make.height.equalTo(44)
         }
     }
     

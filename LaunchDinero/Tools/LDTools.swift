@@ -42,6 +42,7 @@ let LDUserDefaultKey_CITY: String = "LDUserDefaultKey_CITY"
 let LDUserDefaultKey_IDFA: String = "LDUserDefaultKey_IDFA"
 let LDUserDefaultKey_IDFV: String = "LDUserDefaultKey_IDFV"
 let LDUserDefaultKey_OneDay: String = "LDUserDefaultKey_OneDay"
+let LDUserDefaultKey_Account: String = "LDUserDefaultKey_Account"
 
 func LDNowTime() -> String {
     return "\(Int(Date().timeIntervalSince1970))"

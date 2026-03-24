@@ -45,7 +45,7 @@ class LDLoginVC: LDBaseVC {
         return view
     }()
     
-    lazy var gradientView: GradientView = {
+    lazy var gradientVieww: GradientView = {
         let view = GradientView(frame: CGRectZero)
         view.verticalGradient([UIColor.init(hex: "#FFFFFF"), UIColor.init(hex: "#D8D99E")])
         view.setCorners([.topLeft, .topRight], radius: 25)
@@ -140,14 +140,14 @@ class LDLoginVC: LDBaseVC {
         imgView.addSubview(nameLab)
         imgView.addSubview(welcomeLab)
         
-        self.view.addSubview(self.gradientView)
-        gradientView.addSubview(self.tipLab1)
-        gradientView.addSubview(self.tipLab2)
-        gradientView.addSubview(phoneView)
-        gradientView.addSubview(codeView)
-        gradientView.addSubview(voiceBtn)
-        gradientView.addSubview(loginBtn)
-        gradientView.addSubview(privateView)
+        self.view.addSubview(self.gradientVieww)
+        gradientVieww.addSubview(self.tipLab1)
+        gradientVieww.addSubview(self.tipLab2)
+        gradientVieww.addSubview(phoneView)
+        gradientVieww.addSubview(codeView)
+        gradientVieww.addSubview(voiceBtn)
+        gradientVieww.addSubview(loginBtn)
+        gradientVieww.addSubview(privateView)
         privateView.addSubview(agreeImgView)
         privateView.addSubview(privacyLb)
         
@@ -183,7 +183,7 @@ class LDLoginVC: LDBaseVC {
             make.top.equalTo(nameLab.snp.bottom).offset(6)
         }
         
-        gradientView.snp.makeConstraints { make in
+        gradientVieww.snp.makeConstraints { make in
             make.horizontalEdges.bottom.equalToSuperview()
             make.top.equalTo(logoimgView.snp.bottom).offset(20)
         }
@@ -238,6 +238,10 @@ class LDLoginVC: LDBaseVC {
         
         let tapGes = UITapGestureRecognizer(target: self, action: #selector(getCodeClick))
         codeView.getView.addGestureRecognizer(tapGes)
+        
+        if let _text = UserDefaults.standard.string(forKey: LDUserDefaultKey_Account) {
+            self.phoneView.textField.text = _text
+        }
     }
     
     @objc func backBtnClick() {
@@ -334,6 +338,8 @@ class LDLoginVC: LDBaseVC {
                     LDUploadingInfoManager.point(num: 1)
                     if let data = success.financial {
                         UserDefaults.standard.set(data.consensus, forKey: LDUserDefaultKey_SID)
+                        UserDefaults.standard.set(self.phoneView.textField.text, forKey: LDUserDefaultKey_Account)
+                        UserDefaults.standard.synchronize()
                         if let ws = UIApplication.shared.connectedScenes.first as? UIWindowScene, let w = ws.windows.first {
                             w.rootViewController = LDTabBarC()
                         }
@@ -421,7 +427,7 @@ class LDLoginItemView: UIView {
                 textField.snp.makeConstraints { make in
                     make.verticalEdges.equalToSuperview()
                     make.left.equalToSuperview().offset(15)
-                    make.width.equalTo(LDScreenWidth * 0.7)
+                    make.width.equalTo(LDScreenWidth * 0.8)
                     make.height.equalTo(50)
                 }
                 
