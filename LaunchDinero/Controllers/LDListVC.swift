@@ -74,6 +74,8 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        addLeftButton = false
+        
         NotificationCenter.default.addObserver(forName: NSNotification.Name("requestOrder"), object: nil, queue: OperationQueue.main) { (sender: Notification) in
             guard let _tag = sender.object as? Int else {
                 return

@@ -98,6 +98,8 @@ class LDUserVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        addLeftButton = false
+        
         self.view.addSubview(avatarImg)
         self.view.addSubview(nameLb)
         self.view.addSubview(subtitleLb)

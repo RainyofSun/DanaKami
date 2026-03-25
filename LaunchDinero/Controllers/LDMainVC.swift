@@ -27,7 +27,6 @@ class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
         tb.dataSource = self
         tb.separatorStyle = .none
         tb.contentInsetAdjustmentBehavior = .never
-        tb.register(LDMainCell.self, forCellReuseIdentifier: "Cell1")
         tb.register(LDMainListCell.self, forCellReuseIdentifier: "Cell2")
         tb.register(UserAvatarView.self, forCellReuseIdentifier: NSStringFromClass(UserAvatarView.self))
         tb.register(MainTableViewFirstCell.self, forCellReuseIdentifier: NSStringFromClass(MainTableViewFirstCell.self))
@@ -42,6 +41,7 @@ class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addLeftButton = false
         self.view.addSubview(mainTb)
         
         mainTb.snp.makeConstraints { make in

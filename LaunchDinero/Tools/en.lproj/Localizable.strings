@@ -27,9 +27,9 @@
 "Agree and Continue" = "Agree and Continue";
 "Sign out" = "Sign out";
 "Are you sure you want to exit the application?" = "You will not be able to view your loan application progress and credit limit after logging out.";
-"Loan Agreement" = "Loan Agreement";
-"Delete Agreement Content" = "Launch Dinero App is a professional personal credit loan application that can provide users with up to 70000 yuan in funding services with simple information. We have provided financial services to over one million users, helping them solve various application that can provide users with up to 70000 yuan in funding services with simple information.We have provided financial services to over one million users.";
-"I have read and accept the above" = "  I have read and accept the above";
+"Delete Account" = "Delete Account";
+"Delete Agreement Content" = "After account cancellation: data is non-recoverable, outstanding loan repayments must still be fulfilled. are you sure?";
+"I have read and accept the above" = " I have read and accept the above";
 "Delete Content" = "Accounts cannot be restored after cancellation. To ensure the security of your account, please confirm that you have properly processed account-related services before submitting an application.";
 "main_2_img" = "main_2_img";
 "Loan supermarket" = "Loan supermarket";
@@ -86,3 +86,5 @@
 "Version" = "Versi";
 "Think again" = "Think again";
 "Confirm log out" = "Confirm log out";
+"Account cancellation" = "Account cancellation";
+"cancel Toast" = "Please read and agree to the above content";

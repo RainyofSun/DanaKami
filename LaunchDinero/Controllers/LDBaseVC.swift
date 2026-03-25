@@ -17,6 +17,14 @@ class LDBaseVC: UIViewController {
         return view
     }()
 
+    var addLeftButton: Bool = true {
+        didSet {
+            if addLeftButton {
+                setupLeftBtn()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,8 +41,6 @@ class LDBaseVC: UIViewController {
         self.gradientView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        setupLeftBtn()
     }
     
     func setupLeftBtn() {

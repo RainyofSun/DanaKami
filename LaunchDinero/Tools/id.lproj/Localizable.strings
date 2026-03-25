@@ -27,9 +27,9 @@
 "Agree and Continue" = "Agree and Continue";
 "Sign out" = "Keluar dari akun";
 "Are you sure you want to exit the application?" = "Anda tidak akan dapat melihat perkembangan aplikasi pinjaman dan batas kredit anda setelah keluar dari akun.";
-"Loan Agreement" = "Loan Agreement";
-"Delete Agreement Content" = "Launch Dinero App is a professional personal credit loan application that can provide users with up to 70000 yuan in funding services with simple information. We have provided financial services to over one million users, helping them solve various application that can provide users with up to 70000 yuan in funding services with simple information.We have provided financial services to over one million users.";
-"I have read and accept the above" = "  I have read and accept the above";
+"Delete Account" = "Hapus Akun";
+"Delete Agreement Content" = "Setelah akun anda dihapus secara permanen: data anda tidak dapat dipulihkan kembali, dan pinjaman yang belum anda lunasi tetap harus anda bayar sesuai jadwal pembayaran yang telah disepakati. apakah anda yakin?";
+"I have read and accept the above" = " Saya membaca dan menyetujui isi di atas";
 "Delete Content" = "Accounts cannot be restored after cancellation. To ensure the security of your account, please confirm that you have properly processed account-related services before submitting an application.";
 "main_2_img" = "main_2_img";
 "Loan supermarket" = "Loan supermarket";
@@ -84,5 +84,7 @@
 "Repayment" = "Belum lunas";
 "Completed" = "Lunas";
 "Version" = "Versi";
-"Think again" = "Think again";
+"Think again" = "Pikirkan lagi";
 "Confirm log out" = "Confirm log out";
+"Account cancellation" = "Pembatalan akun";
+"cancel Toast" = "Silakan baca dan setuju dengan hal di atas.";

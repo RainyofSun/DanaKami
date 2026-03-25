@@ -78,13 +78,12 @@ class LDPopupView: UIView {
         }
         
         backBtn.snp.makeConstraints { make in
-            make.top.equalTo(20)
-            make.right.equalToSuperview().offset(-20)
+            make.top.right.equalToSuperview()
             make.width.height.equalTo(52)
         }
         
         titleLb.snp.makeConstraints { make in
-            make.top.equalTo(96)
+            make.top.equalTo(125)
             make.horizontalEdges.equalToSuperview().inset(15)
             make.height.equalTo(25)
         }

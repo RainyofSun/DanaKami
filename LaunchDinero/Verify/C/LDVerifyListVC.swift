@@ -23,15 +23,11 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
         tb.separatorStyle = .none
         tb.contentInsetAdjustmentBehavior = .never
         tb.register(LDVerifyListCell.self, forCellReuseIdentifier: "Cell")
+        tb.register(LDVerifyListHeaderView.self, forCellReuseIdentifier: NSStringFromClass(LDVerifyListHeaderView.self))
         tb.es.addPullToRefresh {
             self.reqData()
         }
         return tb
-    }()
-    
-    lazy var tbHeaderView: LDVerifyListHeaderView = {
-        let view = LDVerifyListHeaderView(frame: CGRect(x: 0, y: 0, width: LDScreenWidth, height: 352 * LDScale + 46))
-        return view
     }()
     
     lazy var agreeBtn: UIButton = {
@@ -76,17 +72,18 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
         self.view.addSubview(agreeBtn)
         self.view.addSubview(agreeLb)
         
-        listTb.tableHeaderView = tbHeaderView
-        
         listTb.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
+            make.top.equalToSuperview().offset(20 + LDNavMaxY)
+            make.horizontalEdges.equalToSuperview()
             make.bottom.equalTo(-LDHomeBarHeight-LDTabBarHeight)
         }
+        
         agreeLb.snp.makeConstraints { make in
             make.bottom.equalTo(nextBtn.snp.top).offset(-14)
             make.centerX.equalToSuperview()
             make.width.lessThanOrEqualTo(LDScreenWidth - 80)
         }
+        
         agreeBtn.snp.makeConstraints { make in
             make.right.equalTo(agreeLb.snp.left)
             make.width.height.equalTo(22)
@@ -95,10 +92,25 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        verifyModel.promising.count
+        verifyModel.promising.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            guard let _header = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(LDVerifyListHeaderView.self), for: indexPath) as? LDVerifyListHeaderView else {
+                return UITableViewCell()
+            }
+            
+            _header.amountA.text = verifyModel.reel.florida
+            _header.amountB.text = verifyModel.reel.newcomer
+            if let _url = URL(string: verifyModel.reel.writers) {
+                _header.ppLogoImgView.kf.setImage(with: _url, options: [.transition(.fade(0.3))])
+            }
+            _header.ppNameLab.text = verifyModel.reel.portal
+            
+            return _header
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! LDVerifyListCell
         if let m = verifyModel.promising[safe: indexPath.row] {
             cell.model = m
@@ -107,6 +119,10 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            return
+        }
+        
         var currentIndex: Int = indexPath.row
         if let m = verifyModel.promising[safe: indexPath.row] {
             var type = m.bmi
@@ -172,12 +188,7 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
     }
     
     func refreshData() {
-        self.tbHeaderView.amountA.text = verifyModel.reel.florida
-        self.tbHeaderView.amountB.text = verifyModel.reel.newcomer
-        self.tbHeaderView.termA.text = verifyModel.reel.directorial.directors.rainmaker
-        self.tbHeaderView.termB.text = verifyModel.reel.directorial.directors.guild
-        self.tbHeaderView.rateA.text = verifyModel.reel.directorial.america.rainmaker
-        self.tbHeaderView.rateB.text = verifyModel.reel.directorial.america.guild
+        
         self.nextBtn.setTitle(verifyModel.reel.turkish, for: .normal)
         self.listTb.reloadData()
         
@@ -263,130 +274,124 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
 
 }
 
-class LDVerifyListHeaderView: UIView {
+class LDVerifyListHeaderView: UITableViewCell {
     
-    lazy var bgImageView: UIImageView = {
-        let img = UIImageView(image: UIImage(named: LDText(key: "verify_list_img")))
-        img.isUserInteractionEnabled = true
-        return img
+    lazy var bgImageView: GradientView = {
+        let view = GradientView(frame: CGRectZero)
+        view.diagonalGradient([UIColor.white, UIColor.init(hex: "#D8D99E")])
+        view.layer.cornerRadius = 25
+        view.clipsToBounds = true
+        view.layer.borderColor = UIColor.white.cgColor
+        view.layer.borderWidth = 1
+        return view
+    }()
+    
+    lazy var ppLogoImgView: UIImageView = {
+        let view = UIImageView(frame: CGRectZero)
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        return view
+    }()
+
+    lazy var ppNameLab: UILabel = UILabel(text: "", color: UIColor.black, font: UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold))
+    
+    lazy var dotView1: UIView = {
+        let view = UIView(frame: CGRectZero)
+        view.backgroundColor = UIColor.init(hex: "#FF8844")
+        view.layer.cornerRadius = 4
+        view.clipsToBounds = true
+        return view
+    }()
+    
+    lazy var dotView2: UIView = {
+        let view = UIView(frame: CGRectZero)
+        view.backgroundColor = UIColor.init(hex: "#C9BDAA")
+        view.layer.cornerRadius = 4
+        view.clipsToBounds = true
+        return view
+    }()
+    
+    lazy var dotView3: UIView = {
+        let view = UIView(frame: CGRectZero)
+        view.backgroundColor = UIColor.init(hex: "#C9BDAA")
+        view.layer.cornerRadius = 4
+        view.clipsToBounds = true
+        return view
     }()
     
     lazy var amountA: UILabel = {
         let lb = UILabel(text: "",
-                         color: .white)
+                         color: UIColor.init(hex: "#460629"), font: UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold))
         return lb
     }()
+    
     lazy var amountB: UILabel = {
         let lb = UILabel(text: "",
-                         color: .white,
-                         font: UIFont(name: "Racing Sans One", size: 58) ?? .systemFont(ofSize: 58))
+                         color: UIColor.init(hex: "#460629"),
+                         font: UIFont.interFont(size: 50, fontStyle: InterFontWeight.Extra_Bold))
         return lb
     }()
     
-    lazy var termI: UIImageView = {
-        let img = UIImageView(image: UIImage(named: "main_1_term"))
-        return img
-    }()
-    lazy var termA: UILabel = {
-        let lb = UILabel(text: "",
-                         color: UIColor(hex: "#333333"),
-                         font: .systemFont(ofSize: 14))
-        return lb
-    }()
-    lazy var termB: UILabel = {
-        let lb = UILabel(text: "",
-                         color: UIColor(hex: "#333333"),
-                         font: .boldSystemFont(ofSize: 15))
-        return lb
-    }()
-    
-    lazy var rateI: UIImageView = {
-        let img = UIImageView(image: UIImage(named: "main_1_rate"))
-        return img
-    }()
-    lazy var rateA: UILabel = {
-        let lb = UILabel(text: "",
-                         color: UIColor(hex: "#333333"),
-                         font: .systemFont(ofSize: 14))
-        return lb
-    }()
-    lazy var rateB: UILabel = {
-        let lb = UILabel(text: "",
-                         color: UIColor(hex: "#333333"),
-                         font: .boldSystemFont(ofSize: 15))
-        return lb
-    }()
-    
-    lazy var titleLb: UILabel = {
-        let lb = UILabel(text: LDText(key: "Certification condition"),
-                         font: .boldSystemFont(ofSize: 16))
-        return lb
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.contentView.backgroundColor = .clear
+        self.backgroundColor = .clear
+        self.selectionStyle = .none
         
         self.addSubview(bgImageView)
+        bgImageView.addSubview(ppLogoImgView)
+        bgImageView.addSubview(ppNameLab)
+        bgImageView.addSubview(dotView1)
+        bgImageView.addSubview(dotView2)
+        bgImageView.addSubview(dotView3)
         bgImageView.addSubview(amountA)
         bgImageView.addSubview(amountB)
-        bgImageView.addSubview(termI)
-        bgImageView.addSubview(termA)
-        bgImageView.addSubview(termB)
-        bgImageView.addSubview(rateI)
-        bgImageView.addSubview(rateA)
-        bgImageView.addSubview(rateB)
-        self.addSubview(titleLb)
         
         bgImageView.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
-            make.height.equalTo(352 * LDScale)
+            make.top.equalToSuperview().offset(50)
+            make.horizontalEdges.equalToSuperview().inset(15)
         }
+        
+        self.ppLogoImgView.snp.makeConstraints { make in
+            make.left.top.equalToSuperview().offset(20)
+            make.size.equalTo(30)
+        }
+        
+        self.ppNameLab.snp.makeConstraints { make in
+            make.left.equalTo(self.ppLogoImgView.snp.right).offset(10)
+            make.centerY.equalTo(self.ppLogoImgView)
+        }
+        
+        self.dotView2.snp.makeConstraints { make in
+            make.centerY.equalTo(self.ppLogoImgView)
+            make.right.equalToSuperview().offset(-20)
+            make.size.equalTo(8)
+        }
+        
+        self.dotView1.snp.makeConstraints { make in
+            make.bottom.equalTo(self.dotView2.snp.top).offset(-4)
+            make.size.centerX.equalTo(self.dotView2)
+        }
+        
+        self.dotView3.snp.makeConstraints { make in
+            make.top.equalTo(self.dotView2.snp.bottom).offset(4)
+            make.size.centerX.equalTo(self.dotView2)
+        }
+        
         amountA.snp.makeConstraints { make in
-            make.top.equalTo(123 * LDScale)
-            make.left.equalTo(14)
-            make.height.equalTo(22)
+            make.top.equalTo(ppLogoImgView.snp.bottom).offset(15)
+            make.left.equalTo(15)
         }
+        
         amountB.snp.makeConstraints { make in
-            make.top.equalTo(amountA.snp.bottom).offset(5 * LDScale)
-            make.left.equalTo(14)
-            make.height.equalTo(73)
-        }
-        termI.snp.makeConstraints { make in
-            make.top.equalTo(286 * LDScale)
-            make.left.equalTo(isiPhoneX ? 28 : 42)
-            make.width.height.equalTo(35)
-        }
-        termA.snp.makeConstraints { make in
-            make.left.equalTo(termI.snp.right).offset(10)
-            make.top.equalTo(termI)
-        }
-        termB.snp.makeConstraints { make in
-            make.left.equalTo(termA)
-            make.bottom.equalTo(termI)
-        }
-        rateA.snp.makeConstraints { make in
-            make.top.equalTo(termI)
-            make.right.equalTo(isiPhoneX ? -28 : -42)
-        }
-        rateI.snp.makeConstraints { make in
-            make.top.width.height.equalTo(termI)
-            make.right.equalTo(rateA.snp.left).offset(-10)
-        }
-        rateB.snp.makeConstraints { make in
-            make.bottom.equalTo(rateI)
-            make.left.equalTo(rateA)
-        }
-        titleLb.snp.makeConstraints { make in
-            make.top.equalTo(bgImageView.snp.bottom).offset(14)
-            make.left.equalTo(14)
+            make.top.equalTo(amountA.snp.bottom).offset(10 * LDScale)
+            make.left.equalTo(amountA)
+            make.bottom.equalToSuperview().offset(-20)
         }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    @objc func applyBtnClick() {
-        
     }
 }
