@@ -68,7 +68,7 @@ class LDSetupVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
             }
         } else if indexPath.row == 2 {
             self.popup.custom(with: LDPopupConfig()) {
-                let popupV = LDPopupOutView(frame: CGRect(x: 0, y: 0, width: 339, height: 268))
+                let popupV = LDPopupOutView(frame: CGRectZero)
                 return popupV
             }
         }
@@ -79,6 +79,28 @@ class LDSetupVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
 class LDPopupDeleteView: LDPopupView {
     
     var AgreeClourse:(() -> Void)?
+    lazy var cancelBtn: UIButton = {
+        let btn = UIButton()
+        btn.setTitleColor(UIColor.init(hex: "#999999"), for: .normal)
+        btn.titleLabel?.font = UIFont.interFont(size: 14, fontStyle: InterFontWeight.Regular)
+        btn.addTarget(self, action: #selector(confirmBtnClick), for: .touchUpInside)
+        return btn
+    }()
+    
+    lazy var protoclView: GradientView = {
+        let view = GradientView(frame: CGRectZero)
+        view.diagonalGradient([UIColor.white, UIColor.init(hex: "#D8D99E")])
+        return view
+    }()
+    
+    lazy var selBtn: UIButton = {
+        let view = UIButton(type: UIButton.ButtonType.custom)
+        view.setImage(UIImage(named: "select_normal"), for: UIControl.State.normal)
+        view.setImage(UIImage(named: "select_sel"), for: UIControl.State.selected)
+        return view
+    }()
+    
+    lazy var protocolText: UILabel = UILabel(text: LDText(key: ""), color: UIColor.black, font: UIFont.interFont(size: 12, fontStyle: InterFontWeight.Bold))
     
     var timer: Timer?
     
@@ -86,14 +108,14 @@ class LDPopupDeleteView: LDPopupView {
         super.init(frame: frame)
         self.titleLb.text = LDText(key: "Loan Agreement")
         self.contentLb.text = LDText(key: "Delete Agreement Content")
-        confirmBtn.setTitle("\(LDText(key: "Agree and Continue")) (5s)", for: .normal)
+        confirmBtn.setTitle("\(LDText(key: "Agree and Continue")) (5s)")
         confirmBtn.isEnabled = false
         var num = 5
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { t in
             num -= 1
-            self.confirmBtn.setTitle("\(LDText(key: "Agree and Continue")) (\(num)s)", for: .normal)
+            self.confirmBtn.setTitle("\(LDText(key: "Agree and Continue")) (\(num)s)")
             if num <= 0 {
-                self.confirmBtn.setTitle("\(LDText(key: "Agree and Continue"))", for: .normal)
+                self.confirmBtn.setTitle("\(LDText(key: "Agree and Continue"))")
                 self.confirmBtn.isEnabled = true
                 
                 self.endTimer()
@@ -121,12 +143,43 @@ class LDPopupDeleteView: LDPopupView {
 }
 
 class LDPopupOutView: LDPopupView {
+    
+    lazy var cancelBtn: UIButton = {
+        let btn = UIButton()
+        btn.setTitleColor(UIColor.init(hex: "#999999"), for: .normal)
+        btn.titleLabel?.font = UIFont.interFont(size: 14, fontStyle: InterFontWeight.Regular)
+        btn.addTarget(self, action: #selector(confirmBtnClick), for: .touchUpInside)
+        return btn
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.imageView.image = UIImage(named: "popup_out")
+        self.imageView.image = UIImage(named: "pop_logout")?.stretchable()
         self.titleLb.text = LDText(key: "Sign out")
         self.contentLb.text = LDText(key: "Are you sure you want to exit the application?")
-        confirmBtn.setTitle(LDText(key: "Confirm"), for: .normal)
+        confirmBtn.setTitle(LDText(key: "Think again"))
+        cancelBtn.setTitle(LDText(key: "Confirm log out"), for: UIControl.State.normal)
+        cancelBtn.addTarget(self, action: #selector(clickCancelClick), for: UIControl.Event.touchUpInside)
+    }
+    
+    override func addPopSubViews() {
+        super.addPopSubViews()
+        imageView.addSubview(cancelBtn)
+    }
+    
+    override func layoutPopViews() {
+        super.layoutPopViews()
+        
+        confirmBtn.snp.remakeConstraints { make in
+            make.top.equalTo(contentLb.snp.bottom).offset(15)
+            make.height.equalTo(18)
+            make.horizontalEdges.equalTo(contentLb)
+        }
+        
+        cancelBtn.snp.makeConstraints { make in
+            make.height.horizontalEdges.equalTo(confirmBtn)
+            make.bottom.equalTo(-15)
+        }
     }
     
     @MainActor required init?(coder: NSCoder) {
@@ -149,6 +202,11 @@ class LDPopupOutView: LDPopupView {
                 break
             }
         }
+        
+    }
+    
+    
+    @objc func clickCancelClick() {
         
     }
 }

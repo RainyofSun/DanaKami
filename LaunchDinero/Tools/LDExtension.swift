@@ -115,6 +115,16 @@ extension UIImage {
         
         return imgData
     }
+    
+    
+    func stretchable() -> UIImage {
+        let w = self.size.width / 2
+        let h = self.size.height / 2
+        return resizableImage(
+            withCapInsets: UIEdgeInsets(top: h, left: w, bottom: h, right: w),
+            resizingMode: .stretch
+        )
+    }
 }
 
 enum InterFontWeight: String {

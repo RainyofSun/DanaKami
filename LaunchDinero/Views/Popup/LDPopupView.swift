@@ -34,61 +34,71 @@ class LDPopupView: UIView {
     
     lazy var titleLb: UILabel = {
         let lb = UILabel(text: "",
-                         font: .systemFont(ofSize: 18),
+                         font: UIFont.interFont(size: 16, fontStyle: InterFontWeight.Bold),
                          alignment: .center)
         return lb
     }()
     
     lazy var contentLb: UILabel = {
         let lb = UILabel(text: "",
-                         font: .systemFont(ofSize: 15),
+                         font: UIFont.interFont(size: 12, fontStyle: InterFontWeight.Regular),
                          alignment: .center)
         lb.numberOfLines = 0
         return lb
     }()
     
-    lazy var confirmBtn: UIButton = {
-        let btn = UIButton()
-        btn.setBackgroundImage(UIImage(named: "popup_btn"), for: .normal)
-        btn.setTitle(LDText(key: "Next"), for: .normal)
-        btn.setTitleColor(.white, for: .normal)
-        btn.titleLabel?.font = .boldSystemFont(ofSize: 16)
+    lazy var confirmBtn: GradientLoadingButton = {
+        let btn = GradientLoadingButton(frame: CGRectZero)
+        btn.setTitle(LDText(key: "Next"))
+        btn.setTitleColor(.white)
+        btn.setFont(UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold))
         btn.addTarget(self, action: #selector(confirmBtnClick), for: .touchUpInside)
+        btn.layer.cornerRadius = 18
+        btn.clipsToBounds = true
         return btn
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        addPopSubViews()
+        layoutPopViews()
+    }
+    
+    func addPopSubViews() {
         self.addSubview(imageView)
         imageView.addSubview(backBtn)
         imageView.addSubview(titleLb)
         imageView.addSubview(contentLb)
         imageView.addSubview(confirmBtn)
-        
+    }
+    
+    func layoutPopViews() {
         imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
         backBtn.snp.makeConstraints { make in
-            make.top.equalTo(23)
-            make.right.equalToSuperview()
+            make.top.equalTo(20)
+            make.right.equalToSuperview().offset(-20)
             make.width.height.equalTo(52)
         }
+        
         titleLb.snp.makeConstraints { make in
             make.top.equalTo(96)
-            make.left.equalTo(14)
-            make.right.equalTo(-14)
+            make.horizontalEdges.equalToSuperview().inset(15)
             make.height.equalTo(25)
         }
-        confirmBtn.snp.makeConstraints { make in
-            make.bottom.equalTo(-14)
-            make.centerX.equalToSuperview()
-        }
+        
         contentLb.snp.makeConstraints { make in
             make.top.equalTo(titleLb.snp.bottom).offset(14)
-            make.left.equalTo(27)
-            make.right.equalTo(-27)
-            make.bottom.equalTo(confirmBtn.snp.top).offset(-29)
+            make.horizontalEdges.equalToSuperview().inset(15)
+        }
+        
+        confirmBtn.snp.makeConstraints { make in
+            make.top.equalTo(contentLb.snp.bottom).offset(15)
+            make.bottom.equalTo(-15)
+            make.height.equalTo(18)
+            make.horizontalEdges.equalTo(contentLb)
         }
     }
     
@@ -104,5 +114,4 @@ class LDPopupView: UIView {
         self.nextClourse?()
         self.parentVC().dismiss(animated: true)
     }
-    
 }

