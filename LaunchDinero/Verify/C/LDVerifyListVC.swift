@@ -168,7 +168,7 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
     
     func refreshData() {
         
-        self.nextBtn.setTitle(verifyModel.reel.turkish, for: .normal)
+        self.nextBtn.setTitle(verifyModel.reel.turkish)
         self.listTb.reloadData()
         
         self.title = verifyModel.reel.portal
@@ -193,15 +193,15 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
         for m in verifyModel.promising {
             switch m.bmi {
             case "finda":
-                VerifyStepList.append(LDVerifyStepModel(img: "verify_step_1", selImg: "verify_step_1_sel"))
+                VerifyStepList.append(LDVerifyStepModel(img: "step1", tipStr: "Verify upload photo hint"))
             case "findb":
-                VerifyStepList.append(LDVerifyStepModel(img: "verify_step_2", selImg: "verify_step_2_sel"))
+                VerifyStepList.append(LDVerifyStepModel(img: "step2", tipStr: "Verify upload photo hint"))
             case "findc":
-                VerifyStepList.append(LDVerifyStepModel(img: "verify_step_3", selImg: "verify_step_3_sel"))
+                VerifyStepList.append(LDVerifyStepModel(img: "step3", tipStr: "Verify upload photo hint"))
             case "findd":
-                VerifyStepList.append(LDVerifyStepModel(img: "verify_step_4", selImg: "verify_step_4_sel"))
+                VerifyStepList.append(LDVerifyStepModel(img: "step4", tipStr: "Verify upload photo hint"))
             case "finde":
-                VerifyStepList.append(LDVerifyStepModel(img: "verify_step_5", selImg: "verify_step_5_sel"))
+                VerifyStepList.append(LDVerifyStepModel(img: "step5", tipStr: "Verify upload photo hint"))
             default:
                 break
             }
@@ -336,7 +336,7 @@ class LDVerifyListHeaderView: UITableViewCell {
         self.backgroundColor = .clear
         self.selectionStyle = .none
         
-        self.addSubview(bgImageView)
+        self.contentView.addSubview(bgImageView)
         bgImageView.addSubview(ppLogoImgView)
         bgImageView.addSubview(ppNameLab)
         bgImageView.addSubview(dotView1)

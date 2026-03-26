@@ -32,11 +32,8 @@ class LDVerifyListCell: LDCell {
         bgView.addSubview(self.tipLab)
         
         bgView.snp.makeConstraints { make in
-            make.left.equalTo(39)
-            make.right.equalTo(-14)
-            make.top.equalToSuperview()
-            make.bottom.equalTo(-12)
-            make.height.equalTo(54)
+            make.horizontalEdges.equalToSuperview().inset(15)
+            make.verticalEdges.equalToSuperview().inset(15)
         }
         
         tipLab.snp.makeConstraints { make in
@@ -61,6 +58,7 @@ class LDVerifyListCell: LDCell {
             }
             cellItem.titleLb.text = item.rainmaker
             cellItem.tag = 1000 + index
+            cellItem.addTarget(self, action: #selector(clickCellControl(sender: )), for: UIControl.Event.touchUpInside)
             
             self.bgView.addSubview(cellItem)
             

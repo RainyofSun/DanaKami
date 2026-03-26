@@ -17,7 +17,14 @@ class VerifyCellItem: UIControl {
     }()
     
     lazy var arrowImg: UIImageView = {
-        let img = UIImageView(image: UIImage(named: "verify_list_arrow"))
+        let img = UIImageView(image: UIImage(named: "Vector"))
+        img.isHidden = true
+        return img
+    }()
+    
+    lazy var successImg: UIImageView = {
+        let img = UIImageView(image: UIImage(named: "login_yes"))
+        img.isHidden = true
         return img
     }()
     
@@ -32,9 +39,13 @@ class VerifyCellItem: UIControl {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.layer.cornerRadius = 18
+        self.clipsToBounds = true
+        self.backgroundColor = UIColor.init(hex: "#FFFFFF").withAlphaComponent(0.8)
         self.addSubview(self.iconImgView)
         self.addSubview(self.titleLb)
         self.addSubview(self.arrowImg)
+        self.addSubview(self.successImg)
         
         self.iconImgView.snp.makeConstraints { make in
             make.size.equalTo(42)
@@ -50,13 +61,18 @@ class VerifyCellItem: UIControl {
         self.arrowImg.snp.makeConstraints { make in
             make.centerY.equalTo(self.iconImgView)
             make.right.equalToSuperview().offset(-15)
-            make.size.equalTo(34)
+        }
+        
+        self.successImg.snp.makeConstraints { make in
+            make.centerY.equalTo(self.iconImgView)
+            make.right.equalTo(self.arrowImg)
         }
     }
     
     override var isSelected: Bool {
         didSet {
-            arrowImg.image = UIImage(named: !isSelected ? "Vector" : "login_yes")
+            arrowImg.isHidden = isSelected
+            successImg.isHidden = !isSelected
         }
     }
     

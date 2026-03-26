@@ -13,22 +13,6 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
     
     var isFirst: Bool = true
     
-    lazy var bgView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.layer.masksToBounds = true
-        view.layer.cornerRadius = 14
-        return view
-    }()
-    
-    lazy var hintLb: UILabel = {
-        let lb = UILabel(text: LDText(key: "Verify upload photo hint"),
-                         color: UIColor(hex: "#E31C1C"),
-                         font: .systemFont(ofSize: 13))
-        lb.numberOfLines = 0
-        return lb
-    }()
-    
     lazy var tableView: UITableView = {
         let tb = UITableView(frame: .zero, style: .plain)
         tb.separatorStyle = .none
@@ -44,31 +28,12 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.addSubview(bgView)
-        self.view.insertSubview(bgView, belowSubview: stepV)
-        bgView.addSubview(tableView)
-        bgView.addSubview(hintLb)
-        
-        bgView.snp.makeConstraints { make in
-            make.top.equalTo(14 + LDNavMaxY)
-            make.left.equalTo(14)
-            make.right.equalTo(-14)
-            make.bottom.equalTo(nextBtn.snp.top).offset(-14)
-        }
-        stepV.snp.remakeConstraints { make in
-            make.top.equalTo(bgView).offset(14)
-            make.left.equalTo(29)
-            make.right.equalTo(-29)
-        }
-        hintLb.snp.makeConstraints { make in
-            make.bottom.equalTo(-14)
-            make.left.equalTo(16)
-            make.right.equalTo(-16)
-        }
+        cornerBgView.addSubview(tableView)
+
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(65)
+            make.top.equalTo(tipView.snp.bottom).offset(20)
             make.left.right.equalToSuperview()
-            make.bottom.equalTo(hintLb.snp.top)
+            make.bottom.equalTo(nextBgView.snp.top)
         }
         
         reqData()

@@ -22,15 +22,31 @@ class LDVerifyBaseVC: LDBaseVC {
         return view
     }()
     
-    lazy var nextBtn: UIButton = {
-        let btn = UIButton()
-        btn.setBackgroundImage(UIImage(named: "login_btn"), for: .normal)
-        btn.setTitle(LDText(key: "Next"), for: .normal)
-        btn.setTitleColor(.white, for: .normal)
-        btn.titleLabel?.font = .boldSystemFont(ofSize: 16)
+    lazy var nextBgView: UIView = {
+        let view = UIView(frame: CGRectZero)
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    lazy var nextBtn: GradientLoadingButton = {
+        let btn = GradientLoadingButton(frame: CGRectZero)
+        btn.layer.cornerRadius = 22
+        btn.clipsToBounds = true
+        btn.setTitle(LDText(key: "Next"))
+        btn.setTitleColor(.white)
+        btn.setFont(UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold))
         btn.addTarget(self, action: #selector(nextBtnClick), for: .touchUpInside)
         return btn
     }()
+    
+    lazy var cornerBgView: GradientView = {
+        let view = GradientView(frame: CGRectZero)
+        view.verticalGradient([UIColor.white, UIColor.init(hex: "#D8D99E")])
+        view.setCorners([.topLeft, .topRight], radius: 25)
+        return view
+    }()
+    
+    lazy var tipView: VertifyBTipView = VertifyBTipView(frame: CGRectZero)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,17 +58,37 @@ class LDVerifyBaseVC: LDBaseVC {
     func setupSubviews() {
 
         self.view.addSubview(stepV)
-        self.view.addSubview(nextBtn)
+        self.view.addSubview(self.cornerBgView)
+        self.cornerBgView.addSubview(self.tipView)
+        self.cornerBgView.addSubview(self.nextBgView)
+        self.nextBgView.addSubview(nextBtn)
         
         stepV.snp.makeConstraints { make in
-            make.top.equalTo(14 + LDNavMaxY)
-            make.left.equalTo(29)
-            make.right.equalTo(-29)
+            make.top.equalTo(20 + LDNavMaxY)
+            make.horizontalEdges.equalToSuperview().inset(15)
+            make.height.equalTo((LDScreenWidth - 30) * 0.17)
         }
+        
+        cornerBgView.snp.makeConstraints { make in
+            make.bottom.horizontalEdges.equalToSuperview()
+            make.top.equalTo(stepV.snp.bottom).offset(15)
+        }
+        
+        tipView.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(15)
+            make.top.equalToSuperview().offset(15)
+            make.height.greaterThanOrEqualTo(36)
+        }
+        
+        nextBgView.snp.makeConstraints { make in
+            make.bottom.horizontalEdges.equalToSuperview()
+            make.height.equalTo(80)
+        }
+        
         nextBtn.snp.makeConstraints { make in
-            make.bottom.equalTo(-33)
-            make.left.equalTo(32)
-            make.right.equalTo(-32)
+            make.top.equalTo(10)
+            make.horizontalEdges.equalToSuperview().inset(15)
+            make.height.equalTo(44)
         }
     }
     
@@ -64,92 +100,25 @@ class LDVerifyBaseVC: LDBaseVC {
 
 struct LDVerifyStepModel {
     var img: String = ""
-    var selImg: String = ""
+    var tipStr: String = ""
     
-    init(img: String, selImg: String) {
+    init(img: String, tipStr: String) {
         self.img = img
-        self.selImg = selImg
+        self.tipStr = tipStr
     }
 }
 
-var VerifyStepList: [LDVerifyStepModel] = [LDVerifyStepModel(img: "verify_step_1", selImg: "verify_step_1_sel"),
-                                           LDVerifyStepModel(img: "verify_step_2", selImg: "verify_step_2_sel"),
-                                           LDVerifyStepModel(img: "verify_step_3", selImg: "verify_step_3_sel"),
-                                           LDVerifyStepModel(img: "verify_step_4", selImg: "verify_step_4_sel"),
-                                           LDVerifyStepModel(img: "verify_step_5", selImg: "verify_step_5_sel"),]
+var VerifyStepList: [LDVerifyStepModel] = [LDVerifyStepModel(img: "step1", tipStr: "Verify upload photo hint"),
+                                           LDVerifyStepModel(img: "step2", tipStr: "Verify upload photo hint"),
+                                           LDVerifyStepModel(img: "step3", tipStr: "Verify upload photo hint"),
+                                           LDVerifyStepModel(img: "step4", tipStr: "Verify upload photo hint"),
+                                           LDVerifyStepModel(img: "step5", tipStr: "Verify upload photo hint"),]
 
-class LDVerifyStepView: UIView {
+class LDVerifyStepView: UIImageView {
     
     var index: Int = 0 {
         didSet {
-            for (i, imgv) in listImgVs.enumerated() {
-                let model = VerifyStepList[i]
-                imgv.image = UIImage(named: i > index ? model.img : model.selImg)
-            }
-            selLineV.snp.remakeConstraints { make in
-                make.left.equalTo(itemWH / 2)
-                make.height.equalTo(5)
-                make.centerY.equalToSuperview()
-                make.width.equalTo(CGFloat(index) * (itemWH + margin))
-            }
-            lineV.snp.remakeConstraints { make in
-                make.left.equalTo(selLineV.snp.right)
-                make.height.centerY.equalTo(selLineV)
-                make.right.equalTo(-itemWH / 2)
-            }
+            self.image = UIImage(named: VerifyStepList[index].img)
         }
-    }
-    
-    var listImgVs: [UIImageView] = []
-    
-    let itemWH: CGFloat = 37
-    
-    let margin: CGFloat = (LDScreenWidth - 58 - CGFloat(VerifyStepList.count) * 37) / CGFloat(VerifyStepList.count - 1)
-    
-    lazy var selLineV: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hex: "#9BCF21")
-        return view
-    }()
-    
-    lazy var lineV: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hex: "#E4FFD4")
-        return view
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        self.addSubview(selLineV)
-        self.addSubview(lineV)
-        
-        selLineV.snp.makeConstraints { make in
-            make.left.equalTo(itemWH / 2)
-            make.height.equalTo(5)
-            make.centerY.equalToSuperview()
-            make.width.equalTo(0)
-        }
-        lineV.snp.makeConstraints { make in
-            make.left.equalTo(selLineV.snp.right)
-            make.height.centerY.equalTo(selLineV)
-            make.right.equalTo(-itemWH / 2)
-        }
-        
-        for (i, model) in VerifyStepList.enumerated() {
-            let imageView = UIImageView(image: UIImage(named: i > index ? model.img : model.selImg))
-            self.addSubview(imageView)
-            self.listImgVs.append(imageView)
-            
-            imageView.snp.makeConstraints { make in
-                make.left.equalTo(CGFloat(i) * (itemWH + margin))
-                make.top.bottom.equalToSuperview()
-                make.width.height.equalTo(itemWH)
-            }
-        }
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
