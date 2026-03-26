@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
+class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource, AutoHiddenNavigationBar {
     
     let list: [String] = [LDText(key: "All"), LDText(key: "Apply"), LDText(key: "Repayment"), LDText(key: "Finished")]
     var btns: [UIButton] = []
@@ -73,8 +73,6 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        addLeftButton = false
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name("requestOrder"), object: nil, queue: OperationQueue.main) { (sender: Notification) in
             guard let _tag = sender.object as? Int else {

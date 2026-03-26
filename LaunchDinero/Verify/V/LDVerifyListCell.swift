@@ -7,54 +7,29 @@
 
 import UIKit
 
+protocol VerifyCellProtocol: AnyObject {
+    func didTapCellControl(index: Int)
+}
+
 class LDVerifyListCell: LDCell {
     
-    var model: LDVerifyPromisingModel = LDVerifyPromisingModel() {
-        didSet {
-            titleLb.text = model.rainmaker
-            pointV.backgroundColor = model.society == 0 ? UIColor(hex: "#9BCF21") : UIColor(hex: "#173100")
-            arrowImg.image = UIImage(named: model.society == 0 ? "verify_list_arrow" : "verify_list_finish")
-        }
-    }
+    open weak var cellDelegate: VerifyCellProtocol?
     
-    lazy var pointV: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hex: "#9BCF21")
-        view.layer.masksToBounds = true
-        view.layer.cornerRadius = 5
-        return view
-    }()
+    lazy var tipLab: UILabel = UILabel(text: LDText(key: "Certification Items"), color: UIColor.init(hex: "#460629"), font: UIFont.interFont(size: 16, fontStyle: InterFontWeight.Bold))
     
     lazy var bgView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(hex: "DBDCA5")
         view.layer.masksToBounds = true
-        view.layer.cornerRadius = 16
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor(hex: "#173100").cgColor
+        view.layer.cornerRadius = 25
         return view
-    }()
-    
-    lazy var arrowImg: UIImageView = {
-        let img = UIImageView(image: UIImage(named: "verify_list_arrow"))
-        return img
-    }()
-    
-    lazy var titleLb: UILabel = {
-        let lb = UILabel(text: "Información del trabajo",
-                         color: UIColor(hex: "#3D3D3D"),
-                         font: .systemFont(ofSize: 15))
-        lb.numberOfLines = 0
-        return lb
     }()
 
     override func setupSubviews() {
         super.setupSubviews()
-        
-        self.contentView.addSubview(pointV)
+
         self.contentView.addSubview(bgView)
-        bgView.addSubview(arrowImg)
-        bgView.addSubview(titleLb)
+        bgView.addSubview(self.tipLab)
         
         bgView.snp.makeConstraints { make in
             make.left.equalTo(39)
@@ -63,21 +38,57 @@ class LDVerifyListCell: LDCell {
             make.bottom.equalTo(-12)
             make.height.equalTo(54)
         }
-        pointV.snp.makeConstraints { make in
-            make.centerY.equalTo(bgView)
-            make.right.equalTo(bgView.snp.left).offset(-12)
-            make.width.height.equalTo(10)
+        
+        tipLab.snp.makeConstraints { make in
+            make.top.left.equalToSuperview().offset(15)
         }
-        arrowImg.snp.makeConstraints { make in
-            make.right.equalTo(-14)
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(22)
+    }
+    
+    func buildListView(cellList: [LDVerifyPromisingModel]) {
+        self.bgView.subviews.forEach { item in
+            if let _viskw = item as? VerifyCellItem {
+                _viskw.removeFromSuperview()
+            }
         }
-        titleLb.snp.makeConstraints { make in
-            make.left.equalTo(12)
-            make.top.bottom.equalToSuperview()
-            make.right.equalTo(arrowImg.snp.left).offset(-14)
+        
+        var topItem: VerifyCellItem?
+        
+        cellList.enumerated().forEach { (index, item) in
+            let cellItem = VerifyCellItem(frame: CGRectZero)
+            cellItem.isSelected = item.society == 1
+            if let _url = URL(string: item.outstanding) {
+                cellItem.iconImgView.kf.setImage(with: _url, options: [.transition(.fade(0.3))])
+            }
+            cellItem.titleLb.text = item.rainmaker
+            cellItem.tag = 1000 + index
+            
+            self.bgView.addSubview(cellItem)
+            
+            if let _top = topItem {
+                if index == cellList.count - 1 {
+                    cellItem.snp.makeConstraints { make in
+                        make.horizontalEdges.equalTo(_top)
+                        make.top.equalTo(_top.snp.bottom).offset(10)
+                        make.bottom.equalToSuperview().offset(-15)
+                    }
+                } else {
+                    cellItem.snp.makeConstraints { make in
+                        make.horizontalEdges.equalTo(_top)
+                        make.top.equalTo(_top.snp.bottom).offset(10)
+                    }
+                }
+            } else {
+                cellItem.snp.makeConstraints { make in
+                    make.horizontalEdges.equalToSuperview().inset(15)
+                    make.top.equalTo(self.tipLab.snp.bottom).offset(10)
+                }
+            }
+            
+            topItem = cellItem
         }
     }
 
+    @objc func clickCellControl(sender: VerifyCellItem) {
+        cellDelegate?.didTapCellControl(index: sender.tag - 1000)
+    }
 }

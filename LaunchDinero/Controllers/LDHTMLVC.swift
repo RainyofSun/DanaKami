@@ -59,9 +59,9 @@ class LDHTMLVC: LDBaseVC, WKNavigationDelegate, WKScriptMessageHandler {
         }
     }
     
-    override func backClick() {
-        super.backClick()
+    override func shouldPop() -> Bool {
         self.dismiss(animated: true)
+        return false
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {

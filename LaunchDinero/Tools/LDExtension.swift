@@ -138,3 +138,13 @@ extension UIFont {
         return self.init(name: fontStyle.rawValue, size: size) ?? UIFont.systemFont(ofSize: size);
     }
 }
+
+protocol CurrentControllerShouldPopProtocol {
+    func shouldPop() -> Bool
+}
+
+extension UIViewController: CurrentControllerShouldPopProtocol {
+    @objc func shouldPop() -> Bool {
+        return true
+    }
+}

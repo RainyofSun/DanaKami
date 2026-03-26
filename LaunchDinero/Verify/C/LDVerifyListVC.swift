@@ -92,7 +92,7 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        verifyModel.promising.count + 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -112,30 +112,9 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! LDVerifyListCell
-        if let m = verifyModel.promising[safe: indexPath.row] {
-            cell.model = m
-        }
+        cell.buildListView(cellList: verifyModel.promising)
+        cell.cellDelegate = self
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            return
-        }
-        
-        var currentIndex: Int = indexPath.row
-        if let m = verifyModel.promising[safe: indexPath.row] {
-            var type = m.bmi
-            if !verifyModel.golden.bmi.isEmpty && m.society == 0 {
-                type = verifyModel.golden.bmi
-                for (i, model) in verifyModel.promising.enumerated() {
-                    if model.bmi == type {
-                        currentIndex = i
-                    }
-                }
-            }
-            pushDetail(type: type, model: m, currentIndex: currentIndex)
-        }
     }
     
     func pushDetail(type: String, model: LDVerifyPromisingModel, currentIndex: Int) {
@@ -205,7 +184,8 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
         }
         
         listTb.snp.remakeConstraints { make in
-            make.top.left.right.equalToSuperview()
+            make.top.equalToSuperview().offset(20 + LDNavMaxY)
+            make.horizontalEdges.equalToSuperview()
             make.bottom.equalTo(isShowAgree ? agreeLb.snp.top : nextBtn.snp.top).offset(-14)
         }
         
@@ -271,7 +251,24 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
             }
         }
     }
+}
 
+extension LDVerifyListVC: VerifyCellProtocol {
+    func didTapCellControl(index: Int) {
+        var currentIndex: Int = index
+        if let m = verifyModel.promising[safe: index] {
+            var type = m.bmi
+            if !verifyModel.golden.bmi.isEmpty && m.society == 0 {
+                type = verifyModel.golden.bmi
+                for (i, model) in verifyModel.promising.enumerated() {
+                    if model.bmi == type {
+                        currentIndex = i
+                    }
+                }
+            }
+            pushDetail(type: type, model: m, currentIndex: currentIndex)
+        }
+    }
 }
 
 class LDVerifyListHeaderView: UITableViewCell {
@@ -349,8 +346,7 @@ class LDVerifyListHeaderView: UITableViewCell {
         bgImageView.addSubview(amountB)
         
         bgImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(50)
-            make.horizontalEdges.equalToSuperview().inset(15)
+            make.edges.equalToSuperview().inset(15)
         }
         
         self.ppLogoImgView.snp.makeConstraints { make in
@@ -387,7 +383,7 @@ class LDVerifyListHeaderView: UITableViewCell {
         amountB.snp.makeConstraints { make in
             make.top.equalTo(amountA.snp.bottom).offset(10 * LDScale)
             make.left.equalTo(amountA)
-            make.bottom.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview().offset(-15)
         }
     }
     

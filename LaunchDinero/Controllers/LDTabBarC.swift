@@ -10,9 +10,9 @@ import UIKit
 class LDTabBarC: UITabBarController {
     
     var vcs: [UIViewController] = [
-        UINavigationController(rootViewController: LDMainVC()),
-        UINavigationController(rootViewController: LDListVC()),
-        UINavigationController(rootViewController: LDUserVC()),
+        MainNavViewController(rootViewController: LDMainVC()),
+        MainNavViewController(rootViewController: LDListVC()),
+        MainNavViewController(rootViewController: LDUserVC()),
     ]
     
     convenience init(index: Int) {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
+class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource, AutoHiddenNavigationBar {
     
     var isList: Bool = false
     
@@ -40,8 +40,7 @@ class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        addLeftButton = false
+
         self.view.addSubview(mainTb)
         
         mainTb.snp.makeConstraints { make in

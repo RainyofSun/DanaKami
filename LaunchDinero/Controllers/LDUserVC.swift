@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LDUserVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
+class LDUserVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource, AutoHiddenNavigationBar {
     
     var userModel: LDUserModel = LDUserModel()
     
@@ -97,8 +97,6 @@ class LDUserVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        addLeftButton = false
         
         self.view.addSubview(avatarImg)
         self.view.addSubview(nameLb)
