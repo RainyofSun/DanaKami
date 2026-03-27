@@ -121,9 +121,8 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
                                 self.popup.custom(with: LDPopupConfig()) {
                                     let popupV = LDLDVerifyDetailConfirmPopup(frame: CGRect(x: 0, y: 0, width: 315, height: 460))
                                     popupV.titleLb.text = self.navTitle
-                                    popupV.nameV.textTf.text = m.commented
-                                    popupV.IDV.textTf.text = m.lipset
-                                    popupV.dateV.textTf.text = m.nominee
+                                    popupV.pid = self.pID
+                                    popupV.buildItemList(source: m.determines)
                                     popupV.CommitClourse = {
                                         self.reqData()
                                     }

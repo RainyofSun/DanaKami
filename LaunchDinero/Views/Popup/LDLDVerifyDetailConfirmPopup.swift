@@ -10,6 +10,7 @@ import UIKit
 class LDLDVerifyDetailConfirmPopup: LDPopupView {
     
     var CommitClourse:(() -> Void)?
+    var pid: String = ""
     
 //    lazy var nameV: LDLDVerifyDetailConfirmPopupItem = {
 //        let view = LDLDVerifyDetailConfirmPopupItem(frame: .zero)
@@ -35,6 +36,8 @@ class LDLDVerifyDetailConfirmPopup: LDPopupView {
 //        return view
 //    }()
 
+    var nameV: LDLDVerifyDetailConfirmPopupItem?
+    var IDV: LDLDVerifyDetailConfirmPopupItem?
     var dateV: LDLDVerifyDetailConfirmPopupItem?
     
     override init(frame: CGRect) {
@@ -51,10 +54,6 @@ class LDLDVerifyDetailConfirmPopup: LDPopupView {
             make.left.equalTo(14)
             make.right.equalTo(-14)
         }
-        
-//        self.addSubview(nameV)
-//        self.addSubview(IDV)
-//        self.addSubview(dateV)
         
         imageView.snp.remakeConstraints { make in
             make.horizontalEdges.top.equalToSuperview()
@@ -91,10 +90,10 @@ class LDLDVerifyDetailConfirmPopup: LDPopupView {
     
     override func confirmBtnClick() {
         self.LDShowActivity()
-        LDReqManager.request(url: .verifySFZConfirmUrl(params: ["scorer": nameV.textTf.text ?? "",
-                                                                "listed": "11",
-                                                                "resulter": IDV.textTf.text ?? "",
-                                                                "nominee": dateV.textTf.text ?? ""]), modelType: LDModel.self) { model in
+        LDReqManager.request(url: .verifySFZConfirmUrl(params: ["scorer": nameV?.textTf.text ?? "",
+                                                                "resulter": IDV?.textTf.text ?? "",
+                                                                "foreign": pid,
+                                                                "nominee": dateV?.textTf.text ?? ""]), modelType: LDModel.self) { model in
             self.LDHideActivity()
             switch model {
             case .success(let success):
@@ -117,8 +116,17 @@ class LDLDVerifyDetailConfirmPopup: LDPopupView {
             let cellItem = LDLDVerifyDetailConfirmPopupItem(frame: CGRectZero)
             cellItem.titleLb.text = item.pmatrix
             cellItem.textTf.text = item.begin
-            cellItem.textImg.isHidden = item.numbers != "nominee"
-            cellItem.textTf.isUserInteractionEnabled = item.numbers != "nominee"
+            cellItem.textImg.isHidden = true
+            if item.numbers == "scorer" {
+                cellItem.textTf.isUserInteractionEnabled = true
+                self.nameV = cellItem
+            }
+            
+            if item.numbers == "resulter" {
+                cellItem.textTf.isUserInteractionEnabled = true
+                self.IDV = cellItem
+            }
+            
             if item.numbers == "nominee" {
                 let tap = UITapGestureRecognizer(target: self, action: #selector(dateClick))
                 cellItem.textV.addGestureRecognizer(tap)
