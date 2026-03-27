@@ -19,7 +19,7 @@ class LDVerifyDetailCCell: LDCell {
             relationV.textTf.placeholder = model.tensions
             relationV.textTf.text = ""
             for r in model.lyrics {
-                if r.listed == model.irish {
+                if "\(r.listeder)" == model.irish {
                     relationV.textTf.text = r.scorer
                 }
             }
@@ -32,15 +32,35 @@ class LDVerifyDetailCCell: LDCell {
         }
     }
     
+    lazy var bgView1: UIView = {
+        let view = UIView(frame: CGRectZero)
+        view.layer.cornerRadius = 14
+        view.clipsToBounds = true
+        view.layer.borderColor = UIColor.init(hex: "#EEEEEE").cgColor
+        view.layer.borderWidth = 1
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    lazy var bgView2: UIView = {
+        let view = UIView(frame: CGRectZero)
+        view.layer.cornerRadius = 14
+        view.clipsToBounds = true
+        view.layer.borderColor = UIColor.init(hex: "#EEEEEE").cgColor
+        view.layer.borderWidth = 1
+        view.backgroundColor = .white
+        return view
+    }()
+    
     lazy var titleLb: UILabel = {
-        let lb = UILabel(text: "",
-                         font: .boldSystemFont(ofSize: 18))
+        let lb = UILabel(text: "", color: UIColor.init(hex: "#460629"),
+                         font: UIFont.interFont(size: 16, fontStyle: InterFontWeight.Bold))
         return lb
     }()
     
     lazy var relationV: LDVerifyDetailCItemView = {
         let view = LDVerifyDetailCItemView(frame: .zero)
-        view.textImg.image = UIImage(named: "verify_list_arrow")
+        view.textImg.image = UIImage(named: "Vector")
         let tap = UITapGestureRecognizer(target: self, action: #selector(relationClick))
         view.textV.addGestureRecognizer(tap)
         return view
@@ -48,7 +68,6 @@ class LDVerifyDetailCCell: LDCell {
     
     lazy var phoneV: LDVerifyDetailCItemView = {
         let view = LDVerifyDetailCItemView(frame: .zero)
-        view.textImg.image = UIImage(named: "verify_emergent_contacts")
         let tap = UITapGestureRecognizer(target: self, action: #selector(phoneClick))
         view.textV.addGestureRecognizer(tap)
         return view
@@ -57,9 +76,16 @@ class LDVerifyDetailCCell: LDCell {
     override func setupSubviews() {
         super.setupSubviews()
         
+        self.relationV.textV.backgroundColor = .clear
+        self.relationV.textV.layer.borderColor = UIColor.clear.cgColor
+        self.phoneV.textV.backgroundColor = .clear
+        self.phoneV.textV.layer.borderColor = UIColor.clear.cgColor
+        
         self.contentView.addSubview(titleLb)
-        self.contentView.addSubview(relationV)
-        self.contentView.addSubview(phoneV)
+        self.contentView.addSubview(self.bgView1)
+        self.bgView1.addSubview(relationV)
+        self.contentView.addSubview(self.bgView2)
+        self.bgView2.addSubview(phoneV)
         
         titleLb.snp.makeConstraints { make in
             make.left.equalTo(16)
@@ -67,16 +93,26 @@ class LDVerifyDetailCCell: LDCell {
             make.right.equalTo(-16)
             make.height.equalTo(25)
         }
-        relationV.snp.makeConstraints { make in
+        
+        self.bgView1.snp.makeConstraints { make in
             make.top.equalTo(titleLb.snp.bottom).offset(17)
             make.left.equalTo(14)
             make.right.equalTo(-14)
         }
-        phoneV.snp.makeConstraints { make in
-            make.top.equalTo(relationV.snp.bottom)
+        
+        relationV.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(15)
+        }
+        
+        self.bgView2.snp.makeConstraints { make in
+            make.top.equalTo(bgView1.snp.bottom).offset(10)
             make.left.equalTo(14)
             make.right.equalTo(-14)
             make.bottom.equalTo(-14)
+        }
+        
+        phoneV.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(15)
         }
     }
     
@@ -94,14 +130,18 @@ class LDVerifyDetailCItemView: UIView {
     
     lazy var titleLb: UILabel = {
         let lb = UILabel(text: "")
+        lb.textColor = UIColor.init(hex: "#460629")
+        lb.font = UIFont.interFont(size: 14, fontStyle: InterFontWeight.Regular)
         return lb
     }()
     
     lazy var textV: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hex: "#F5F5F5")
+        view.backgroundColor = UIColor(hex: "#EEEEEE")
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 12
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor(hex: "#CCCCCC").cgColor
         return view
     }()
     
@@ -141,11 +181,9 @@ class LDVerifyDetailCItemView: UIView {
         textImg.snp.makeConstraints { make in
             make.right.equalTo(-14)
             make.centerY.equalToSuperview()
-            make.width.height.equalTo(24)
         }
         textTf.snp.makeConstraints { make in
-            make.left.equalTo(14)
-            make.top.bottom.equalToSuperview()
+            make.left.top.bottom.equalToSuperview()
             make.right.equalTo(textImg.snp.left).offset(-14)
         }
     }

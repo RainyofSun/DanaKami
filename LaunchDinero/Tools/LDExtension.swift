@@ -148,3 +148,16 @@ extension UIViewController: CurrentControllerShouldPopProtocol {
         return true
     }
 }
+
+extension UIDatePicker {
+    func setTextFont(_ font: UIFont, textColor: UIColor = .label) {
+        guard let pickerView = self.subviews.first?.subviews.first else { return }
+        for subview in pickerView.subviews {
+            for label in subview.subviews where label is UILabel {
+                let lb = label as! UILabel
+                lb.font = font
+                lb.textColor = textColor
+            }
+        }
+    }
+}

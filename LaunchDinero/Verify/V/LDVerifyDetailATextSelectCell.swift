@@ -16,11 +16,11 @@ class LDVerifyDetailATextSelectCell: LDVerifyDetailATextCell {
             titleLb.text = model.rainmaker
             tf.placeholder = model.association
             tf.text = ""
-            if model.editors == "supportingc" {
+            if model.editors == "supportinga" {
                 tf.text = model.choice
             } else {
                 for item in model.lyrics {
-                    if "\(item.listed)" == model.choice {
+                    if "\(item.listeder)" == model.listeder {
                         tf.text = item.scorer
                     }
                 }
@@ -36,7 +36,7 @@ class LDVerifyDetailATextSelectCell: LDVerifyDetailATextCell {
     }()
     
     lazy var arrowImg: UIImageView = {
-        let img = UIImageView(image: UIImage(named: "verify_list_arrow"))
+        let img = UIImageView(image: UIImage(named: "Vector"))
         img.isUserInteractionEnabled = true
         return img
     }()
@@ -51,7 +51,7 @@ class LDVerifyDetailATextSelectCell: LDVerifyDetailATextCell {
             make.edges.equalTo(tf)
         }
         arrowImg.snp.makeConstraints { make in
-            make.right.equalTo(tf).offset(-14)
+            make.right.equalTo(tf)
             make.centerY.equalTo(tf)
         }
     }

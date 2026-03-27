@@ -87,16 +87,16 @@ class LDUploadingInfoManager {
                 try CNContactStore().enumerateContacts(with: request) { contact, objcBool in
                     var item: [String: Any] = [:]
                     item["kate"] = contact.phoneNumbers.map({$0.value.stringValue}).joined(separator: ",")
-                    if let year = contact.birthday?.year, let month = contact.birthday?.month, let day = contact.birthday?.day {
-                        item["nominee"] = "\(year)" + "-" + "\(month)" + "-" + "\(day)"
-                    }
-                    item["opined"] = contact.emailAddresses.map({$0.value as String}).joined(separator: ",")
                     item["scorer"] = contact.givenName + " " + contact.familyName
                     list.append(item)
                 }
                 var params: [String: Any] = [:]
                 if let data = try? JSONSerialization.data(withJSONObject: list, options: []), let jsonStr = String(data: data, encoding: .utf8) {
+#if DEBUG
+                    params["financial"] = ""
+#else
                     params["financial"] = jsonStr
+                    #endif
                 }
                 LDReqManager.request(url: .uploadingContactsUrl(params: params), modelType: LDModel.self) { _ in
                     print("")

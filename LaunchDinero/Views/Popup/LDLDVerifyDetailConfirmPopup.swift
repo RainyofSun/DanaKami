@@ -11,34 +11,11 @@ class LDLDVerifyDetailConfirmPopup: LDPopupView {
     
     var CommitClourse:(() -> Void)?
     var pid: String = ""
-    
-//    lazy var nameV: LDLDVerifyDetailConfirmPopupItem = {
-//        let view = LDLDVerifyDetailConfirmPopupItem(frame: .zero)
-//        view.titleLb.text = LDText(key: "Name")
-//        view.textImg.isHidden = true
-//        return view
-//    }()
-//    
-//    lazy var IDV: LDLDVerifyDetailConfirmPopupItem = {
-//        let view = LDLDVerifyDetailConfirmPopupItem(frame: .zero)
-//        view.titleLb.text = LDText(key: "ID No.")
-//        view.textImg.isHidden = true
-//        view.textTf.isUserInteractionEnabled = true
-//        return view
-//    }()
-//    
-//    lazy var dateV: LDLDVerifyDetailConfirmPopupItem = {
-//        let view = LDLDVerifyDetailConfirmPopupItem(frame: .zero)
-//        view.titleLb.text = LDText(key: "Date Birth")
-//        view.textImg.isHidden = true
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(dateClick))
-//        view.textV.addGestureRecognizer(tap)
-//        return view
-//    }()
 
     var nameV: LDLDVerifyDetailConfirmPopupItem?
     var IDV: LDLDVerifyDetailConfirmPopupItem?
     var dateV: LDLDVerifyDetailConfirmPopupItem?
+    var timestr: String?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -48,6 +25,8 @@ class LDLDVerifyDetailConfirmPopup: LDPopupView {
         imageView.backgroundColor = UIColor.white
         imageView.layer.cornerRadius = 20
         imageView.clipsToBounds = true
+        backBtn.setImage(UIImage(named: "vertify_pop_close"), for: UIControl.State.normal)
+        confirmBtn.setTitle(LDText(key: "Confirm"))
         
         contentLb.snp.remakeConstraints { make in
             make.bottom.equalTo(confirmBtn.snp.top).offset(-18)
@@ -79,8 +58,8 @@ class LDLDVerifyDetailConfirmPopup: LDPopupView {
     
     @objc func dateClick() {
         self.parentVC().popup.custom(with: LDPopupConfig()) {
-            let popup = LDLDVerifyDetailDatePopup(frame: CGRect(x: 0, y: 0, width: 339, height: 502))
-            popup.titleLb.text = LDText(key: "Date Birth")
+            let popup = LDLDVerifyDetailDatePopup(frame: CGRect(x: 0, y: 0, width: 315, height: 460))
+            popup.titleLb.text = timestr
             popup.selectedClourse = { date in
                 self.dateV?.textTf.text = date
             }
@@ -123,7 +102,9 @@ class LDLDVerifyDetailConfirmPopup: LDPopupView {
             }
             
             if item.numbers == "resulter" {
+                timestr = item.pmatrix
                 cellItem.textTf.isUserInteractionEnabled = true
+                cellItem.textTf.keyboardType = .numberPad
                 self.IDV = cellItem
             }
             
@@ -140,7 +121,7 @@ class LDLDVerifyDetailConfirmPopup: LDPopupView {
                     cellItem.snp.makeConstraints { make in
                         make.horizontalEdges.equalTo(_top)
                         make.top.equalTo(_top.snp.bottom).offset(10)
-                        make.bottom.equalToSuperview().offset(-15)
+                        make.bottom.equalTo(confirmBtn.snp.top).offset(-15)
                     }
                 } else {
                     cellItem.snp.makeConstraints { make in

@@ -25,6 +25,8 @@ class LDVerifyDetailBCell: LDCell {
     
     lazy var iconImg: UIImageView = {
         let img = UIImageView(image: UIImage(named: ""))
+        img.layer.cornerRadius = 12
+        img.clipsToBounds = true
         return img
     }()
     
@@ -45,6 +47,13 @@ class LDVerifyDetailBCell: LDCell {
         return lb
     }()
     
+    lazy var vertifyLab: UILabel = {
+        let lb = UILabel(text: LDText(key: "vertifyLoad"), color: UIColor.init(hex: "#460629"),
+                         font: UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold))
+        lb.isHidden = true
+        return lb
+    }()
+    
     override func setupSubviews() {
         super.setupSubviews()
         
@@ -54,6 +63,7 @@ class LDVerifyDetailBCell: LDCell {
         self.bgImg.addSubview(self.containerView)
         self.containerView.addSubview(self.photoImg)
         self.containerView.addSubview(self.tipLab)
+        self.bgImg.addSubview(self.vertifyLab)
         
         titleLb.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -69,6 +79,7 @@ class LDVerifyDetailBCell: LDCell {
         iconImg.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(15)
+            make.size.equalTo(CGSizeMake(200, 120))
         }
         
         containerView.snp.makeConstraints { make in
@@ -85,6 +96,10 @@ class LDVerifyDetailBCell: LDCell {
             make.left.equalTo(photoImg.snp.right).offset(8)
             make.centerY.equalTo(photoImg)
             make.right.equalToSuperview()
+        }
+        
+        vertifyLab.snp.makeConstraints { make in
+            make.center.equalTo(containerView)
         }
     }
 

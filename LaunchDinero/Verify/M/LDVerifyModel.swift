@@ -36,8 +36,6 @@ struct LDVerifyReelModel: Codable {
     var globe: [String] = []
     /// amount
     var newcomer: String = ""
-    /// termArr
-    var circle: [String] = []
     /// amountDesc
     var florida: String = ""
     /// termDesc

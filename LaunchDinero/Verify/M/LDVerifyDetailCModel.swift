@@ -37,5 +37,17 @@ struct LDVerifyDetailCLyricsModel: Codable {
     /// name
     var scorer: String = ""
     /// type
-    var listed: String = ""
+    var listeder: Int = 0
+    
+    init(){}
+    
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.scorer = try container.decode(String.self, forKey: .scorer)
+        if let liste = try? container.decodeIfPresent(String.self, forKey: .listeder) {
+            self.listeder = Int(liste) ?? 0
+        } else if let listederInt = try? container.decodeIfPresent(Int.self, forKey: .listeder) {
+            self.listeder = listederInt
+        }
+    }
 }

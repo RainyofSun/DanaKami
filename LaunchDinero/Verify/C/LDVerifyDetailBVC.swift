@@ -65,6 +65,9 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
             } else {
                 cell.iconImg.kf.setImage(with: URL(string: self.data.ramanujan.parts))
             }
+            
+            cell.containerView.isHidden = !self.data.ramanujan.parts.isEmpty
+            cell.vertifyLab.isHidden = !cell.containerView.isHidden
         }
         
         if indexPath.row == 1 {
@@ -73,6 +76,9 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
             } else {
                 cell.iconImg.kf.setImage(with: URL(string: self.data.ramanujan.power))
             }
+            
+            cell.containerView.isHidden = !self.data.ramanujan.parts.isEmpty
+            cell.vertifyLab.isHidden = !cell.containerView.isHidden
         }
         
         cell.photoImg.contentMode = indexPath.row == 0 ? .scaleToFill : .scaleAspectFill

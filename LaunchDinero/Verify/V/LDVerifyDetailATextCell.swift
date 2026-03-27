@@ -14,28 +14,32 @@ class LDVerifyDetailATextCell: LDCell, UITextFieldDelegate {
     var model: LDVerifyDetailAItemModel = LDVerifyDetailAItemModel() {
         didSet {
             titleLb.text = model.rainmaker
-            tf.placeholder = model.association
+            tf.attributedPlaceholder = NSMutableAttributedString(string: model.association, attributes: [.foregroundColor: UIColor.init(hex: "#999999"), .font: UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold)])
             tf.text = model.choice
             tf.keyboardType = model.cinema == 1 ? .numberPad : .default
         }
     }
     
+    lazy var containerView: UIView = {
+        let view = UIView(frame: CGRectZero)
+        view.backgroundColor = UIColor.white
+        view.layer.cornerRadius = 14
+        view.clipsToBounds = true
+        view.layer.borderColor = UIColor(hex: "#EEEEEE").cgColor
+        view.layer.borderWidth = 1
+        return view
+    }()
+    
     lazy var titleLb: UILabel = {
-        let lb = UILabel(text: "")
+        let lb = UILabel(text: "", color: UIColor.init(hex: "#460629"), font: UIFont.interFont(size: 14, fontStyle: InterFontWeight.Regular))
         return lb
     }()
     
     lazy var tf: UITextField = {
         let tf = UITextField()
-        tf.font = .systemFont(ofSize: 14)
+        tf.font = UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold)
         tf.textColor = UIColor(hex: "#333333")
-        tf.leftViewMode = .always
-        tf.rightViewMode = .always
-        tf.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 14, height: 46))
-        tf.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 14, height: 46))
         tf.backgroundColor = .white
-        tf.layer.masksToBounds = true
-        tf.layer.cornerRadius = 12
         tf.delegate = self
         return tf
     }()
@@ -43,20 +47,25 @@ class LDVerifyDetailATextCell: LDCell, UITextFieldDelegate {
     override func setupSubviews() {
         super.setupSubviews()
         
-        self.contentView.addSubview(titleLb)
-        self.contentView.addSubview(tf)
+        self.contentView.addSubview(self.containerView)
+        self.containerView.addSubview(titleLb)
+        self.containerView.addSubview(tf)
+        
+        self.containerView.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(15)
+            make.verticalEdges.equalToSuperview().inset(5)
+        }
         
         titleLb.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.left.equalTo(14)
+            make.top.left.equalTo(15)
             make.height.equalTo(22)
         }
+        
         tf.snp.makeConstraints { make in
             make.top.equalTo(titleLb.snp.bottom).offset(8)
-            make.left.equalTo(14)
-            make.right.equalTo(-14)
+            make.horizontalEdges.equalToSuperview().inset(15)
             make.height.equalTo(46)
-            make.bottom.equalTo(-16)
+            make.bottom.equalTo(-15)
         }
     }
     

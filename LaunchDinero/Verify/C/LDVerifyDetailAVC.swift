@@ -31,12 +31,12 @@ class LDVerifyDetailAVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.addSubview(tb)
+        self.cornerBgView.addSubview(tb)
         
         tb.snp.makeConstraints { make in
-            make.top.equalTo(stepV.snp.bottom).offset(14)
-            make.left.right.equalToSuperview()
-            make.bottom.equalTo(nextBtn.snp.top).offset(-14)
+            make.top.equalTo(tipView.snp.bottom).offset(10)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalTo(nextBgView.snp.top).offset(-15)
         }
 
         reqData()
@@ -50,7 +50,7 @@ class LDVerifyDetailAVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let m = data.feature[safe: indexPath.row] {
-            if m.editors == "supportingb" || m.editors == "supportingc" {
+            if m.editors == "supportinga" || m.editors == "supportingc" {
                 if type == "finda" {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "Cell1") as! LDVerifyDetailASelectCell
                     cell.model = m
@@ -74,16 +74,12 @@ class LDVerifyDetailAVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
                         }
                     } else {
                         self.popup.custom(with: LDPopupConfig()) {
-                            let popupV = LDLDVerifyDetailSelectPopup(frame: CGRect(x: 0, y: 0, width: 339, height: 502))
+                            let popupV = LDLDVerifyDetailSelectPopup(frame: CGRect(x: 0, y: 0, width: 315, height: 400))
                             popupV.titleLb.text = m.rainmaker
-                            popupV.list = m.lyrics.map({ lModel in
-                                var listM = LDVerifyDetailCLyricsModel()
-                                listM.listed = "\(lModel.listed)"
-                                listM.scorer = lModel.scorer
-                                return listM
-                            })
+                            popupV.list = m.lyrics
                             popupV.selectedClourse = { i in
-                                self.data.feature[indexPath.row].choice = "\(m.lyrics[i].listed)"
+                                self.data.feature[indexPath.row].listeder = "\(m.lyrics[i].listeder)"
+                                self.data.feature[indexPath.row].choice = m.lyrics[i].scorer
                                 self.tb.reloadData()
                             }
                             return popupV
@@ -138,15 +134,22 @@ class LDVerifyDetailAVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
         var params: [String: Any] = ["foreign": self.pID]
         
         for item in data.feature {
-            params[item.numbers] = item.choice
+            // 单选
+            if item.editors == "supportinga" {
+                params[item.numbers] = item.listeder
+            }
+        
+            if item.editors == "supportingb" {
+                params[item.numbers] = item.choice
+            }
         }
         
         var url: LDReqURL = .verifyCommitWJUrl(params: params)
-        if type == "findc" {
+        if type == "findb" {
             url = .verifyCommitGRXXUrl(params: params)
-        } else if type == "findd" {
+        } else if type == "findc" {
             url = .verifyCommitGZXXUrl(params: params)
-        } else if type == "findf" {
+        } else if type == "finde" {
             url = .verifyCommitBKUrl(params: params)
         }
         

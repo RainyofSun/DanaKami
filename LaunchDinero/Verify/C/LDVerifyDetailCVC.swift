@@ -14,18 +14,10 @@ class LDVerifyDetailCVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
     
     var selectedIndex: Int = 0
     
-    lazy var bgView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.layer.masksToBounds = true
-        view.layer.cornerRadius = 16
-        return view
-    }()
-    
     lazy var tb: UITableView = {
         let tb = UITableView(frame: .zero, style: .plain)
         tb.separatorStyle = .none
-        tb.backgroundColor = .white
+        tb.backgroundColor = .clear
         tb.delegate = self
         tb.dataSource = self
         tb.showsVerticalScrollIndicator = false
@@ -37,24 +29,12 @@ class LDVerifyDetailCVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.addSubview(bgView)
-        self.view.insertSubview(bgView, belowSubview: self.stepV)
-        bgView.addSubview(tb)
+        cornerBgView.addSubview(tb)
         
-        bgView.snp.makeConstraints { make in
-            make.top.equalTo(14 + LDNavMaxY)
-            make.left.equalTo(14)
-            make.right.equalTo(-14)
-            make.bottom.equalTo(nextBtn.snp.top).offset(-14)
-        }
-        stepV.snp.remakeConstraints { make in
-            make.top.equalTo(bgView).offset(14)
-            make.left.equalTo(29)
-            make.right.equalTo(-29)
-        }
         tb.snp.makeConstraints { make in
-            make.top.equalTo(65)
-            make.left.right.bottom.equalToSuperview()
+            make.top.equalTo(tipView.snp.bottom).offset(10)
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(nextBgView.snp.top)
         }
         
         reqData()
@@ -77,7 +57,7 @@ class LDVerifyDetailCVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
                     popupV.titleLb.text = m.tensions
                     popupV.list = m.lyrics
                     popupV.selectedClourse = { i in
-                        self.data.catholics[indexPath.row].irish = m.lyrics[i].listed
+                        self.data.catholics[indexPath.row].irish = "\(m.lyrics[i].listeder)"
                         self.tb.reloadData()
                     }
                     return popupV
@@ -141,8 +121,8 @@ class LDVerifyDetailCVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
         let contactsList: [[String: Any]] = data.catholics.map { model in
             var contacts: [String: Any] = [:]
             for item in model.lyrics {
-                if model.irish == item.listed {
-                    contacts["irish"] = item.listed
+                if model.irish == "\(item.listeder)" {
+                    contacts["irish"] = item.listeder
                     break
                 }
             }

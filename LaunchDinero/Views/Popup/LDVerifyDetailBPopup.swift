@@ -34,6 +34,7 @@ class LDVerifyDetailBPopup: LDPopupView {
         imageView.layer.cornerRadius = 20
         imageView.clipsToBounds = true
         confirmBtn.setImage(UIImage(named: "pop_camera"))
+        confirmBtn.setTitle(LDText(key: "Camera"))
         
         self.addSubview(img)
         

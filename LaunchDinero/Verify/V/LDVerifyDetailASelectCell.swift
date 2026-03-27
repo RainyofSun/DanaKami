@@ -103,17 +103,17 @@ class LDVerifyDetailASelectCell: LDCell, UITableViewDelegate, UITableViewDataSou
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! LDVerifyDetailASelectItemCell
         if let m = self.model.lyrics[safe: indexPath.row] {
             cell.model = m
-            cell.titleLb.backgroundColor = "\(m.listed)" == model.choice ? UIColor(hex: "#173100") : .white
-            cell.titleLb.textColor = "\(m.listed)" == model.choice ? .white : UIColor(hex: "#173100")
+            cell.titleLb.backgroundColor = "\(m.listeder)" == model.choice ? UIColor(hex: "#173100") : .white
+            cell.titleLb.textColor = "\(m.listeder)" == model.choice ? .white : UIColor(hex: "#173100")
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let m = self.model.lyrics[safe: indexPath.row] {
-            model.choice = "\(m.listed)"
+            model.choice = "\(m.listeder)"
             self.tb.reloadData()
-            self.selectedClourse?("\(m.listed)")
+            self.selectedClourse?("\(m.listeder)")
         }
     }
 
@@ -121,7 +121,7 @@ class LDVerifyDetailASelectCell: LDCell, UITableViewDelegate, UITableViewDataSou
 
 class LDVerifyDetailASelectItemCell: LDCell {
     
-    var model: LDVerifyDetailALyricsModel = LDVerifyDetailALyricsModel() {
+    var model: LDVerifyDetailCLyricsModel = LDVerifyDetailCLyricsModel() {
         didSet {
             titleLb.text = model.scorer
         }

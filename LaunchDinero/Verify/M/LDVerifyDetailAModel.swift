@@ -24,7 +24,7 @@ struct LDVerifyDetailAItemModel: Codable {
     /// cate
     var editors: String = ""
     /// note
-    var lyrics: [LDVerifyDetailALyricsModel] = []
+    var lyrics: [LDVerifyDetailCLyricsModel] = []
     /// optional
     var blockbuster: Int = 0
     /// status
@@ -37,6 +37,8 @@ struct LDVerifyDetailAItemModel: Codable {
     var choice: String = ""
     /// dateSelect
     var editing: Int = 0
+    /// listeder
+    var listeder: String = ""
     
     var cinema: Int = 0
     
@@ -51,7 +53,7 @@ struct LDVerifyDetailAItemModel: Codable {
         self.association = try container.decodeIfPresent(String.self, forKey: .association) ?? ""
         self.numbers = try container.decodeIfPresent(String.self, forKey: .numbers) ?? ""
         self.editors = try container.decodeIfPresent(String.self, forKey: .editors) ?? ""
-        self.lyrics = try container.decodeIfPresent([LDVerifyDetailALyricsModel].self, forKey: .lyrics) ?? []
+        self.lyrics = try container.decodeIfPresent([LDVerifyDetailCLyricsModel].self, forKey: .lyrics) ?? []
         self.blockbuster = try container.decodeIfPresent(Int.self, forKey: .blockbuster) ?? 0
         self.society = try container.decodeIfPresent(Int.self, forKey: .society) ?? 0
         self.tv = try container.decodeIfPresent(String.self, forKey: .tv) ?? ""
@@ -61,15 +63,15 @@ struct LDVerifyDetailAItemModel: Codable {
         } else if let choiceInt = try? container.decodeIfPresent(Int.self, forKey: .choice) {
             self.choice = "\(choiceInt)"
         }
+        
+        if let liste = try? container.decodeIfPresent(String.self, forKey: .listeder) {
+            self.listeder = liste
+        } else if let listederInt = try? container.decodeIfPresent(Int.self, forKey: .listeder) {
+            self.listeder = "\(listederInt)"
+        }
+        
         self.editing = try container.decodeIfPresent(Int.self, forKey: .editing) ?? 0
         self.cinema = try container.decodeIfPresent(Int.self, forKey: .cinema) ?? 0
         self.isShow = try container.decodeIfPresent(Bool.self, forKey: .isShow) ?? true
     }
-}
-
-struct LDVerifyDetailALyricsModel: Codable {
-    /// name
-    var scorer: String = ""
-    /// type
-    var listed: Int = 0
 }

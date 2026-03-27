@@ -26,10 +26,32 @@ class LDLDVerifyDetailSelectPopup: LDPopupView, UIPickerViewDelegate, UIPickerVi
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        imageView.image = UIImage(named: "popup_select")
         contentLb.isHidden = true
+        imageView.image = nil
+        imageView.backgroundColor = UIColor.white
+        imageView.layer.cornerRadius = 20
+        imageView.clipsToBounds = true
+        backBtn.setImage(UIImage(named: "vertify_pop_close"), for: UIControl.State.normal)
+        confirmBtn.setTitle(LDText(key: "Confirm"))
         
-        self.addSubview(selectView)
+        imageView.addSubview(selectView)
+        
+        imageView.snp.remakeConstraints { make in
+            make.horizontalEdges.top.equalToSuperview()
+            make.height.equalTo(330)
+        }
+        
+        titleLb.snp.remakeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(15)
+            make.height.equalTo(25)
+        }
+        
+        backBtn.snp.remakeConstraints { make in
+            make.width.height.equalTo(52)
+            make.top.equalTo(imageView.snp.bottom).offset(15)
+            make.centerX.equalToSuperview()
+        }
         
         selectView.snp.makeConstraints { make in
             make.top.equalTo(titleLb.snp.bottom).offset(14)
@@ -55,16 +77,14 @@ class LDLDVerifyDetailSelectPopup: LDPopupView, UIPickerViewDelegate, UIPickerVi
         list.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if let m = list[safe: row] {
-            return m.scorer
-        } else {
-            return ""
-        }
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let label = UILabel(text: list[safe: row]?.scorer ?? "", color: (selectedIndex == row ? UIColor.init(hex: "#460629") : UIColor.black), font: (selectedIndex == row ? UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold) : UIFont.interFont(size: 14, fontStyle: InterFontWeight.Regular)), alignment: .center)
+        return label
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedIndex = row
+        pickerView.reloadAllComponents()
     }
     
 }
