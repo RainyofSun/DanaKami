@@ -66,7 +66,7 @@ class LDPopupView: UIView {
     
     func addPopSubViews() {
         self.addSubview(imageView)
-        imageView.addSubview(backBtn)
+        self.addSubview(backBtn)
         imageView.addSubview(titleLb)
         imageView.addSubview(contentLb)
         imageView.addSubview(confirmBtn)
@@ -78,7 +78,7 @@ class LDPopupView: UIView {
         }
         
         backBtn.snp.makeConstraints { make in
-            make.top.right.equalToSuperview()
+            make.top.right.equalTo(imageView)
             make.width.height.equalTo(52)
         }
         
@@ -96,7 +96,7 @@ class LDPopupView: UIView {
         confirmBtn.snp.makeConstraints { make in
             make.top.equalTo(contentLb.snp.bottom).offset(15)
             make.bottom.equalTo(-15)
-            make.height.equalTo(18)
+            make.height.equalTo(36)
             make.horizontalEdges.equalTo(contentLb)
         }
     }

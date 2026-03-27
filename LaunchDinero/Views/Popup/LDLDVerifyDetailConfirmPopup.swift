@@ -11,46 +11,40 @@ class LDLDVerifyDetailConfirmPopup: LDPopupView {
     
     var CommitClourse:(() -> Void)?
     
-    lazy var nameV: LDLDVerifyDetailConfirmPopupItem = {
-        let view = LDLDVerifyDetailConfirmPopupItem(frame: .zero)
-        view.titleLb.text = LDText(key: "Name")
-        view.textImg.isHidden = true
-        return view
-    }()
-    
-    lazy var IDV: LDLDVerifyDetailConfirmPopupItem = {
-        let view = LDLDVerifyDetailConfirmPopupItem(frame: .zero)
-        view.titleLb.text = LDText(key: "ID No.")
-        view.textImg.isHidden = true
-        view.textTf.isUserInteractionEnabled = true
-        return view
-    }()
-    
-    lazy var dateV: LDLDVerifyDetailConfirmPopupItem = {
-        let view = LDLDVerifyDetailConfirmPopupItem(frame: .zero)
-        view.titleLb.text = LDText(key: "Date Birth")
-        view.textImg.isHidden = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dateClick))
-        view.textV.addGestureRecognizer(tap)
-        return view
-    }()
-    
-    lazy var bgView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.layer.masksToBounds = true
-        view.layer.cornerRadius = 14
-        return view
-    }()
+//    lazy var nameV: LDLDVerifyDetailConfirmPopupItem = {
+//        let view = LDLDVerifyDetailConfirmPopupItem(frame: .zero)
+//        view.titleLb.text = LDText(key: "Name")
+//        view.textImg.isHidden = true
+//        return view
+//    }()
+//    
+//    lazy var IDV: LDLDVerifyDetailConfirmPopupItem = {
+//        let view = LDLDVerifyDetailConfirmPopupItem(frame: .zero)
+//        view.titleLb.text = LDText(key: "ID No.")
+//        view.textImg.isHidden = true
+//        view.textTf.isUserInteractionEnabled = true
+//        return view
+//    }()
+//    
+//    lazy var dateV: LDLDVerifyDetailConfirmPopupItem = {
+//        let view = LDLDVerifyDetailConfirmPopupItem(frame: .zero)
+//        view.titleLb.text = LDText(key: "Date Birth")
+//        view.textImg.isHidden = true
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(dateClick))
+//        view.textV.addGestureRecognizer(tap)
+//        return view
+//    }()
 
+    var dateV: LDLDVerifyDetailConfirmPopupItem?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        titleLb.text = LDText(key: "Please confirm")
-        contentLb.text = LDText(key: "Verify confirm desc")
-        contentLb.textColor = UIColor(hex: "#F14343")
-        contentLb.font = .systemFont(ofSize: 12)
-        imageView.image = UIImage(named: "popup_confirm")
+        contentLb.isHidden = true
+        imageView.image = nil
+        imageView.backgroundColor = UIColor.white
+        imageView.layer.cornerRadius = 20
+        imageView.clipsToBounds = true
         
         contentLb.snp.remakeConstraints { make in
             make.bottom.equalTo(confirmBtn.snp.top).offset(-18)
@@ -58,31 +52,25 @@ class LDLDVerifyDetailConfirmPopup: LDPopupView {
             make.right.equalTo(-14)
         }
         
-        self.addSubview(bgView)
-        self.insertSubview(bgView, belowSubview: titleLb)
+//        self.addSubview(nameV)
+//        self.addSubview(IDV)
+//        self.addSubview(dateV)
         
-        self.addSubview(nameV)
-        self.addSubview(IDV)
-        self.addSubview(dateV)
+        imageView.snp.remakeConstraints { make in
+            make.horizontalEdges.top.equalToSuperview()
+            make.height.equalTo(370)
+        }
         
-        nameV.snp.makeConstraints { make in
-            make.top.equalTo(titleLb.snp.bottom).offset(13)
-            make.left.equalTo(16)
-            make.right.equalTo(-16)
+        titleLb.snp.remakeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(15)
+            make.height.equalTo(25)
         }
-        IDV.snp.makeConstraints { make in
-            make.top.equalTo(nameV.snp.bottom).offset(12)
-            make.left.right.equalTo(nameV)
-        }
-        dateV.snp.makeConstraints { make in
-            make.top.equalTo(IDV.snp.bottom).offset(12)
-            make.left.right.equalTo(nameV)
-        }
-        bgView.snp.makeConstraints { make in
-            make.top.equalTo(titleLb).offset(-13)
-            make.left.equalTo(14)
-            make.right.equalTo(-14)
-            make.bottom.equalTo(dateV).offset(20)
+        
+        backBtn.snp.remakeConstraints { make in
+            make.width.height.equalTo(52)
+            make.top.equalTo(imageView.snp.bottom).offset(15)
+            make.centerX.equalToSuperview()
         }
     }
     
@@ -95,7 +83,7 @@ class LDLDVerifyDetailConfirmPopup: LDPopupView {
             let popup = LDLDVerifyDetailDatePopup(frame: CGRect(x: 0, y: 0, width: 339, height: 502))
             popup.titleLb.text = LDText(key: "Date Birth")
             popup.selectedClourse = { date in
-                self.dateV.textTf.text = date
+                self.dateV?.textTf.text = date
             }
             return popup
         }
@@ -122,6 +110,46 @@ class LDLDVerifyDetailConfirmPopup: LDPopupView {
         }
     }
     
+    func buildItemList(source: [LDVerifyDetailConfirmItemModel]) {
+        var topItem: LDLDVerifyDetailConfirmPopupItem?
+        
+        source.enumerated().forEach { (index, item) in
+            let cellItem = LDLDVerifyDetailConfirmPopupItem(frame: CGRectZero)
+            cellItem.titleLb.text = item.pmatrix
+            cellItem.textTf.text = item.begin
+            cellItem.textImg.isHidden = item.numbers != "nominee"
+            cellItem.textTf.isUserInteractionEnabled = item.numbers != "nominee"
+            if item.numbers == "nominee" {
+                let tap = UITapGestureRecognizer(target: self, action: #selector(dateClick))
+                cellItem.textV.addGestureRecognizer(tap)
+                self.dateV = cellItem
+            }
+            
+            self.imageView.addSubview(cellItem)
+            
+            if let _top = topItem {
+                if index == source.count - 1 {
+                    cellItem.snp.makeConstraints { make in
+                        make.horizontalEdges.equalTo(_top)
+                        make.top.equalTo(_top.snp.bottom).offset(10)
+                        make.bottom.equalToSuperview().offset(-15)
+                    }
+                } else {
+                    cellItem.snp.makeConstraints { make in
+                        make.horizontalEdges.equalTo(_top)
+                        make.top.equalTo(_top.snp.bottom).offset(10)
+                    }
+                }
+            } else {
+                cellItem.snp.makeConstraints { make in
+                    make.horizontalEdges.equalToSuperview().inset(15)
+                    make.top.equalTo(self.titleLb.snp.bottom).offset(10)
+                }
+            }
+            
+            topItem = cellItem
+        }
+    }
 }
 
 class LDLDVerifyDetailConfirmPopupItem: LDVerifyDetailCItemView {

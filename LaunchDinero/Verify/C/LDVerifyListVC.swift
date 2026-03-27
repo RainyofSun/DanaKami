@@ -67,6 +67,7 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
         super.setupSubviews()
         
         stepV.isHidden = true
+        self.cornerBgView.isHidden = true
         
         self.view.addSubview(listTb)
         self.view.addSubview(agreeBtn)

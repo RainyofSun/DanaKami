@@ -246,7 +246,7 @@ extension LDReqURL: TargetType {
                     formData.append(item)
                 }
             }
-            formData.append(MultipartFormData(provider: .data(imgData), name: "ofWifes", fileName: "image.jpg", mimeType: "image/jpeg"))
+            formData.append(MultipartFormData(provider: .data(imgData), name: "thePlans", fileName: "image.jpg", mimeType: "image/jpeg"))
             return .uploadCompositeMultipart(formData, urlParameters: LDReqManager.parameters)
         }
     }

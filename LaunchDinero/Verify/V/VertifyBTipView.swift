@@ -18,7 +18,6 @@ class VertifyBTipView: UIView {
         self.tiptextLab.numberOfLines = 0
         
         self.backgroundColor = UIColor.init(hex: "#FFD363")
-        self.layer.cornerRadius = 18
         self.clipsToBounds = true
         
         self.addSubview(self.tipImgView)
@@ -41,4 +40,8 @@ class VertifyBTipView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layer.cornerRadius = self.jf_height/2
+    }
 }

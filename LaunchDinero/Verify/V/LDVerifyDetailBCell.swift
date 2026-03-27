@@ -10,51 +10,81 @@ import UIKit
 class LDVerifyDetailBCell: LDCell {
     
     lazy var titleLb: UILabel = {
-        let lb = UILabel(text: "",
-                         font: .boldSystemFont(ofSize: 16),
-                         alignment: .center)
+        let lb = UILabel(text: "", color: UIColor.init(hex: "#460629"),
+                         font: UIFont.interFont(size: 16, fontStyle: InterFontWeight.Bold))
         return lb
     }()
     
-    lazy var bgImg: UIImageView = {
-        let img = UIImageView(image: UIImage(named: ""))
+    lazy var bgImg: UIView = {
+        let img = UIView(frame: CGRectZero)
+        img.backgroundColor = UIColor(hex: "#C9D9A0")
+        img.layer.cornerRadius = 18
+        img.clipsToBounds = true
         return img
     }()
     
     lazy var iconImg: UIImageView = {
-        let img = UIImageView(image: UIImage(named: "verify_photo_camera"))
+        let img = UIImageView(image: UIImage(named: ""))
         return img
     }()
     
     lazy var photoImg: UIImageView = {
-        let img = UIImageView(image: UIImage(named: ""))
+        let img = UIImageView(image: UIImage(named: "camera"))
         img.layer.masksToBounds = true
         return img
     }()
+    
+    lazy var containerView: UIView = {
+        let view = UIView(frame: CGRectZero)
+        return view
+    }()
 
+    lazy var tipLab: UILabel = {
+        let lb = UILabel(text: LDText(key: "Upload"), color: UIColor.init(hex: "#460629"),
+                         font: UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold))
+        return lb
+    }()
+    
     override func setupSubviews() {
         super.setupSubviews()
         
         self.contentView.addSubview(titleLb)
         self.contentView.addSubview(bgImg)
-        self.contentView.addSubview(iconImg)
-        self.contentView.addSubview(photoImg)
+        self.bgImg.addSubview(iconImg)
+        self.bgImg.addSubview(self.containerView)
+        self.containerView.addSubview(self.photoImg)
+        self.containerView.addSubview(self.tipLab)
         
         titleLb.snp.makeConstraints { make in
-            make.top.centerX.equalToSuperview()
-            make.height.equalTo(22)
+            make.top.equalToSuperview()
+            make.left.equalToSuperview().offset(15)
         }
+        
         bgImg.snp.makeConstraints { make in
             make.top.equalTo(titleLb.snp.bottom).offset(10)
-            make.left.equalTo(14)
-            make.right.equalTo(-14)
+            make.horizontalEdges.equalToSuperview().inset(15)
             make.bottom.equalTo(-20)
         }
+        
         iconImg.snp.makeConstraints { make in
-            make.center.equalTo(bgImg)
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(15)
         }
+        
+        containerView.snp.makeConstraints { make in
+            make.top.equalTo(iconImg.snp.bottom).offset(15)
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-15)
+        }
+        
         photoImg.snp.makeConstraints { make in
-            make.edges.equalTo(bgImg)
+            make.left.verticalEdges.equalToSuperview()
+        }
+        
+        tipLab.snp.makeConstraints { make in
+            make.left.equalTo(photoImg.snp.right).offset(8)
+            make.centerY.equalTo(photoImg)
+            make.right.equalToSuperview()
         }
     }
 

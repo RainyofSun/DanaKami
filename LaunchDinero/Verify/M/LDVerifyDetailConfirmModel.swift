@@ -8,33 +8,29 @@
 import Foundation
 
 struct LDVerifyDetailConfirmModel: Codable {
-    /// name
-    var commented: String = ""
-    /// ID
-    var lipset: String = ""
-    /// gender
-    var david: String = ""
-    /// birthday
-    var nominee: String = ""
-    var infinity: String = ""
-    var similarly: String = ""
-    var mobility: String = ""
     /// isShowConfirm
     var social: Int = 0
-    var society: Bool = false
+    /// determines
+    var determines: [LDVerifyDetailConfirmItemModel] = []
     
     init() {}
     
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.commented = try container.decodeIfPresent(String.self, forKey: .commented) ?? ""
-        self.lipset = try container.decodeIfPresent(String.self, forKey: .lipset) ?? ""
-        self.david = try container.decodeIfPresent(String.self, forKey: .david) ?? ""
-        self.nominee = try container.decodeIfPresent(String.self, forKey: .nominee) ?? ""
-        self.infinity = try container.decodeIfPresent(String.self, forKey: .infinity) ?? ""
-        self.similarly = try container.decodeIfPresent(String.self, forKey: .similarly) ?? ""
-        self.mobility = try container.decodeIfPresent(String.self, forKey: .mobility) ?? ""
-        self.social = try container.decodeIfPresent(Int.self, forKey: .social) ?? 0
-        self.society = try container.decodeIfPresent(Bool.self, forKey: .society) ?? false
+        self.social = try container.decode(Int.self, forKey: .social)
+        self.determines = try container.decode([LDVerifyDetailConfirmItemModel].self, forKey: .determines)
+    }
+}
+
+struct LDVerifyDetailConfirmItemModel: Codable {
+    var pmatrix: String = ""
+    var begin: String = ""
+    var numbers: String = ""
+    
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.pmatrix = try container.decode(String.self, forKey: .pmatrix)
+        self.begin = try container.decode(String.self, forKey: .begin)
+        self.numbers = try container.decode(String.self, forKey: .numbers)
     }
 }

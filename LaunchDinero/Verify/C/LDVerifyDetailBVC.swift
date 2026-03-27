@@ -15,6 +15,7 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
     
     lazy var tableView: UITableView = {
         let tb = UITableView(frame: .zero, style: .plain)
+        tb.backgroundColor = .clear
         tb.separatorStyle = .none
         tb.delegate = self
         tb.dataSource = self
@@ -31,7 +32,7 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
         cornerBgView.addSubview(tableView)
 
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(tipView.snp.bottom).offset(20)
+            make.top.equalTo(tipView.snp.bottom).offset(15)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(nextBgView.snp.top)
         }
@@ -40,10 +41,10 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
     }
     
     override func nextBtnClick() {
-        if self.data.actress.society == 0 {
+        if self.data.ramanujan.parts.isEmpty {
             isFirst = true
             self.takePhoto()
-        } else if self.data.subtext.society == 0 {
+        } else if self.data.ramanujan.power.isEmpty {
             isFirst = false
             self.takePhoto()
         } else {
@@ -57,18 +58,32 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! LDVerifyDetailBCell
-        cell.titleLb.text = indexPath.row == 0 ? self.data.id_front_msg : self.data.face_msg
-        cell.bgImg.image = UIImage(named: indexPath.row == 0 ? "verify_photo_img_1" : "verify_photo_img_2")
-        cell.photoImg.kf.setImage(with: URL(string: indexPath.row == 0 ? self.data.actress.infinity : self.data.subtext.infinity))
+        cell.titleLb.text = indexPath.row == 0 ? self.data.ramanujan.concern : self.data.ramanujan.fourth
+        if indexPath.row == 0 {
+            if self.data.ramanujan.parts.isEmpty {
+                cell.iconImg.image = isEnglish ? UIImage(named: "vertify_front_en") : UIImage(named: "vertify_front")
+            } else {
+                cell.iconImg.kf.setImage(with: URL(string: self.data.ramanujan.parts))
+            }
+        }
+        
+        if indexPath.row == 1 {
+            if self.data.ramanujan.power.isEmpty {
+                cell.iconImg.image = UIImage(named: "vertify_back")
+            } else {
+                cell.iconImg.kf.setImage(with: URL(string: self.data.ramanujan.power))
+            }
+        }
+        
         cell.photoImg.contentMode = indexPath.row == 0 ? .scaleToFill : .scaleAspectFill
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.data.actress.society == 0 {
+        if self.data.ramanujan.parts.isEmpty {
             isFirst = true
             self.takePhoto()
-        } else if self.data.subtext.society == 0 && indexPath.row == 1 {
+        } else if self.data.ramanujan.power.isEmpty {
             isFirst = false
             self.takePhoto()
         }
@@ -82,6 +97,7 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
             case .success(let success):
                 if let m = success.financial {
                     self.data = m
+                    self.isFirst = self.data.ramanujan.parts.isEmpty
                     self.tableView.reloadData()
                 }
             case .failure(_):
@@ -93,7 +109,7 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
     func commitPhoto(photo: UIImage) {
         self.view.LDShowActivity()
         if let imgData = UIImage.verifyPhoto(image: photo) {
-            LDReqManager.request(url: .verifyCommitSFZUrl(params: ["listed": isFirst ? "11" : "10"], imgData: imgData), modelType: LDVerifyDetailConfirmModel.self) { model in
+            LDReqManager.request(url: .verifyCommitSFZUrl(params: ["listeder": isFirst ? "11" : "10"], imgData: imgData), modelType: LDVerifyDetailConfirmModel.self) { model in
                 self.view.LDHideActivity()
                 switch model {
                 case .success(let success):
@@ -103,7 +119,8 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
                         if self.isFirst {
                             if let m = success.financial, m.social != 0 {
                                 self.popup.custom(with: LDPopupConfig()) {
-                                    let popupV = LDLDVerifyDetailConfirmPopup(frame: CGRect(x: 0, y: 0, width: 339, height: 519))
+                                    let popupV = LDLDVerifyDetailConfirmPopup(frame: CGRect(x: 0, y: 0, width: 315, height: 460))
+                                    popupV.titleLb.text = self.navTitle
                                     popupV.nameV.textTf.text = m.commented
                                     popupV.IDV.textTf.text = m.lipset
                                     popupV.dateV.textTf.text = m.nominee
@@ -128,7 +145,8 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
     func takePhoto() {
         self.beginTime = LDNowTime()
         self.popup.custom(with: LDPopupConfig()) {
-            let popupV = LDVerifyDetailBPopup(frame: CGRect(x: 0, y: 0, width: 339, height: 558))
+            let popupV = LDVerifyDetailBPopup(frame: CGRect(x: 0, y: 0, width: 315, height: 440))
+            popupV.titleLb.text = self.isFirst ? self.data.ramanujan.concern : self.data.ramanujan.fourth
             popupV.isFirst = self.isFirst
             popupV.nextClourse = {
                 self.showCamera()

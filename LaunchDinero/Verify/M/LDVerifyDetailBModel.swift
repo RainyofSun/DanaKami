@@ -9,32 +9,29 @@ import Foundation
 
 struct LDVerifyDetailBModel: Codable {
     /// id_front
-    var actress: LDVerifyDetailBPhotoModel = LDVerifyDetailBPhotoModel()
-    /// liveness
-    var subtext: LDVerifyDetailBPhotoModel = LDVerifyDetailBPhotoModel()
+    var ramanujan: LDVerifyDetailBPhotoModel = LDVerifyDetailBPhotoModel()
     /// id_front_msg
-    var id_front_msg: String = ""
-    /// livenessType
-    var accolades: Int = 0
-    /// face_msg
-    var face_msg: String = ""
+    var third: String = ""
 }
 
 struct LDVerifyDetailBPhotoModel: Codable {
     /// status
-    var society: Int = 0
+    var concern: String = ""
     /// url
-    var infinity: String = ""
-    /// info
-    var ref: LDVerifyDetailBPhotoInfoModel = LDVerifyDetailBPhotoInfoModel()
+    var fourth: String = ""
+    /// power
+    var power: String = ""
+    /// parts
+    var parts: String = ""
     
     init() {}
     
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.society = try container.decodeIfPresent(Int.self, forKey: .society) ?? 0
-        self.infinity = try container.decodeIfPresent(String.self, forKey: .infinity) ?? ""
-        self.ref = try container.decodeIfPresent(LDVerifyDetailBPhotoInfoModel.self, forKey: .ref) ?? LDVerifyDetailBPhotoInfoModel()
+        self.concern = try container.decodeIfPresent(String.self, forKey: .concern) ?? ""
+        self.fourth = try container.decodeIfPresent(String.self, forKey: .fourth) ?? ""
+        self.power = try container.decodeIfPresent(String.self, forKey: .power) ?? ""
+        self.parts = try container.decodeIfPresent(String.self, forKey: .parts) ?? ""
     }
 }
 

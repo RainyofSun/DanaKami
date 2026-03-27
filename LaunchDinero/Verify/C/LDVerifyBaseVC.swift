@@ -51,6 +51,8 @@ class LDVerifyBaseVC: LDBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = navTitle
+        
         setupSubviews()
         
     }
@@ -60,7 +62,7 @@ class LDVerifyBaseVC: LDBaseVC {
         self.view.addSubview(stepV)
         self.view.addSubview(self.cornerBgView)
         self.cornerBgView.addSubview(self.tipView)
-        self.cornerBgView.addSubview(self.nextBgView)
+        self.view.addSubview(self.nextBgView)
         self.nextBgView.addSubview(nextBtn)
         
         stepV.snp.makeConstraints { make in
@@ -70,7 +72,8 @@ class LDVerifyBaseVC: LDBaseVC {
         }
         
         cornerBgView.snp.makeConstraints { make in
-            make.bottom.horizontalEdges.equalToSuperview()
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalTo(nextBgView.snp.top)
             make.top.equalTo(stepV.snp.bottom).offset(15)
         }
         
@@ -78,6 +81,7 @@ class LDVerifyBaseVC: LDBaseVC {
             make.horizontalEdges.equalToSuperview().inset(15)
             make.top.equalToSuperview().offset(15)
             make.height.greaterThanOrEqualTo(36)
+            make.height.lessThanOrEqualTo(50)
         }
         
         nextBgView.snp.makeConstraints { make in

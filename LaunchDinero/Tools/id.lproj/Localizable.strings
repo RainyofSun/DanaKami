@@ -22,7 +22,7 @@
 "Account cancellation" = "Pembatalan akun";
 "Logout" = "Keluar";
 "Set up" = "Pusat pengaturan";
-"Next" = "Next";
+"Next" = "Berikutnya";
 "Confirm" = "Confirm";
 "Agree and Continue" = "Agree and Continue";
 "Sign out" = "Keluar dari akun";
@@ -89,3 +89,4 @@
 "Account cancellation" = "Pembatalan akun";
 "cancel Toast" = "Silakan baca dan setuju dengan hal di atas.";
 "Certification Items" = "Item sertifikasi";
+"Upload" = "Mengunggah";
