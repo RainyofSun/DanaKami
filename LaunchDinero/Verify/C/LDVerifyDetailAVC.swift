@@ -78,7 +78,17 @@ class LDVerifyDetailAVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
                             popupV.titleLb.text = m.rainmaker
                             popupV.list = m.lyrics
                             popupV.selectedClourse = { i in
-                                self.data.feature[indexPath.row].listeder = "\(m.lyrics[i].listeder)"
+                                let lyModel: LDVerifyDetailCLyricsModel = m.lyrics[i]
+                                if self.type == "finde" {
+                                    self.data.feature[indexPath.row].listeder = lyModel.listederStr
+                                } else {
+                                    if lyModel.listeder != -1 {
+                                        self.data.feature[indexPath.row].listeder = "\(m.lyrics[i].listeder)"
+                                    } else {
+                                        self.data.feature[indexPath.row].listeder = lyModel.listederStr
+                                    }
+                                }
+                                
                                 self.data.feature[indexPath.row].choice = m.lyrics[i].scorer
                                 self.tb.reloadData()
                             }

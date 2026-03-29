@@ -7,108 +7,67 @@
 
 import UIKit
 
-class LDOrderCell: LDCell, UITableViewDelegate, UITableViewDataSource {
+class LDOrderCell: LDCell {
     
     var model: LDOrderItemModel = LDOrderItemModel() {
         didSet {
             icon.kf.setImage(with: URL(string: model.writers))
             titleLb.text = model.portal
-            statusLb.text = model.examined
-            agreeLb.attributedText = NSAttributedString(string: model.help, attributes: [.foregroundColor: UIColor(hex: "#173100"), .font: UIFont.boldSystemFont(ofSize: 14), .underlineStyle: NSUnderlineStyle.single.rawValue])
-            checkBtn.isHidden = model.help.isEmpty
-//            checkBtn.setTitle(model.turkish, for: .normal)
-            self.tb.reloadData()
+            statusV.setTitle(model.examined)
             
-            self.tb.snp.remakeConstraints { make in
-                make.top.equalTo(divideV.snp.bottom).offset(5)
-                make.left.right.equalToSuperview()
-                make.height.equalTo(CGFloat(model.levy.count) * 30)
-                if model.help.isEmpty {
-                    make.bottom.equalTo(-18)
-                }
-            }
+            agreeBtn.setAttributedTitle(NSAttributedString(string: model.help, attributes: [.foregroundColor: UIColor(hex: "#173100"), .font: UIFont.boldSystemFont(ofSize: 14), .underlineStyle: NSUnderlineStyle.single.rawValue]), for: UIControl.State.normal)
         }
     }
     
     lazy var bgView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.init(hex: "#DBDCA5")
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 14
         view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor(hex: "#173100").cgColor
+        view.layer.borderColor = UIColor(hex: "#FFFFFF").cgColor
         return view
     }()
     
     lazy var icon: UIImageView = {
         let img = UIImageView()
+        img.layer.cornerRadius = 5
+        img.clipsToBounds = true
         return img
     }()
     
     lazy var titleLb: UILabel = {
         let lb = UILabel(text: "LaunchDinero",
-                         font: .boldSystemFont(ofSize: 14))
+                         font: UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold))
         return lb
     }()
     
-    lazy var statusV: UIView = {
-        let view = UIView()
+    lazy var statusV: GradientLoadingButton = {
+        let view = GradientLoadingButton()
         view.layer.masksToBounds = true
-        view.layer.cornerRadius = 6
-        view.backgroundColor = UIColor(hex: "#EB7005")
-        return view
-    }()
-    lazy var statusLb: UILabel = {
-        let lb = UILabel(text: "Apply",
-                         color: .white,
-                         font: .boldSystemFont(ofSize: 14),
-                         alignment: .center)
-        return lb
-    }()
-    
-    lazy var divideV: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hex: "#F0F0F0")
+        view.layer.cornerRadius = 20
+        view.setTitleColor(UIColor.white)
+        view.setFont(UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold))
         return view
     }()
     
-    lazy var agreeLb: UILabel = {
-        let lb = UILabel()
-        lb.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(agreeBtnClick))
-        lb.addGestureRecognizer(tap)
-        return lb
+    lazy var containerView: UIView = {
+        let view = UIView(frame: CGRectZero)
+        view.layer.cornerRadius = 12
+        view.clipsToBounds = true
+        view.backgroundColor = .white
+        return view
     }()
+    
+    lazy var divideV: UIImageView = UIImageView(image: UIImage(named: "Line"))
+    
+    lazy var amountItem: LDOrderCellItem = LDOrderCellItem(frame: CGRectZero)
+    lazy var dateItem: LDOrderCellItem = LDOrderCellItem(frame: CGRectZero)
     
     lazy var agreeBtn: UIButton = {
         let btn = UIButton()
         btn.addTarget(self, action: #selector(agreeBtnClick), for: .touchUpInside)
         return btn
-    }()
-    
-    lazy var checkBtn: UIButton = {
-        let btn = UIButton()
-        btn.backgroundColor = UIColor(hex: "#173100")
-        btn.layer.masksToBounds = true
-        btn.layer.cornerRadius = 8
-        btn.setTitle(LDText(key: "Check"), for: .normal)
-        btn.setTitleColor(.white, for: .normal)
-        btn.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        btn.isUserInteractionEnabled = false
-        return btn
-    }()
-    
-    lazy var tb: UITableView = {
-        let tb = UITableView(frame: .zero, style: .plain)
-        tb.backgroundColor = .clear
-        tb.separatorStyle = .none
-        tb.showsVerticalScrollIndicator = false
-        tb.showsHorizontalScrollIndicator = false
-        tb.delegate = self
-        tb.dataSource = self
-        tb.isUserInteractionEnabled = false
-        tb.register(LDOrderCellItem.self, forCellReuseIdentifier: "Cell")
-        return tb
     }()
 
     override func setupSubviews() {
@@ -118,62 +77,60 @@ class LDOrderCell: LDCell, UITableViewDelegate, UITableViewDataSource {
         bgView.addSubview(icon)
         bgView.addSubview(titleLb)
         bgView.addSubview(statusV)
-        statusV.addSubview(statusLb)
-        bgView.addSubview(divideV)
-        bgView.addSubview(tb)
-        bgView.addSubview(agreeLb)
-        bgView.addSubview(checkBtn)
+        bgView.addSubview(containerView)
+        containerView.addSubview(divideV)
+        containerView.addSubview(amountItem)
+        containerView.addSubview(dateItem)
         bgView.addSubview(agreeBtn)
         
         bgView.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.left.equalTo(14)
-            make.right.bottom.equalTo(-14)
+            make.left.equalTo(15)
+            make.right.bottom.equalTo(-15)
         }
+        
         icon.snp.makeConstraints { make in
-            make.top.left.equalTo(14)
+            make.top.left.equalTo(15)
             make.width.height.equalTo(30)
         }
-        statusV.snp.makeConstraints { make in
-            make.right.equalTo(-14)
-            make.centerY.equalTo(icon)
-            make.height.equalTo(27)
-        }
-        statusLb.snp.makeConstraints { make in
-            make.left.equalTo(15)
-            make.right.equalTo(-15)
-            make.top.bottom.equalToSuperview()
-        }
+        
         titleLb.snp.makeConstraints { make in
-            make.left.equalTo(icon.snp.right).offset(6)
+            make.left.equalTo(icon.snp.right).offset(8)
             make.centerY.equalTo(icon)
-            make.right.equalTo(statusV.snp.left).offset(-10)
         }
+        
+        containerView.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(15)
+            make.top.equalTo(icon.snp.bottom).offset(15)
+        }
+        
+        statusV.snp.makeConstraints { make in
+            make.horizontalEdges.equalTo(containerView)
+            make.top.equalTo(containerView).offset(-5)
+            make.height.equalTo(40)
+        }
+        
         divideV.snp.makeConstraints { make in
-            make.top.equalTo(icon.snp.bottom).offset(10)
-            make.left.equalTo(14)
-            make.right.equalTo(-14)
-            make.height.equalTo(1)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(1)
+            make.height.equalTo(40)
+            make.top.equalToSuperview().offset(15)
         }
-        tb.snp.makeConstraints { make in
-            make.top.equalTo(divideV.snp.bottom).offset(5)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(0)
+        
+        amountItem.snp.makeConstraints { make in
+            make.left.top.equalToSuperview()
+            make.right.equalTo(self.divideV.snp.left)
         }
-        checkBtn.snp.makeConstraints { make in
-            make.top.equalTo(tb.snp.bottom).offset(5)
-            make.right.equalTo(-14)
-            make.width.equalTo(108)
-            make.height.equalTo(34)
-            make.bottom.equalTo(-18)
+        
+        dateItem.snp.makeConstraints { make in
+            make.right.top.equalToSuperview()
+            make.left.equalTo(divideV.snp.right)
+            make.width.equalTo(amountItem)
         }
-        agreeLb.snp.makeConstraints { make in
-            make.left.equalTo(14)
-            make.centerY.equalTo(checkBtn)
-        }
+        
         agreeBtn.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
-            make.top.equalTo(tb.snp.bottom)
+            make.top.equalTo(statusV.snp.bottom).offset(6)
         }
     }
     
@@ -183,26 +140,9 @@ class LDOrderCell: LDCell, UITableViewDelegate, UITableViewDataSource {
         }
         jumpPage(vc: self.parentVC(), url: model.lapses)
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        model.levy.count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        30
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! LDOrderCellItem
-        if let m = model.levy[safe: indexPath.row] {
-            cell.model = m
-        }
-        return cell
-    }
-
 }
 
-class LDOrderCellItem: LDCell {
+class LDOrderCellItem: UIView {
     
     var model: LDOrderLevyModel = LDOrderLevyModel() {
         didSet {
@@ -212,31 +152,36 @@ class LDOrderCellItem: LDCell {
     }
     
     lazy var titleLb: UILabel = {
-        let lb = UILabel(text: "",
-                         font: .systemFont(ofSize: 14))
+        let lb = UILabel(text: "", color: UIColor.init(hex: "#999999"),
+                         font: UIFont.interFont(size: 12, fontStyle: InterFontWeight.Regular))
         return lb
     }()
     
     lazy var subtitleLb: UILabel = {
-        let lb = UILabel(text: "",
-                         font: .boldSystemFont(ofSize: 14),
-                         alignment: .right)
+        let lb = UILabel(text: "", color: .black,
+                         font: UIFont.interFont(size: 24, fontStyle: InterFontWeight.Extra_Bold))
         return lb
     }()
     
-    override func setupSubviews() {
-        super.setupSubviews()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        self.contentView.addSubview(titleLb)
-        self.contentView.addSubview(subtitleLb)
+        self.addSubview(titleLb)
+        self.addSubview(subtitleLb)
         
         titleLb.snp.makeConstraints { make in
-            make.left.equalTo(14)
-            make.centerY.equalToSuperview()
+            make.top.equalTo(15)
+            make.horizontalEdges.equalToSuperview().inset(15)
         }
+        
         subtitleLb.snp.makeConstraints { make in
-            make.right.equalTo(-14)
-            make.centerY.equalToSuperview()
+            make.horizontalEdges.equalTo(titleLb)
+            make.bottom.equalToSuperview().offset(-30)
+            make.top.equalTo(titleLb.snp.bottom).offset(6)
         }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
