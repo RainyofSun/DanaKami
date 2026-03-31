@@ -196,7 +196,8 @@ class LDDevice {
                     "little": idfv,
                     "charm": addressIP,
                     "spare": networkType,
-                    "amounts": idfa]
+                    "amounts": idfa,
+            ]
         }
         
         static var wifiInfo: [String: Any] {

@@ -17,8 +17,13 @@ struct LDVerifyDetailConfirmModel: Codable {
     
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.social = try container.decode(Int.self, forKey: .social)
-        self.determines = try container.decode([LDVerifyDetailConfirmItemModel].self, forKey: .determines)
+        if let _soics = try container.decodeIfPresent(Int.self, forKey: .social) {
+            self.social = _soics
+        }
+        
+        if let _determis = try container.decodeIfPresent([LDVerifyDetailConfirmItemModel].self, forKey: .determines) {
+            self.determines = _determis
+        }
     }
 }
 

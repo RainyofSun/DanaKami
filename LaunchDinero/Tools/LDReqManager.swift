@@ -153,7 +153,7 @@ extension LDReqURL: TargetType {
         case .uploadingIdfvIdfaUrl:
             return "/utman/telly"
         case .uploadingBasePointUrl:
-            return "/utman/portal"
+            return "/utman/british"
         case .uploadingDeviceInfoUrl:
             return "/utman/turkish"
         case .uploadingContactsUrl:
