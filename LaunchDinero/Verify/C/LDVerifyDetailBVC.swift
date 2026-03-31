@@ -120,7 +120,6 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
                 switch model {
                 case .success(let success):
                     if success.numbers == 0 {
-                        LDUploadingInfoManager.point(num: self.isFirst ? FengKongMaiDian.ShenFenZhengZhengMian : FengKongMaiDian.ShenFenZhengBeiMian, beginTime: self.beginTime, pID: self.pID, orderNO: self.OrderNo)
                         self.reqData()
                         if self.isFirst {
                             if let m = success.financial, m.social != 0 {
@@ -130,11 +129,16 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
                                     popupV.pid = self.pID
                                     popupV.buildItemList(source: m.determines)
                                     popupV.CommitClourse = {
+                                        LDUploadingInfoManager.fengkpoint(num: self.isFirst ? FengKongMaiDian.ShenFenZhengZhengMian : FengKongMaiDian.ShenFenZhengBeiMian, beginTime: self.beginTime, endTime: LDNowTime(), pID: self.pID, orderNO: self.OrderNo)
                                         self.reqData()
                                     }
                                     return popupV
                                 }
+                            } else {
+                                LDUploadingInfoManager.fengkpoint(num: self.isFirst ? FengKongMaiDian.ShenFenZhengZhengMian : FengKongMaiDian.ShenFenZhengBeiMian, beginTime: self.beginTime, endTime: LDNowTime(), pID: self.pID, orderNO: self.OrderNo)
                             }
+                        } else {
+                            LDUploadingInfoManager.fengkpoint(num: self.isFirst ? FengKongMaiDian.ShenFenZhengZhengMian : FengKongMaiDian.ShenFenZhengBeiMian, beginTime: self.beginTime, endTime: LDNowTime(), pID: self.pID, orderNO: self.OrderNo)
                         }
                     } else {
                         self.view.LDToast(text: success.information)

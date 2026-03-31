@@ -220,12 +220,18 @@ class LDDevice {
                                 "tenderness": name,]]
         }
         
+        static var vpnInfo: [String: Any] {
+            return ["post": Device.isSimulator, "mop": JailbreakDetector.isJailbroken]
+        }
+        
         static var params: [String: Any] {
             return ["superficial": memory,
                     "stated": battery,
                     "andrew": systemInfo,
                     "too": timeZone,
-                    "bags": wifiInfo]
+                    "bags": wifiInfo,
+                    "intermediate": vpnInfo
+            ]
         }
     }
     
@@ -313,6 +319,63 @@ class LDKeychain {
         ]
         
         SecItemDelete(query as CFDictionary)
+    }
+}
+
+enum Device {
+    static var isSimulator: Bool {
+        #if targetEnvironment(simulator)
+        return true
+        #else
+        return false
+        #endif
+    }
+}
+
+enum JailbreakDetector {
+
+    static var isJailbroken: Bool {
+        // 模拟器直接返回 false
+        #if targetEnvironment(simulator)
+        return false
+        #endif
+
+        return checkSuspiciousFiles()
+            || canWriteOutsideSandbox()
+            || canOpenCydiaURL()
+    }
+
+    // 1️⃣ 越狱常见文件
+    private static func checkSuspiciousFiles() -> Bool {
+        let paths = [
+            "/Applications/Cydia.app",
+            "/Library/MobileSubstrate/MobileSubstrate.dylib",
+            "/bin/bash",
+            "/usr/sbin/sshd",
+            "/etc/apt",
+            "/private/var/lib/apt/"
+        ]
+        return paths.contains { FileManager.default.fileExists(atPath: $0) }
+    }
+
+    // 2️⃣ 尝试写沙盒外
+    private static func canWriteOutsideSandbox() -> Bool {
+        let testPath = "/private/jb_test.txt"
+        do {
+            try "test".write(toFile: testPath, atomically: true, encoding: .utf8)
+            try FileManager.default.removeItem(atPath: testPath)
+            return true
+        } catch {
+            return false
+        }
+    }
+
+    // 3️⃣ 是否能打开 cydia
+    private static func canOpenCydiaURL() -> Bool {
+        guard let url = URL(string: "cydia://package/com.example.package") else {
+            return false
+        }
+        return UIApplication.shared.canOpenURL(url)
     }
 }
 

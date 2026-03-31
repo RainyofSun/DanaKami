@@ -43,13 +43,12 @@ class LDUploadingInfoManager {
         }
     }
     
-    static func point(num: FengKongMaiDian, beginTime: String = "", pID: String = "", orderNO: String = "") {
-        let nowTime: String = LDNowTime()
+    static func fengkpoint(num: FengKongMaiDian, beginTime: String = LDNowTime(), endTime: String = "", pID: String = "", orderNO: String = "") {
         var params: [String: Any] = ["morning": "\(num.rawValue)",
                                      "graph": orderNO,
                                      "fourier": LDDevice.info.idfv,
-                                     "theory": (num == FengKongMaiDian.KaiShiJieDai || num == FengKongMaiDian.JieShuJieDai) ? nowTime : beginTime,
-                                     "describes": nowTime, "describing":2, "advanced": LDDevice.info.idfa]
+                                     "theory": (num == FengKongMaiDian.KaiShiJieDai || num == FengKongMaiDian.JieShuJieDai) ? beginTime : endTime,
+                                     "describes": beginTime, "describing":2, "advanced": LDDevice.info.idfa]
         LDPermissionManager.location { isAllow in
             if isAllow {
 //                DispatchQueue.main.async {

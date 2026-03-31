@@ -4,7 +4,7 @@
 //
 //  Created by wangxiang on 2025/2/15.
 //
-
+// TODO: 注册倒计时按钮UI、开始借贷没有loading
 import UIKit
 
 class LDLoginVC: LDBaseVC {
@@ -255,6 +255,7 @@ class LDLoginVC: LDBaseVC {
         if !checkAgree() {
             return
         }
+        self.beginTime = LDNowTime()
         self.view.LDShowActivity()
         LDReqManager.request(url: .loginCodeUrl(params: ["kate": self.phoneView.textField.text ?? ""]), modelType: LDModel.self) { model in
             self.view.LDHideActivity()
@@ -303,6 +304,7 @@ class LDLoginVC: LDBaseVC {
         if !checkAgree() {
             return
         }
+        self.beginTime = LDNowTime()
         self.view.LDShowActivity()
         LDReqManager.request(url: .loginVoiceUrl(params: ["kate": self.phoneView.textField.text ?? ""]), modelType: LDModel.self) { model in
             self.view.LDHideActivity()
@@ -335,7 +337,7 @@ class LDLoginVC: LDBaseVC {
             switch model {
             case .success(let success):
                 if success.numbers == 0 {
-                    LDUploadingInfoManager.point(num: FengKongMaiDian.ZhuCeMaiDian)
+                    LDUploadingInfoManager.fengkpoint(num: FengKongMaiDian.ZhuCeMaiDian, beginTime: self.beginTime, endTime: LDNowTime())
                     if let data = success.financial {
                         UserDefaults.standard.set(data.consensus, forKey: LDUserDefaultKey_SID)
                         UserDefaults.standard.set(self.phoneView.textField.text, forKey: LDUserDefaultKey_Account)

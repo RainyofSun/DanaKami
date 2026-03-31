@@ -99,7 +99,7 @@ class LDHTMLVC: LDBaseVC, WKNavigationDelegate, WKScriptMessageHandler {
             }
         } else if message.name == "HimBoth" {
             if let body = message.body as? [Any], body.count > 0 {
-                LDUploadingInfoManager.point(num: FengKongMaiDian.JieShuJieDai, pID: "\(body[0])")
+                LDUploadingInfoManager.fengkpoint(num: FengKongMaiDian.JieShuJieDai, pID: "\(body[0])")
             }
         }
     }

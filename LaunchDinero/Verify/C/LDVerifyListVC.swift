@@ -230,7 +230,7 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
                 switch model {
                 case .success(let success):
                     if success.numbers == 0, let m = success.financial {
-                        LDUploadingInfoManager.point(num: FengKongMaiDian.KaiShiJieDai, pID: self.pID, orderNO: self.OrderNo)
+                        LDUploadingInfoManager.fengkpoint(num: FengKongMaiDian.KaiShiJieDai, pID: self.pID, orderNO: self.OrderNo)
                         jumpPage(vc: self, url: m.infinity)
                         var vcs = self.navigationController?.viewControllers ?? []
                         if vcs.count >= 2 {

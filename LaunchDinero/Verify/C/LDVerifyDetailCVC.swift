@@ -145,7 +145,7 @@ class LDVerifyDetailCVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
             switch model {
             case .success(let success):
                 if success.numbers == 0 {
-                    LDUploadingInfoManager.point(num: FengKongMaiDian.LianXiRen, beginTime: self.beginTime, pID: self.pID, orderNO: self.OrderNo)
+                    LDUploadingInfoManager.fengkpoint(num: FengKongMaiDian.LianXiRen, beginTime: self.beginTime, endTime: LDNowTime(), pID: self.pID, orderNO: self.OrderNo)
                     self.navigationController?.popViewController(animated: true)
                 } else {
                     self.view.LDToast(text: success.information)

@@ -177,7 +177,7 @@ class LDVerifyDetailAVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
                     } else if self.type == "finde" {
                         num = FengKongMaiDian.BangKa
                     }
-                    LDUploadingInfoManager.point(num: num, beginTime: self.beginTime, pID: self.pID, orderNO: self.OrderNo)
+                    LDUploadingInfoManager.fengkpoint(num: num, beginTime: self.beginTime, endTime: LDNowTime(), pID: self.pID, orderNO: self.OrderNo)
                     self.navigationController?.popViewController(animated: true)
                 } else {
                     self.view.LDToast(text: success.information)
