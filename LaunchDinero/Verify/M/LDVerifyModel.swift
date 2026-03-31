@@ -26,7 +26,9 @@ struct LDVerifyModel: Codable {
         self.domestic = try container.decodeIfPresent(Int.self, forKey: .domestic) ?? 0
         self.reel = try container.decodeIfPresent(LDVerifyReelModel.self, forKey: .reel) ?? LDVerifyReelModel()
         self.promising = try container.decodeIfPresent([LDVerifyPromisingModel].self, forKey: .promising) ?? []
-        self.golden = try container.decodeIfPresent(LDVerifyGoldenModel.self, forKey: .golden) ?? LDVerifyGoldenModel()
+        if let _golden = try? container.decodeIfPresent(LDVerifyGoldenModel.self, forKey: .golden) {
+            self.golden = _golden
+        }
         self.festival = try container.decodeIfPresent(LDVerifyFestivalModel.self, forKey: .festival) ?? LDVerifyFestivalModel()
     }
 }
@@ -56,8 +58,6 @@ struct LDVerifyReelModel: Codable {
     var turkish: String = ""
     /// buttonUrl
     var worth: String = ""
-    /// term
-    var fort: Int = 0
     /// term_type
     var dallas: Int = 0
     /// url

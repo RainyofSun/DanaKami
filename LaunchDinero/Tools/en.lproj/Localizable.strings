@@ -24,31 +24,17 @@
 "Set up" = "Set up";
 "Next" = "Next";
 "Confirm" = "Confirm";
-"Agree and Continue" = "Agree and Continue";
 "Sign out" = "Sign out";
 "Are you sure you want to exit the application?" = "You will not be able to view your loan application progress and credit limit after logging out.";
 "Delete Account" = "Delete Account";
 "Delete Agreement Content" = "After account cancellation: data is non-recoverable, outstanding loan repayments must still be fulfilled. are you sure?";
 "I have read and accept the above" = " I have read and accept the above";
-"Delete Content" = "Accounts cannot be restored after cancellation. To ensure the security of your account, please confirm that you have properly processed account-related services before submitting an application.";
-"main_2_img" = "main_2_img";
-"Loan supermarket" = "Loan supermarket";
-"main_1_img" = "main_1_img";
-"main_1_know" = "main_1_know";
-"main_1_step" = "main_1_step";
-"Loan process" = "Loan process";
-"Do you know us?" = "Do you know us?";
-"Loan details" = "Loan details";
-"verify_list_img" = "verify_list_img";
-"Certification condition" = "Certification condition";
 "Verify upload photo hint" = "Your information will only be used for verification purposes. ";
-"Demonstration" = "Demonstration";
-"Wrong demonstration" = "Wrong demonstration";
+
 "Please confirm" = "Please confirm";
 "Name" = "Name";
 "ID No." = "ID No.";
 "Date Birth" = "Date Birth";
-"Verify confirm desc" = "*Please check your lD information correctly, oncesubmitted it is not changed again";
 "Order list" = "Order center";
 "order_tip" = "Every loan application comes with full, transparent traceability.";
 "All" = "All";
@@ -56,8 +42,6 @@
 "Repayment" = "Repayment";
 "Finished" = "Finished";
 "There are currently no orders available" = "No orders yet. tap apply to start your experience.";
-"wecome" = "wecome";
-"Check" = "Check";
 
 "retry" = "Retry";
 "Welcome back" = "Welcome back";

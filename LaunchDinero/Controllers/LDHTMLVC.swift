@@ -15,15 +15,11 @@ class LDHTMLVC: LDBaseVC, WKNavigationDelegate, WKScriptMessageHandler {
     
     lazy var wbView: WKWebView = {
         let userContent = WKUserContentController()
-        userContent.add(self, name: "IsOf")
-        userContent.add(self, name: "OfRelease")
-        userContent.add(self, name: "NineIs")
-        userContent.add(self, name: "ThreatensHe")
-        userContent.add(self, name: "RankedBully")
-        userContent.add(self, name: "ADiscovered")
-        userContent.add(self, name: "ToHe")
-        userContent.add(self, name: "BestCollege")
-        userContent.add(self, name: "VictimLambeau")
+        userContent.add(self, name: "NegotiatorOf")
+        userContent.add(self, name: "AutomaticTo")
+        userContent.add(self, name: "AfterHis")
+        userContent.add(self, name: "UnderOf")
+        userContent.add(self, name: "HimBoth")
         
         let userConfig = WKWebViewConfiguration()
         userConfig.userContentController = userContent
@@ -60,7 +56,14 @@ class LDHTMLVC: LDBaseVC, WKNavigationDelegate, WKScriptMessageHandler {
     }
     
     override func shouldPop() -> Bool {
-        self.dismiss(animated: true)
+        if isPushed {
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        if isPresented {
+            self.dismiss(animated: true)
+        }
+        
         return false
     }
     
@@ -76,36 +79,27 @@ class LDHTMLVC: LDBaseVC, WKNavigationDelegate, WKScriptMessageHandler {
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print("ht === \(message.name)")
         if message.name == "IsOf" {
             if let body = message.body as? [String], body.count > 0, let urlStr = URL(string: body[0]) {
                 wbView.load(URLRequest(url: urlStr))
             }
-        } else if message.name == "OfRelease" {
+        } else if message.name == "NegotiatorOf" {
             self.navigationController?.popViewController(animated: true)
-        } else if message.name == "NineIs" {
+        } else if message.name == "AutomaticTo" {
             if let body = message.body as? [String], body.count > 0 {
                 let urlStr = body[0]
                 jumpPage(vc: self, url: urlStr)
             }
-        } else if message.name == "ThreatensHe" {
+        } else if message.name == "AfterHis" {
             self.view.window?.rootViewController = LDTabBarC()
-        } else if message.name == "RankedBully" {
-            self.view.window?.rootViewController = LDTabBarC(index: 2)
-        }  else if message.name == "ADiscovered" { // 跳转到登录页，并清空页面栈
-            
-        }  else if message.name == "ToHe" {
-            if let body = message.body as? [String], body.count > 0 {
-                if let url = URL(string: "tel://\(body)"), UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url)
-                }
-            }
-        } else if message.name == "BestCollege" {
+        } else if message.name == "UnderOf" {
             if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                 SKStoreReviewController.requestReview(in: scene)
             }
-        } else if message.name == "VictimLambeau" {
+        } else if message.name == "HimBoth" {
             if let body = message.body as? [Any], body.count > 0 {
-                LDUploadingInfoManager.point(num: 12, pID: "\(body[0])")
+                LDUploadingInfoManager.point(num: FengKongMaiDian.JieShuJieDai, pID: "\(body[0])")
             }
         }
     }

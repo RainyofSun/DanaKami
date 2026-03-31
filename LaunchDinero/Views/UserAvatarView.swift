@@ -45,6 +45,10 @@ class UserAvatarView: UITableViewCell {
         self.backgroundColor = .clear
         self.selectionStyle = .none
         
+        if let sID = UserDefaults.standard.string(forKey: LDUserDefaultKey_SID), sID.count > 0, let _phone = UserDefaults.standard.string(forKey: LDUserDefaultKey_Account) {
+            userPhoneLab.text = _phone.maskedPhone
+        }
+        
         welcomeLab.text = LDLocalLanguage.shared.languageString(key: "Welcome back")
         
         self.contentView.addSubview(self.avatarImgView)

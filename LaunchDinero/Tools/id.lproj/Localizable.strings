@@ -24,31 +24,14 @@
 "Set up" = "Pusat pengaturan";
 "Next" = "Berikutnya";
 "Confirm" = "Confirm";
-"Agree and Continue" = "Agree and Continue";
 "Sign out" = "Keluar dari akun";
 "Are you sure you want to exit the application?" = "Anda tidak akan dapat melihat perkembangan aplikasi pinjaman dan batas kredit anda setelah keluar dari akun.";
 "Delete Account" = "Hapus Akun";
 "Delete Agreement Content" = "Setelah akun anda dihapus secara permanen: data anda tidak dapat dipulihkan kembali, dan pinjaman yang belum anda lunasi tetap harus anda bayar sesuai jadwal pembayaran yang telah disepakati. apakah anda yakin?";
 "I have read and accept the above" = " Saya membaca dan menyetujui isi di atas";
-"Delete Content" = "Accounts cannot be restored after cancellation. To ensure the security of your account, please confirm that you have properly processed account-related services before submitting an application.";
-"main_2_img" = "main_2_img";
-"Loan supermarket" = "Loan supermarket";
-"main_1_img" = "main_1_img";
-"main_1_know" = "main_1_know";
-"main_1_step" = "main_1_step";
-"Loan process" = "Loan process";
-"Do you know us?" = "Do you know us?";
-"Loan details" = "Loan details";
-"verify_list_img" = "verify_list_img";
-"Certification condition" = "Certification condition";
 "Verify upload photo hint" = "Informasi anda hanya akan digunakan untuk tujuan verifikasi.";
-"Demonstration" = "Demonstration";
-"Wrong demonstration" = "Wrong demonstration";
-"Please confirm" = "Please confirm";
-"Name" = "Name";
-"ID No." = "ID No.";
-"Date Birth" = "Date Birth";
-"Verify confirm desc" = "*Please check your lD information correctly, oncesubmitted it is not changed again";
+
+"Date Birth" = "Tanggal Lahir";
 "Order list" = "Pusat pesanan";
 "order_tip" = "Setiap permohonan pinjaman dapat dilacak sepenuhnya.";
 "All" = "Semua";
@@ -56,8 +39,6 @@
 "Repayment" = "Belum lunas";
 "Finished" = "Lunas";
 "There are currently no orders available" = "Belum ada pesanan. Klik 'menerapkan' untuk memulai.";
-"wecome" = "wecome";
-"Check" = "Check";
 
 "retry" = "Mencoba kembali";
 "Welcome back" = "Selamat datang kembali";

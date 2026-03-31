@@ -335,7 +335,7 @@ class LDLoginVC: LDBaseVC {
             switch model {
             case .success(let success):
                 if success.numbers == 0 {
-                    LDUploadingInfoManager.point(num: 1)
+                    LDUploadingInfoManager.point(num: FengKongMaiDian.ZhuCeMaiDian)
                     if let data = success.financial {
                         UserDefaults.standard.set(data.consensus, forKey: LDUserDefaultKey_SID)
                         UserDefaults.standard.set(self.phoneView.textField.text, forKey: LDUserDefaultKey_Account)

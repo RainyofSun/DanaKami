@@ -7,6 +7,8 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import IQKeyboardToolbarManager
+import IQKeyboardToolbar
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -18,13 +20,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
         IQKeyboardManager.shared.isEnabled = true
         IQKeyboardManager.shared.resignOnTouchOutside = true
-//        showAllFonts()
-        setWelcomeVC()
+        IQKeyboardToolbarManager.shared.toolbarConfiguration.doneBarButtonConfiguration = IQBarButtonItemConfiguration(title: "Done")
+        IQKeyboardToolbarManager.shared.toolbarConfiguration.manageBehavior = .byTag
+        IQKeyboardToolbarManager.shared.toolbarConfiguration.previousNextDisplayMode = .alwaysHide
+        
+        if UIDevice.isIpad() || isSimulator() {
+            LDLocalLanguage.shared.configLanguage(type: .en)
+            UserDefaults.standard.set("1", forKey: LDUserDefaultKey_CITY)
+            self.window?.rootViewController = LDTabBarC()
+            self.window?.makeKeyAndVisible()
+        } else {
+            setWelcomeVC()
+        }
+    }
+    
+    func isSimulator() -> Bool {
+        #if targetEnvironment(simulator)
+        return true
+        #else
+        return false
+        #endif
     }
     
     func startApp(isWecome: Bool = false) {
+        if UIDevice.isIpad() || isSimulator() {
+            return
+        }
         
         if isWecome, let ws = UIApplication.shared.connectedScenes.first as? UIWindowScene {
             self.window = ws.windows.first

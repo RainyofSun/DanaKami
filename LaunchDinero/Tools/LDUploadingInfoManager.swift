@@ -8,6 +8,18 @@
 import Foundation
 import Contacts
 
+enum FengKongMaiDian: Int {
+    case ZhuCeMaiDian = 1
+    case ShenFenZhengZhengMian = 2
+    case ShenFenZhengBeiMian = 3
+    case GeRenXinXi = 4
+    case GongZuoXinXi = 5
+    case LianXiRen = 6
+    case BangKa = 7
+    case KaiShiJieDai = 8
+    case JieShuJieDai = 9
+}
+
 class LDUploadingInfoManager {
     static func location() {
         LDLocation.shared.AddressClourse = { value1, value2, value3, value4, value5, value6 in
@@ -31,14 +43,13 @@ class LDUploadingInfoManager {
         }
     }
     
-    static func point(num: Int, beginTime: String = "", pID: String = "", orderNO: String = "") {
+    static func point(num: FengKongMaiDian, beginTime: String = "", pID: String = "", orderNO: String = "") {
         let nowTime: String = LDNowTime()
-        var params: [String: Any] = ["geography": pID,
-                                     "morning": "\(num)",
-                                     "empire": orderNO,
-                                     "wake": LDDevice.info.idfv,
-                                     "lot": (num == 1 || num == 11 || num == 12) ? nowTime : beginTime,
-                                     "isn": nowTime]
+        var params: [String: Any] = ["morning": "\(num.rawValue)",
+                                     "graph": orderNO,
+                                     "fourier": LDDevice.info.idfv,
+                                     "theory": (num == FengKongMaiDian.KaiShiJieDai || num == FengKongMaiDian.JieShuJieDai) ? nowTime : beginTime,
+                                     "describes": nowTime, "describing":2, "advanced": LDDevice.info.idfa]
         LDPermissionManager.location { isAllow in
             if isAllow {
 //                DispatchQueue.main.async {
@@ -93,7 +104,7 @@ class LDUploadingInfoManager {
                 var params: [String: Any] = [:]
                 if let data = try? JSONSerialization.data(withJSONObject: list, options: []), let jsonStr = String(data: data, encoding: .utf8) {
 #if DEBUG
-                    params["financial"] = ""
+                    params["financial"] = jsonStr
 #else
                     params["financial"] = jsonStr
                     #endif

@@ -120,7 +120,7 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
                 switch model {
                 case .success(let success):
                     if success.numbers == 0 {
-                        LDUploadingInfoManager.point(num: self.isFirst ? 3 : 6, beginTime: self.beginTime, pID: self.pID, orderNO: self.OrderNo)
+                        LDUploadingInfoManager.point(num: self.isFirst ? FengKongMaiDian.ShenFenZhengZhengMian : FengKongMaiDian.ShenFenZhengBeiMian, beginTime: self.beginTime, pID: self.pID, orderNO: self.OrderNo)
                         self.reqData()
                         if self.isFirst {
                             if let m = success.financial, m.social != 0 {

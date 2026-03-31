@@ -9,6 +9,19 @@ import Foundation
 import UIKit
 import Toast_Swift
 
+extension String {
+    var maskedPhone: String {
+        let digits = self.filter { $0.isNumber }
+        guard digits.count >= 7 else { return self }
+        
+        var result = digits
+        let start = result.index(result.startIndex, offsetBy: 3)
+        let end = result.index(start, offsetBy: 4)
+        result.replaceSubrange(start..<end, with: "****")
+        return result
+    }
+}
+
 extension UIColor {
     convenience init(hex: String) {
         var formatted = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
@@ -159,5 +172,32 @@ extension UIDatePicker {
                 lb.textColor = textColor
             }
         }
+    }
+}
+
+extension UIViewController {
+    
+    /// 是否通过 present 打开
+    var isPresented: Bool {
+        if presentingViewController != nil { return true }
+        
+        if let nav = navigationController,
+           nav.presentingViewController?.presentedViewController == nav {
+            return true
+        }
+        
+        if let tab = tabBarController,
+           tab.presentingViewController is UITabBarController {
+            return true
+        }
+        
+        return false
+    }
+    
+    /// 是否通过 push 进入
+    var isPushed: Bool {
+        navigationController != nil &&
+        navigationController?.viewControllers.first != self &&
+        !isPresented
     }
 }

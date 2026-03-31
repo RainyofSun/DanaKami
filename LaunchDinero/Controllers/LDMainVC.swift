@@ -118,7 +118,7 @@ class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource, AutoHidden
             applyBtnClick()
         } else {
             if isList {
-                if let m = list[safe: indexPath.row] {
+                if let m = list[safe: indexPath.row - 2] {
                     allowProductDetail(vc: self, pID: "\(m.flag)")
                 }
             }
@@ -174,7 +174,12 @@ class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource, AutoHidden
     
     @objc func applyBtnClick() {
         if isLogin(currentVC: self) {
-            allowProductDetail(vc: self, pID: "\(self.listModel.flag)")
+            if isList {
+                allowProductDetail(vc: self, pID: "\(self.listModel.flag)")
+            } else {
+                allowProductDetail(vc: self, pID: "\(self.itemModel.flag)")
+            }
+            
         }
     }
 

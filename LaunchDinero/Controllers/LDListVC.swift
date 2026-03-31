@@ -141,7 +141,7 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource, AutoHidden
             btn.setTitle(str, for: .normal)
             btn.setTitleColor(UIColor(hex: "#999999"), for: .normal)
             btn.setTitleColor(UIColor(hex: "#000000"), for: .selected)
-            btn.titleLabel?.font = .systemFont(ofSize: 14)
+            btn.titleLabel?.font = LDScreenWidth < 414 ? UIFont.interFont(size: 12, fontStyle: InterFontWeight.Regular) : UIFont.interFont(size: 14, fontStyle: InterFontWeight.Regular)
             btn.addTarget(self, action: #selector(btnClick(sender:)), for: .touchUpInside)
             headerView.addSubview(btn)
             self.btns.append(btn)
@@ -172,10 +172,11 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource, AutoHidden
     @objc func btnClick(sender: UIButton) {
         btns.forEach { btn in
             btn.isSelected = false
-            btn.titleLabel?.font = UIFont.interFont(size: 14, fontStyle: InterFontWeight.Regular)
+            btn.titleLabel?.font = LDScreenWidth < 414 ? UIFont.interFont(size: 12, fontStyle: InterFontWeight.Regular) : UIFont.interFont(size: 14, fontStyle: InterFontWeight.Regular)
         }
         sender.isSelected = true
-        sender.titleLabel?.font = UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold)
+        sender.titleLabel?.font = LDScreenWidth < 414 ? UIFont.interFont(size: 12, fontStyle: InterFontWeight.Bold) : UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold)
+        
         lineV.snp.remakeConstraints { make in
             make.width.equalTo(sender.jf_width)
             make.height.equalTo(36)

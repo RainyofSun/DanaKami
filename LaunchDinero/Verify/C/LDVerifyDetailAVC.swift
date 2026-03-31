@@ -169,13 +169,13 @@ class LDVerifyDetailAVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
             switch model {
             case .success(let success):
                 if success.numbers == 0 {
-                    var num: Int = 2
-                    if self.type == "findc" {
-                        num = 7
-                    } else if self.type == "findd" {
-                        num = 8
-                    } else if self.type == "findf" {
-                        num = 10
+                    var num: FengKongMaiDian = FengKongMaiDian.GeRenXinXi
+                    if self.type == "findb" {
+                        num = FengKongMaiDian.GeRenXinXi
+                    } else if self.type == "findc" {
+                        num = FengKongMaiDian.GongZuoXinXi
+                    } else if self.type == "finde" {
+                        num = FengKongMaiDian.BangKa
                     }
                     LDUploadingInfoManager.point(num: num, beginTime: self.beginTime, pID: self.pID, orderNO: self.OrderNo)
                     self.navigationController?.popViewController(animated: true)

@@ -15,7 +15,10 @@ class LDOrderCell: LDCell {
             titleLb.text = model.portal
             statusV.setTitle(model.examined)
             
-            agreeBtn.setAttributedTitle(NSAttributedString(string: model.help, attributes: [.foregroundColor: UIColor(hex: "#173100"), .font: UIFont.boldSystemFont(ofSize: 14), .underlineStyle: NSUnderlineStyle.single.rawValue]), for: UIControl.State.normal)
+            if !model.help.isEmpty {
+                agreeBtn.setAttributedTitle(NSAttributedString(string: model.help, attributes: [.foregroundColor: UIColor(hex: "#173100"), .font: UIFont.boldSystemFont(ofSize: 14), .underlineStyle: NSUnderlineStyle.single.rawValue]), for: UIControl.State.normal)
+            }
+            buildCellItem(levy: model.levy)
         }
     }
     
@@ -59,8 +62,6 @@ class LDOrderCell: LDCell {
         return view
     }()
     
-    lazy var divideV: UIImageView = UIImageView(image: UIImage(named: "Line"))
-    
     lazy var amountItem: LDOrderCellItem = LDOrderCellItem(frame: CGRectZero)
     lazy var dateItem: LDOrderCellItem = LDOrderCellItem(frame: CGRectZero)
     
@@ -76,11 +77,8 @@ class LDOrderCell: LDCell {
         self.contentView.addSubview(bgView)
         bgView.addSubview(icon)
         bgView.addSubview(titleLb)
-        bgView.addSubview(statusV)
         bgView.addSubview(containerView)
-        containerView.addSubview(divideV)
-        containerView.addSubview(amountItem)
-        containerView.addSubview(dateItem)
+        bgView.addSubview(statusV)
         bgView.addSubview(agreeBtn)
         
         bgView.snp.makeConstraints { make in
@@ -99,6 +97,11 @@ class LDOrderCell: LDCell {
             make.centerY.equalTo(icon)
         }
         
+        agreeBtn.snp.makeConstraints { make in
+            make.centerY.equalTo(icon)
+            make.right.equalToSuperview().offset(-15)
+        }
+        
         containerView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(15)
             make.top.equalTo(icon.snp.bottom).offset(15)
@@ -106,31 +109,9 @@ class LDOrderCell: LDCell {
         
         statusV.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(containerView)
-            make.top.equalTo(containerView).offset(-5)
+            make.top.equalTo(containerView.snp.bottom).offset(-5)
             make.height.equalTo(40)
-        }
-        
-        divideV.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.equalTo(1)
-            make.height.equalTo(40)
-            make.top.equalToSuperview().offset(15)
-        }
-        
-        amountItem.snp.makeConstraints { make in
-            make.left.top.equalToSuperview()
-            make.right.equalTo(self.divideV.snp.left)
-        }
-        
-        dateItem.snp.makeConstraints { make in
-            make.right.top.equalToSuperview()
-            make.left.equalTo(divideV.snp.right)
-            make.width.equalTo(amountItem)
-        }
-        
-        agreeBtn.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview()
-            make.top.equalTo(statusV.snp.bottom).offset(6)
+            make.bottom.equalToSuperview().offset(-15)
         }
     }
     
@@ -139,6 +120,47 @@ class LDOrderCell: LDCell {
             return
         }
         jumpPage(vc: self.parentVC(), url: model.lapses)
+    }
+    
+    func buildCellItem(levy: [LDOrderLevyModel]) {
+        
+        self.containerView.subviews.forEach { item in
+            if let _tt = item as? LDOrderCellItem {
+                _tt.removeFromSuperview()
+            }
+        }
+        
+        var topCellItem: LDOrderCellItem?
+        levy.enumerated().forEach { (index, modelItem) in
+            let _item = LDOrderCellItem(frame: CGRectZero)
+            _item.titleLb.text = modelItem.rainmaker
+            _item.subtitleLb.text = modelItem.emanuel
+            _item.showDash = index != (levy.count - 1)
+            
+            self.containerView.addSubview(_item)
+            
+            if let _top = topCellItem {
+                if index == levy.count - 1 {
+                    _item.snp.makeConstraints { make in
+                        make.top.equalTo(_top.snp.bottom)
+                        make.horizontalEdges.equalTo(_top)
+                        make.bottom.equalToSuperview().offset(-5)
+                    }
+                } else {
+                    _item.snp.makeConstraints { make in
+                        make.top.equalTo(_top.snp.bottom)
+                        make.horizontalEdges.equalTo(_top)
+                    }
+                }
+            } else {
+                _item.snp.makeConstraints { make in
+                    make.top.equalToSuperview().offset(5)
+                    make.horizontalEdges.equalToSuperview().inset(15)
+                }
+            }
+            
+            topCellItem = _item
+        }
     }
 }
 
@@ -159,9 +181,11 @@ class LDOrderCellItem: UIView {
     
     lazy var subtitleLb: UILabel = {
         let lb = UILabel(text: "", color: .black,
-                         font: UIFont.interFont(size: 24, fontStyle: InterFontWeight.Extra_Bold))
+                         font: UIFont.interFont(size: 24, fontStyle: InterFontWeight.Extra_Bold), alignment: .right)
         return lb
     }()
+    
+    var showDash: Bool = true
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -170,14 +194,34 @@ class LDOrderCellItem: UIView {
         self.addSubview(subtitleLb)
         
         titleLb.snp.makeConstraints { make in
-            make.top.equalTo(15)
-            make.horizontalEdges.equalToSuperview().inset(15)
+            make.verticalEdges.equalToSuperview().inset(10)
+            make.left.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.6)
         }
         
         subtitleLb.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(titleLb)
-            make.bottom.equalToSuperview().offset(-30)
-            make.top.equalTo(titleLb.snp.bottom).offset(6)
+            make.right.centerY.equalToSuperview()
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if showDash {
+            let dash = CAShapeLayer()
+            dash.strokeColor = UIColor.lightGray.cgColor
+            dash.lineWidth = 1
+            dash.lineDashPattern = [4, 2]
+            
+            let path = CGMutablePath()
+            path.addLines(between: [
+                CGPoint(x: 0, y: bounds.height - 1),
+                CGPoint(x: bounds.width, y: bounds.height - 1)
+            ])
+            
+            dash.path = path
+            dash.frame = bounds
+            layer.addSublayer(dash)
         }
     }
     
