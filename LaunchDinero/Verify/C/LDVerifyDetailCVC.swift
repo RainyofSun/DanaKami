@@ -57,7 +57,14 @@ class LDVerifyDetailCVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
                     popupV.titleLb.text = m.tensions
                     popupV.list = m.lyrics
                     popupV.selectedClourse = { i in
-                        self.data.catholics[indexPath.row].irish = "\(m.lyrics[i].listeder)"
+                        let mos: LDVerifyDetailCLyricsModel = m.lyrics[i]
+                        if mos.listeder != -1 {
+                            self.data.catholics[indexPath.row].irish = "\(mos.listeder)"
+                        }
+                        if !mos.listederStr.isEmpty {
+                            self.data.catholics[indexPath.row].irish = mos.listederStr
+                        }
+                        
                         self.tb.reloadData()
                     }
                     return popupV
@@ -72,16 +79,12 @@ class LDVerifyDetailCVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
                         cpvc.delegate = self
                         self.present(cpvc, animated: true)
                     } else {
-                        LDPermissionManager.requestPermission(currentVC: self)
+                        LDPermissionManager.requestPermission(currentVC: self, text: self.data.matrix)
                     }
                 }
             }
         }
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
     }
     
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {

@@ -10,6 +10,8 @@ import Foundation
 struct LDVerifyDetailCModel: Codable {
     /// emergent
     var catholics: [LDVerifyDetailCItemModel] = []
+    /// matrix
+    var matrix: String = ""
 }
 
 struct LDVerifyDetailCItemModel: Codable {

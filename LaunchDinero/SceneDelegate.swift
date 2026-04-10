@@ -67,6 +67,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     #endif
                     LDLocalLanguage.shared.configLanguage(type: startModel.retrieved == "2" ? .indonesian : .en)
                     UserDefaults.standard.set(startModel.retrieved, forKey: LDUserDefaultKey_CITY)
+                    UserDefaults.standard.synchronize()
+                    
                     self.window?.rootViewController = LDTabBarC()
                     self.window?.makeKeyAndVisible()
                     return

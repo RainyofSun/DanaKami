@@ -19,7 +19,11 @@ class LDVerifyDetailCCell: LDCell {
             relationV.textTf.placeholder = model.tensions
             relationV.textTf.text = ""
             for r in model.lyrics {
-                if "\(r.listeder)" == model.irish {
+                if r.listeder != -1, "\(r.listeder)" == model.irish {
+                    relationV.textTf.text = r.scorer
+                }
+                
+                if !r.listederStr.isEmpty, r.listederStr == model.irish {
                     relationV.textTf.text = r.scorer
                 }
             }

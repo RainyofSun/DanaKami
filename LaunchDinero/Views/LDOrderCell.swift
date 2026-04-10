@@ -40,7 +40,7 @@ class LDOrderCell: LDCell {
     }()
     
     lazy var titleLb: UILabel = {
-        let lb = UILabel(text: "LaunchDinero",
+        let lb = UILabel(text: "",
                          font: UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold))
         return lb
     }()
@@ -181,7 +181,7 @@ class LDOrderCellItem: UIView {
     
     lazy var subtitleLb: UILabel = {
         let lb = UILabel(text: "", color: .black,
-                         font: UIFont.interFont(size: 24, fontStyle: InterFontWeight.Extra_Bold), alignment: .right)
+                         font: UIFont.interFont(size: 24, fontStyle: InterFontWeight.Bold), alignment: .right)
         return lb
     }()
     

@@ -118,20 +118,10 @@ class LDDevice {
         }
         
         static var systemInfo: [String: Any] {
-            
-            var info = utsname()
-            uname(&info)
-            let mirror = Mirror(reflecting: info.machine)
-            let name = mirror.children.compactMap { item in
-                guard let v = item.value as? Int8, v != 0 else {
-                    return nil
-                }
-                return String(UnicodeScalar(UInt8(v)))
-            }.joined()
-            
+        
             return ["depth": systemVersion,
                     "vigour": UIDevice.current.model,
-                    "wit": name]
+                    "wit": DeviceModel.identifier]
         }
         
         static var timeZone: [String: Any] {
@@ -221,7 +211,7 @@ class LDDevice {
         }
         
         static var vpnInfo: [String: Any] {
-            return ["post": Device.isSimulator, "mop": JailbreakDetector.isJailbroken]
+            return ["post": NSNumber(value: Device.isSimulator).intValue, "mop": NSNumber(value: JailbreakDetector.isJailbroken).intValue]
         }
         
         static var params: [String: Any] {
@@ -570,5 +560,22 @@ extension UIDevice {
             #endif
         }
         return xm_mapToDevice(identifier: identifier)
+    }
+}
+
+struct DeviceModel {
+
+    static var identifier: String {
+        #if targetEnvironment(simulator)
+        return ProcessInfo.processInfo.environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "Simulator"
+        #else
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        return withUnsafePointer(to: &systemInfo.machine) {
+            $0.withMemoryRebound(to: CChar.self, capacity: 1) {
+                String(cString: $0)
+            }
+        }
+        #endif
     }
 }

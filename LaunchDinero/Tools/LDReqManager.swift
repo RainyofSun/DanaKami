@@ -50,7 +50,8 @@ import SwiftyJSON
 #if DEBUG
 var LDUrl: String = "http://8.215.47.12/smither"
 #else
-var LDUrl: String = "https://lcm.rupantar-investments.com/nomination"
+var LDUrl: String = "http://8.215.47.12/smither"
+//var LDUrl: String = "https://lcm.rupantar-investments.com/nomination"
 #endif
 
 enum LDReqURL {
@@ -319,10 +320,6 @@ class LDReqManager {
     }
     
     static var parameters: [String: Any] {
-        var retrieved: String = ""
-        if let str = UserDefaults.standard.value(forKey: LDUserDefaultKey_CITY) as? Int {
-            retrieved = "\(str)"
-        }
         return [
             "arc": LDDevice.info.version,
             "narrative": LDDevice.info.name,
@@ -330,7 +327,7 @@ class LDReqManager {
             "follows": LDDevice.info.systemVersion,
             "consensus": LDDevice.info.sID,
             "website": LDDevice.info.idfa,
-            "retrieved": retrieved,
+            "retrieved": UserDefaults.standard.string(forKey: LDUserDefaultKey_CITY) ?? "1",
         ]
     }
 }

@@ -77,7 +77,7 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
                 cell.iconImg.kf.setImage(with: URL(string: self.data.ramanujan.power))
             }
             
-            cell.containerView.isHidden = !self.data.ramanujan.parts.isEmpty
+            cell.containerView.isHidden = !self.data.ramanujan.power.isEmpty
             cell.vertifyLab.isHidden = !cell.containerView.isHidden
         }
         
@@ -180,7 +180,7 @@ class LDVerifyDetailBVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
                         }
                     }
                 } else {
-                    LDPermissionManager.requestPermission(currentVC: self)
+                    LDPermissionManager.requestPermission(currentVC: self, text: self.data.third)
                 }
             }
         }

@@ -279,14 +279,12 @@ class LDLoginVC: LDBaseVC {
             second -= 1
             self.codeView.getLb.text = "\(second)s"
             self.codeView.getLb.textColor = UIColor.init(hex: "#999999")
-            self.codeView.getLb.backgroundColor = UIColor.init(hex: "#EEEEEE")
             self.codeView.getView.isUserInteractionEnabled = false
             
             if second <= 0 {
                 self.codeView.getView.isUserInteractionEnabled = true
                 self.codeView.getLb.text = LDText(key: "Get code")
                 self.codeView.getLb.textColor = UIColor.init(hex: "#460629")
-                self.codeView.getLb.backgroundColor = UIColor.init(hex: "#FFD363")
                 self.cancelTimer()
             }
         })

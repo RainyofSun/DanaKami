@@ -226,9 +226,11 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
         
         let type = verifyModel.golden.bmi
         if type.isEmpty {
+            self.view.LDShowActivity()
             LDReqManager.request(url: .playAnOrder(params: ["newcomer": verifyModel.reel.newcomer, "berlin": verifyModel.reel.empire]), modelType: LDVerifyApplyModel.self) { model in
                 switch model {
                 case .success(let success):
+                    self.view.LDHideActivity()
                     if success.numbers == 0, let m = success.financial {
                         LDUploadingInfoManager.fengkpoint(num: FengKongMaiDian.KaiShiJieDai, pID: self.pID, orderNO: self.OrderNo)
                         jumpPage(vc: self, url: m.infinity)
@@ -241,6 +243,7 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
                         self.view.LDToast(text: success.information)
                     }
                 case .failure(_):
+                    self.view.LDHideActivity()
                     break
                 }
             }

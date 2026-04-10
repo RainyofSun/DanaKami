@@ -12,7 +12,7 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource, AutoHidden
     let list: [String] = [LDText(key: "All"), LDText(key: "Apply"), LDText(key: "Repayment"), LDText(key: "Finished")]
     var btns: [UIButton] = []
     
-    var data: LDOrderModel = LDOrderModel()
+//    var data: LDOrderModel = LDOrderModel()
     
     var currentIndex: Int = 4
     
@@ -63,6 +63,8 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource, AutoHidden
         view.backgroundColor = .clear
         return view
     }()
+    
+    var math: [LDOrderItemModel] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -197,32 +199,36 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource, AutoHidden
             self.tb.es.stopPullToRefresh()
             switch model {
             case .success(let success):
-                self.data = LDOrderModel()
+                self.math.removeAll()
                 if let m = success.financial {
-                    self.data = m
-                    self.tb.reloadData()
+                    self.noDataView.isHidden = !m.mathematicians.isEmpty
+                    self.math.append(contentsOf: m.mathematicians)
+                } else {
+                    self.noDataView.isHidden = false
                 }
+                
+                self.tb.reloadData()
+                
             case .failure(_):
                 break
             }
-            self.noDataView.isHidden = self.data.mathematicians.count > 0
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data.mathematicians.count
+        math.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! LDOrderCell
-        if let m = self.data.mathematicians[safe: indexPath.row] {
+        if let m = math[safe: indexPath.row] {
             cell.model = m
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let m = self.data.mathematicians[safe: indexPath.row] {
+        if let m = math[safe: indexPath.row] {
             allowProductDetail(vc: self, pID: "\(m.geography)")
         }
     }
