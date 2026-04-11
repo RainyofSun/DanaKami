@@ -26,6 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         IQKeyboardToolbarManager.shared.toolbarConfiguration.doneBarButtonConfiguration = IQBarButtonItemConfiguration(title: "Done")
         IQKeyboardToolbarManager.shared.toolbarConfiguration.manageBehavior = .byTag
         IQKeyboardToolbarManager.shared.toolbarConfiguration.previousNextDisplayMode = .alwaysHide
+        IQKeyboardToolbarManager.shared.enabledToolbarClasses.append(LDVerifyBaseVC.self)
+        IQKeyboardToolbarManager.shared.enabledToolbarClasses.append(LDLoginVC.self)
         
         if UIDevice.isIpad() || isSimulator() {
             LDLocalLanguage.shared.configLanguage(type: .en)

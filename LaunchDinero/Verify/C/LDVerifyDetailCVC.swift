@@ -124,9 +124,18 @@ class LDVerifyDetailCVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSou
         let contactsList: [[String: Any]] = data.catholics.map { model in
             var contacts: [String: Any] = [:]
             for item in model.lyrics {
-                if model.irish == "\(item.listeder)" {
-                    contacts["irish"] = item.listeder
-                    break
+                if item.listeder != -1 {
+                    if model.irish == "\(item.listeder)" {
+                        contacts["irish"] = item.listeder
+                        break
+                    }
+                }
+                
+                if !item.listederStr.isEmpty {
+                    if model.irish == item.listederStr {
+                        contacts["irish"] = item.listederStr
+                        break
+                    }
                 }
             }
             contacts["scorer"] = model.scorer
