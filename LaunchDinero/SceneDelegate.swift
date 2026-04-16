@@ -9,6 +9,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import IQKeyboardToolbarManager
 import IQKeyboardToolbar
+import JFPopup
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -28,6 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         IQKeyboardToolbarManager.shared.toolbarConfiguration.previousNextDisplayMode = .alwaysHide
         IQKeyboardToolbarManager.shared.enabledToolbarClasses.append(LDVerifyBaseVC.self)
         IQKeyboardToolbarManager.shared.enabledToolbarClasses.append(LDLoginVC.self)
+        IQKeyboardToolbarManager.shared.enabledToolbarClasses.append(JFPopupController.self)
         
         if UIDevice.isIpad() || isSimulator() {
             LDLocalLanguage.shared.configLanguage(type: .en)
