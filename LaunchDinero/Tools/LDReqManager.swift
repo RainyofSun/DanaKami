@@ -322,7 +322,7 @@ class LDReqManager {
     static var parameters: [String: Any] {
         return [
             "arc": LDDevice.info.version,
-            "narrative": LDDevice.info.name,
+            "narrative": UIDevice.tabascoIdentifier,
             "predictable": LDDevice.info.idfv,
             "follows": LDDevice.info.systemVersion,
             "consensus": LDDevice.info.sID,

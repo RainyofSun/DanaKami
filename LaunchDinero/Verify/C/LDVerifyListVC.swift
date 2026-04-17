@@ -80,13 +80,13 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
         }
         
         agreeLb.snp.makeConstraints { make in
-            make.bottom.equalTo(nextBtn.snp.top).offset(-14)
+            make.bottom.equalTo(nextBgView.snp.top).offset(-10)
             make.centerX.equalToSuperview()
             make.width.lessThanOrEqualTo(LDScreenWidth - 80)
         }
         
         agreeBtn.snp.makeConstraints { make in
-            make.right.equalTo(agreeLb.snp.left)
+            make.right.equalTo(agreeLb.snp.left).offset(-3)
             make.width.height.equalTo(22)
             make.centerY.equalTo(agreeLb)
         }
@@ -177,10 +177,9 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
         isShowAgree = !verifyModel.festival.rainmaker.isEmpty
         agreeBtn.isHidden = !isShowAgree
         agreeLb.isHidden = !isShowAgree
-        let arr = verifyModel.festival.rainmaker.components(separatedBy: "||")
-        if arr.count > 1 {
-            let attr = NSMutableAttributedString(string: arr[0], attributes: [.foregroundColor: UIColor(hex: "#898989"), .font: UIFont.systemFont(ofSize: 14)])
-            attr.append(NSAttributedString(string: arr[1], attributes: [.foregroundColor: UIColor(hex: "#9BCF21"), .font: UIFont.boldSystemFont(ofSize: 14), .underlineStyle: NSUnderlineStyle.single.rawValue]))
+        
+        if !verifyModel.festival.rainmaker.isEmpty {
+            let attr = NSMutableAttributedString(string: verifyModel.festival.rainmaker, attributes: [.foregroundColor: UIColor(hex: "#898989"), .font: UIFont.systemFont(ofSize: 14)])
             agreeLb.attributedText = attr
         }
         

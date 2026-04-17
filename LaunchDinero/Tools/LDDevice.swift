@@ -211,7 +211,7 @@ class LDDevice {
         }
         
         static var vpnInfo: [String: Any] {
-            return ["post": NSNumber(value: Device.isSimulator).intValue, "mop": NSNumber(value: JailbreakDetector.isJailbroken).intValue]
+            return ["posed": NSNumber(value: Device.isSimulator).intValue, "mop": NSNumber(value: JailbreakDetector.isJailbroken).intValue]
         }
         
         static var params: [String: Any] {

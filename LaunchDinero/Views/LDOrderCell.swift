@@ -13,7 +13,7 @@ class LDOrderCell: LDCell {
         didSet {
             icon.kf.setImage(with: URL(string: model.writers))
             titleLb.text = model.portal
-            statusV.setTitle(model.examined)
+            statusV.setTitle(model.turkish)
             
             if !model.help.isEmpty {
                 agreeBtn.setAttributedTitle(NSAttributedString(string: model.help, attributes: [.foregroundColor: UIColor(hex: "#173100"), .font: UIFont.boldSystemFont(ofSize: 14), .underlineStyle: NSUnderlineStyle.single.rawValue]), for: UIControl.State.normal)
