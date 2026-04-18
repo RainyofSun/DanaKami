@@ -15,6 +15,7 @@ class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource, AutoHidden
     var itemModel: LDMainrRamanujanModel = LDMainrRamanujanModel()
     var listModel: LDMainrRamanujanModel = LDMainrRamanujanModel()
     var serviceModel: LDMainCenturiesModel = LDMainCenturiesModel()
+    var festivalModel: LDMainFestivalModel = LDMainFestivalModel()
     var list: [LDMainrRamanujanModel] = []
     var bannerList: [LDMainrRamanujanModel] = []
     
@@ -140,6 +141,7 @@ class LDMainVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource, AutoHidden
                     if let m = success.financial {
                         self.mainData = m
                         self.serviceModel = m.centuries
+                        self.festivalModel = m.festival
                         self.refreshData()
                     }
                 } else {
@@ -197,6 +199,10 @@ extension LDMainVC: UserAvatarProtocol {
 
 extension LDMainVC: EnglishCellProtocol {
     func gotoApply(sender: GradientLoadingButton) {
-        applyBtnClick()
+        if self.festivalModel.international.isEmpty {
+            return
+        }
+        
+        jumpPage(vc: self, url: self.festivalModel.international)
     }
 }

@@ -16,7 +16,7 @@ target 'LaunchDinero' do
   pod "ESPullToRefresh"
   pod 'SwiftyJSON', '~> 5.0.2'
   pod 'JFPopup'
-  
+  pod 'FBSDKCoreKit', '18.0.0'
 
   target 'LaunchDineroTests' do
     inherit! :search_paths

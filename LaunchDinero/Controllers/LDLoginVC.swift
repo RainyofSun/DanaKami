@@ -242,6 +242,12 @@ class LDLoginVC: LDBaseVC {
         if let _text = UserDefaults.standard.string(forKey: LDUserDefaultKey_Account) {
             self.phoneView.textField.text = _text
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+            if self.phoneView.textField.canBecomeFirstResponder {
+                self.phoneView.textField.becomeFirstResponder()
+            }
+        })
     }
     
     @objc func backBtnClick() {

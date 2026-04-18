@@ -10,6 +10,7 @@ import IQKeyboardManagerSwift
 import IQKeyboardToolbarManager
 import IQKeyboardToolbar
 import JFPopup
+import FBSDKCoreKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -68,7 +69,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     // TODO 测试使用
                     #if DEBUG
                     startModel.retrieved = "2"
+                    #else
+                    FacebookChuShiHua(startModel.catalog)
                     #endif
+                    
                     LDLocalLanguage.shared.configLanguage(type: startModel.retrieved == "2" ? .indonesian : .en)
                     UserDefaults.standard.set(startModel.retrieved, forKey: LDUserDefaultKey_CITY)
                     UserDefaults.standard.synchronize()
@@ -160,6 +164,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate: RetryRequestProtocol {
     func retryRequest() {
         startApp(isWecome: true)
+    }
+}
+
+extension SceneDelegate {
+    func FacebookChuShiHua(_ fbModel: LDStartCatalogModel) {
+        Settings.shared.appID = fbModel.references
+        Settings.shared.displayName = fbModel.disco
+        Settings.shared.clientToken = fbModel.beckinsale
+        Settings.shared.appURLSchemeSuffix = fbModel.afi
+        Settings.shared.isAutoLogAppEventsEnabled = true
+        ApplicationDelegate.shared.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
     }
 }
 

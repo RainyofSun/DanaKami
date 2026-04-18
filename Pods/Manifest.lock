@@ -1,6 +1,12 @@
 PODS:
   - Alamofire (5.10.2)
   - ESPullToRefresh (2.9.3)
+  - FBAEMKit (18.0.0):
+    - FBSDKCoreKit_Basics (= 18.0.0)
+  - FBSDKCoreKit (18.0.0):
+    - FBAEMKit (= 18.0.0)
+    - FBSDKCoreKit_Basics (= 18.0.0)
+  - FBSDKCoreKit_Basics (18.0.0)
   - IQKeyboardCore (1.0.5)
   - IQKeyboardManagerSwift (8.0.0):
     - IQKeyboardManagerSwift/Appearance (= 8.0.0)
@@ -56,6 +62,7 @@ PODS:
 
 DEPENDENCIES:
   - ESPullToRefresh
+  - FBSDKCoreKit (= 18.0.0)
   - IQKeyboardManagerSwift
   - JFPopup
   - Kingfisher (~> 8.3.1)
@@ -69,6 +76,9 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - ESPullToRefresh
+    - FBAEMKit
+    - FBSDKCoreKit
+    - FBSDKCoreKit_Basics
     - IQKeyboardCore
     - IQKeyboardManagerSwift
     - IQKeyboardNotification
@@ -89,6 +99,9 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
   ESPullToRefresh: 0d68daa602b343c81753a1b95e09fd0bfcddfd40
+  FBAEMKit: e34530df538b8eb8aeb53c35867715ba6c63ef0c
+  FBSDKCoreKit: d3f479a69127acebb1c6aad91c1a33907bcf6c2f
+  FBSDKCoreKit_Basics: 017b6dc2a1862024815a8229e75661e627ac1e29
   IQKeyboardCore: 28c8bf3bcd8ba5aa1570b318cbc4da94b861711e
   IQKeyboardManagerSwift: 0c6fbbaa2e60739e48d7cf59f25661471a7a3a65
   IQKeyboardNotification: d7382c4466c5a5adef92c7452ebf861b36050088
@@ -106,6 +119,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: f5b1bf1cd8dd53cd25887ac0eabcfd92301c6a5a
   Toast-Swift: 7a03a532afe3a560d4044bc7c237e2864d295173
 
-PODFILE CHECKSUM: ff773e0c54b48abadd976360c45faa21bb65c03a
+PODFILE CHECKSUM: 020172fa058c7371ff05cc67ff200e00624c3a9b
 
 COCOAPODS: 1.16.2

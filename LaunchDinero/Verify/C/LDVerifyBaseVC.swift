@@ -32,7 +32,6 @@ class LDVerifyBaseVC: LDBaseVC {
         let btn = GradientLoadingButton(frame: CGRectZero)
         btn.layer.cornerRadius = 22
         btn.clipsToBounds = true
-        btn.setTitle(LDText(key: "Next"))
         btn.setTitleColor(.white)
         btn.setFont(UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold))
         btn.addTarget(self, action: #selector(nextBtnClick), for: .touchUpInside)

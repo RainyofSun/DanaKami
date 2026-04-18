@@ -24,12 +24,15 @@ struct LDMainModel: Codable {
     var customer: String = ""
     /// privacy
     var archived: String = ""
+    /// festival
+    var festival: LDMainFestivalModel = LDMainFestivalModel()
     
     init() {}
     
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.centuries = try container.decodeIfPresent(LDMainCenturiesModel.self, forKey: .centuries) ?? LDMainCenturiesModel()
+        self.festival = try container.decodeIfPresent(LDMainFestivalModel.self, forKey: .festival) ?? LDMainFestivalModel()
         self.isRepay = try container.decodeIfPresent(Int.self, forKey: .isRepay) ?? 0
         self.scrollMsg = try container.decodeIfPresent([String].self, forKey: .scrollMsg) ?? []
         self.isReyNoticeMsg = try container.decodeIfPresent(String.self, forKey: .isReyNoticeMsg) ?? ""
@@ -49,6 +52,13 @@ struct LDMainCenturiesModel: Codable {
     var feedbackUrl: String = ""
     /// aboutUrl
     var aboutUrl: String = ""
+}
+
+struct LDMainFestivalModel: Codable {
+    /// rainmaker
+    var rainmaker: String = ""
+    /// international
+    var international: String = ""
 }
 
 struct LDMainMathematiciansModel: Codable {
