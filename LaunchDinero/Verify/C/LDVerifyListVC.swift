@@ -65,7 +65,8 @@ class LDVerifyListVC: LDVerifyBaseVC, UITableViewDelegate, UITableViewDataSource
     
     override func setupSubviews() {
         super.setupSubviews()
-        
+        nextBtn.setTitle(LDText(key: ""))
+
         stepV.isHidden = true
         self.cornerBgView.isHidden = true
         

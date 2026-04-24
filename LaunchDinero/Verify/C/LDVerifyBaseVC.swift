@@ -33,6 +33,7 @@ class LDVerifyBaseVC: LDBaseVC {
         btn.layer.cornerRadius = 22
         btn.clipsToBounds = true
         btn.setTitleColor(.white)
+        btn.setTitle(LDText(key: "Next"))
         btn.setFont(UIFont.interFont(size: 14, fontStyle: InterFontWeight.Bold))
         btn.addTarget(self, action: #selector(nextBtnClick), for: .touchUpInside)
         return btn

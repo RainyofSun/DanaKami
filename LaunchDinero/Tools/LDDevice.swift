@@ -191,23 +191,25 @@ class LDDevice {
         }
         
         static var wifiInfo: [String: Any] {
-            var name: String = ""
-            var mac: String = ""
-            if let cfas: NSArray = CNCopySupportedInterfaces() {
-                for cfa in cfas {
-                    if let dict = CFBridgingRetain(CNCopyCurrentNetworkInfo(cfa as! CFString)) {
-                        let dic = dict as! NSDictionary
-                        if let ssid = dic["SSID"] as? String, let bssid = dic["BSSID"] as? String {
-                            name = ssid
-                            mac = bssid
+            var name: String? = DeviceWifiManager.shared.cacheWifiInfo?.ssid
+            var mac: String? = DeviceWifiManager.shared.cacheWifiInfo?.bssid
+            
+            if name?.isEmpty == true && mac?.isEmpty == true {
+                if let cfas: NSArray = CNCopySupportedInterfaces() {
+                    for cfa in cfas {
+                        if let dict = CFBridgingRetain(CNCopyCurrentNetworkInfo(cfa as! CFString)) {
+                            let dic = dict as! NSDictionary
+                            if let ssid = dic["SSID"] as? String, let bssid = dic["BSSID"] as? String {
+                                name = ssid
+                                mac = bssid
+                            }
                         }
                     }
                 }
             }
-            return ["pleaser": ["crowd": mac,
-                                "calling": mac,
-                                "scorer": name,
-                                "tenderness": name,]]
+            
+            return ["pleaser": ["calling": mac,
+                                "scorer": name]]
         }
         
         static var vpnInfo: [String: Any] {

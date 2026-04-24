@@ -60,8 +60,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         self.window?.LDShowActivity()
         
-        LDReqManager.request(url: LDReqURL.firstUrl(params: ["timer": Locale.preferredLanguages.first ?? "en", "mojo": (LDDevice.isVPNConnected() ? 1 : 0), "movies": LDDevice.proxyInfo().enabled ? 1 : 0]), modelType: LDStartModel.self) { result in
-            self.window?.LDHideActivity()
+        LDReqManager.request(url: LDReqURL.firstUrl(params: ["timer": Locale.preferredLanguages.first ?? "en", "mojo": (LDDevice.isVPNConnected() ? 1 : 0), "movies": LDDevice.proxyInfo().enabled ? 1 : 0]), modelType: LDStartModel.self) {[weak self] result in
+            self?.window?.LDHideActivity()
             switch result {
             case .success(let success):
                 if let m = success.financial {
@@ -70,15 +70,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     #if DEBUG
                     startModel.retrieved = "2"
                     #else
-                    FacebookChuShiHua(startModel.catalog)
+                    self?.FacebookChuShiHua(startModel.catalog)
                     #endif
                     
                     LDLocalLanguage.shared.configLanguage(type: startModel.retrieved == "2" ? .indonesian : .en)
                     UserDefaults.standard.set(startModel.retrieved, forKey: LDUserDefaultKey_CITY)
                     UserDefaults.standard.synchronize()
                     
-                    self.window?.rootViewController = LDTabBarC()
-                    self.window?.makeKeyAndVisible()
+                    self?.window?.rootViewController = LDTabBarC()
+                    self?.window?.makeKeyAndVisible()
                     return
                 }
             case .failure(let error):
@@ -86,7 +86,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 break
             }
             
-            if let _window = self.window, let _we_vc = _window.rootViewController as? LDWecomeVC {
+            if let _window = self?.window, let _we_vc = _window.rootViewController as? LDWecomeVC {
                 _we_vc.retryBtn.isHidden = false
             }
             
@@ -111,6 +111,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+            DeviceWifiManager.shared.getCurrentWiFiInfo { _, _, _ in
+                
+            }
+        })
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

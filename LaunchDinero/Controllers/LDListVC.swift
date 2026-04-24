@@ -127,7 +127,7 @@ class LDListVC: LDBaseVC, UITableViewDelegate, UITableViewDataSource, AutoHidden
         }
         
         noDataView.snp.makeConstraints { make in
-            make.top.equalTo(headerView.snp.bottom).offset(124)
+            make.centerY.equalTo(tb)
             make.centerX.equalToSuperview()
         }
         
@@ -269,8 +269,10 @@ class LDListNoDataView: UIControl {
         self.addSubview(self.clickButton)
         
         imgV.snp.makeConstraints { make in
-            make.top.centerX.equalToSuperview()
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview().offset(-20)
         }
+        
         textLb.snp.makeConstraints { make in
             make.top.equalTo(imgV.snp.bottom).offset(20)
             make.horizontalEdges.equalToSuperview().inset(20)

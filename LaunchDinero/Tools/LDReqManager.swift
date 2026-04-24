@@ -30,7 +30,7 @@ import SwiftyJSON
   
   
  6. 证件和流程调试补充文档  https://note.youdao.com/s/cJPkcHQz
-  
+ 3885942926
   
  7. H5交互函数：
  NegotiatorOf()关闭当前webview
